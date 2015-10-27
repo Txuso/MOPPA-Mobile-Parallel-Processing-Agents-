@@ -24,7 +24,7 @@ public class HelloResource {
         @ApiResponse(code = 500, message = "Something wrong in Server")})
     public Response sayHello() {
         JsonObject value = Json.createObjectBuilder()
-                .add("firstName", "Jeremy")
+                .add("firstName", "Mario")
                 .add("lastName", "Chung")
                 .add("message", "Hello World!")
                 .build();
