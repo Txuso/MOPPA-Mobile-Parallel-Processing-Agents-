@@ -896,3 +896,13 @@
 2015-10-27 14:10:36,657 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
 2015-10-27 14:10:36,659 [Worker-22] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
 2015-10-27 14:10:36,659 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2015-10-27 14:12:27,109 [Worker-1] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: cat.uab.ats:resttest:0.0.1-SNAPSHOT @ /Volumes/Txuso HDD/Users/Txuso/Documents/LANAK/UAB - master informatika/Lehengo Maila/SDQ/MOPPA/resttest/pom.xml.
+2015-10-27 14:12:27,679 [Worker-1] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2015-10-27 14:12:27,680 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2015-10-27 14:12:27,682 [Worker-1] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2015-10-27 14:12:27,683 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2015-10-27 14:12:53,570 [Worker-6] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.uab.sdq:MOPPA:0.0.1-SNAPSHOT @ /Volumes/Txuso HDD/Users/Txuso/Documents/LANAK/UAB - master informatika/Lehengo Maila/SDQ/MOPPA/MOPPA/pom.xml.
+2015-10-27 14:12:54,132 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2015-10-27 14:12:54,133 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2015-10-27 14:12:54,135 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2015-10-27 14:12:54,136 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
