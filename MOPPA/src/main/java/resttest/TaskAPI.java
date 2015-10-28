@@ -4,7 +4,6 @@ import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
 
-import classes.Task;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.GET;
