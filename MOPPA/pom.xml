@@ -45,7 +45,7 @@
 </dependency>   
 <dependency>
     <groupId>org.glassfish.grizzly</groupId>
-    <artifactId>grizzly-framework</artifactId>
+    <artifactId>grizzly-http-server</artifactId>
     <version>2.3.22</version>
  </dependency>
 </dependencies>
