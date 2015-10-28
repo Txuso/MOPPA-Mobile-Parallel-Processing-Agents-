@@ -6,6 +6,7 @@
   <name>MOPPA Project</name>
   <description>SDQ MOPPA Project</description>
   
+  
   <dependencies>  
   <dependency>
     <groupId>org.glassfish.jersey.containers</groupId>

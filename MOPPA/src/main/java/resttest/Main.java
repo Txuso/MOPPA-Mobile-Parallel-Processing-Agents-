@@ -14,27 +14,21 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 public class Main {
 
-    private static final URI BASE_URI
-            = URI.create("http://localhost:8080/");
+    private static final URI BASE_URI = URI.create("http://localhost:8080/");
 
     public static void main(String[] args) {
         try {
             BeanConfig beanConfig = new BeanConfig();
             beanConfig.setVersion("1.0");
             beanConfig.setScan(true);
-            beanConfig.setResourcePackage(
-                    HelloResource.class.getPackage().getName());
+            beanConfig.setResourcePackage(TaskAPI.class.getPackage().getName());
             beanConfig.setBasePath(BASE_URI.toString());
             beanConfig.setDescription("Hello resources");
             beanConfig.setTitle("Hello API");
 
-            final HttpServer server
-                    = GrizzlyHttpServerFactory.createHttpServer(
-                            BASE_URI, createApp());
+            final HttpServer server = GrizzlyHttpServerFactory.createHttpServer(BASE_URI, createApp());
 
-            System.out.println(
-                    String.format(
-                            "Application started.%nHit enter to stop it..."));
+            System.out.println(String.format("Application started.%nHit enter to stop it..."));
             System.in.read();
             server.shutdownNow();
             System.exit(0);
@@ -45,7 +39,7 @@ public class Main {
 
     public static ResourceConfig createApp() {
         return new ResourceConfig().
-                packages(HelloResource.class.getPackage().getName(),
+                packages(TaskAPI.class.getPackage().getName(),
                         "com.wordnik.swagger.jaxrs.listing").
                 register(createMoxyJsonResolver());
     }
