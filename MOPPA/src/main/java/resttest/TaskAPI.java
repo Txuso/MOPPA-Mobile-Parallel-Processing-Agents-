@@ -15,7 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/moppa/va/task")
+@Path("/moppa/v1/task")
 @Api(value = "/task", description = "I am a task!")
 public class TaskAPI {
 
@@ -28,7 +28,7 @@ public class TaskAPI {
     public Response showTask() {
         JsonObject value = Json.createObjectBuilder()
                 .add("taskID", "1234")
-                .add("taskValue", "10!")
+                .add("taskValue", "10")
                 .add("result", "3628800")
                 .build();
         return Response.status(200).entity(value).build();
