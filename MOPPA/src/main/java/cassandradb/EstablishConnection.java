@@ -7,25 +7,38 @@ import com.datastax.driver.core.Session;
 
 public class EstablishConnection {
 
-		private static String clusterName = "moppa";
-		private static String username = "cassandra";
-		private static String password = "cassandrapassword";
+		private String clusterName = "moppa";
+		private String username = "cassandra";
+		private String password = "cassandrapassword";
+		
+		private Cluster cluster;
+		private Session session;
 
-		public static void main(String[] args) {
-			Cluster cluster;
-			Session session;
-
+		public void openConnection() {
 			cluster = Cluster.builder().addContactPoint("127.0.0.1").withPort(9042).withCredentials(username, password).build();
 			session = cluster.connect(clusterName);
-
-			/*session.execute("INSERT INTO performer (name, born, country, died, founded, style, type) VALUES ('Mario', 1992, 'Croatia', null, 2014, 'HipHop', null)");*/
-
-			ResultSet results = session.execute("SELECT * FROM users where username = 'mario'");
-			for (Row row : results) {
-				System.out.format("%s %s", row.getString("username"), row.getString("password"));
-			}
+		}
+		
+		public void closeConnection() {
 			cluster.close();
-
+		}
+		
+		public void setClusterName(String clusterName) {
+			this.clusterName = clusterName;
+		}
+		
+		public void setUsername(String username) {
+			this.username = username;
+		}
+		
+		public void setPassword(String password) {
+			this.password = password;
+		}
+		
+		public ResultSet executeQuery (String query) { /* Bad query, test purpose only */
+			ResultSet rs;
+			rs = session.execute(query);
+		    return rs;
 		}
 
 	}

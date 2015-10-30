@@ -1,9 +1,11 @@
 package resttest;
+import com.datastax.driver.core.ResultSet;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
 
+import cassandradb.EstablishConnection;
 import classes.Task;
 
 import javax.json.Json;
@@ -29,6 +31,7 @@ public class Authentication {
         try {
 
             // Authenticate the user using the credentials provided
+        	// Needs more functionality, handling if we can't authenticate user, front-end interaction
             authenticate(username, password);
 
             // Issue a token for the user
@@ -43,12 +46,17 @@ public class Authentication {
     }
 
     private void authenticate(String username, String password) throws Exception {
-        // Authenticate against a database, LDAP, file or whatever
-        // Throw an Exception if the credentials are invalid
+    	ResultSet rs;
+        EstablishConnection connection = new EstablishConnection();
+        connection.openConnection();
+        rs = connection.executeQuery("SELECT * FROM users WHERE username = " + username);
+        /* Bad query, SQL injection stuff, check if user exists */
+        
     }
 
     private String issueToken(String username) {
 		return "1";
+		// Have to consult with Rodolfo how to create token, in Java or from db
         // Issue a token (can be a random String persisted to a database or a JWT token)
         // The issued token must be associated to a user
         // Return the issued token
