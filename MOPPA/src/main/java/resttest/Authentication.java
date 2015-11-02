@@ -1,22 +1,10 @@
 package resttest;
-import com.datastax.driver.core.ResultSet;
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
-import com.wordnik.swagger.annotations.ApiResponse;
-import com.wordnik.swagger.annotations.ApiResponses;
-
 import cassandradb.EstablishConnection;
-import classes.Task;
-
-import javax.json.Json;
-import javax.json.JsonObject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/login")
@@ -46,11 +34,9 @@ public class Authentication {
     }
 
     private void authenticate(String username, String password) throws Exception {
-    	ResultSet rs;
-        EstablishConnection connection = new EstablishConnection();
+    	EstablishConnection connection = new EstablishConnection();
         connection.openConnection();
-        rs = connection.executeQuery("SELECT * FROM users WHERE username = " + username);
-        /* Bad query, SQL injection stuff, check if user exists */
+        connection.executeQuery("SELECT * FROM users WHERE username = " + username);
         
     }
 
