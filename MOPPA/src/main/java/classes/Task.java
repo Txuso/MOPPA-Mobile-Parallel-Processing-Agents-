@@ -4,6 +4,7 @@ public class Task {
 	private double taskID;
 	private double taskValue;
 	private double taskResult;
+	
 	public double getTaskID() {
 		return taskID;
 	}
