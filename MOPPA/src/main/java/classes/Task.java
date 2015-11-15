@@ -2,12 +2,12 @@ package classes;
 
 public class Task {
 	private double taskID;
-	private double taskValue;
+	private int taskValue;
 	private double taskResult;
 	private String taskState;
 	private String creatorUsername;
 	
-	public Task(double taskID, double taskValue, double taskResult, String taskState, String creatorUsername) {
+	public Task(double taskID, int taskValue, double taskResult, String taskState, String creatorUsername) {
 		super();
 		this.taskID = taskID;
 		this.taskValue = taskValue;
@@ -35,10 +35,10 @@ public class Task {
 	public void setTaskID(double taskID) {
 		this.taskID = taskID;
 	}
-	public double getTaskValue() {
+	public int getTaskValue() {
 		return taskValue;
 	}
-	public void setTaskValue(double taskValue) {
+	public void setTaskValue(int taskValue) {
 		this.taskValue = taskValue;
 	}
 	public double getTaskResult() {
