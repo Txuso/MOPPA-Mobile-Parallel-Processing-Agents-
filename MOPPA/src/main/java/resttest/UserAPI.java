@@ -3,10 +3,10 @@ import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
-import classes.MoppaUser;
+import java.io.StringReader;
 import javax.json.Json;
 import javax.json.JsonObject;
-import javax.ws.rs.GET;
+import javax.json.JsonReader;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -17,18 +17,6 @@ import javax.ws.rs.core.Response;
 @Api(value = "/user", description = "I am an User!")
 public class UserAPI {
     
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "OK"),
-        @ApiResponse(code = 500, message = "Something wrong in Server")})
-    public Response getUser() {
-        JsonObject value = Json.createObjectBuilder()
-                .add("username", "Mikel")
-                .add("password", "1234")
-                .build();
-        return Response.status(200).entity(value).build();
-    }
     
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -36,10 +24,13 @@ public class UserAPI {
     @ApiResponses(value = {
         @ApiResponse(code = 200, message = "OK"),
         @ApiResponse(code = 500, message = "Something wrong in Server")})
-    public Response createUserInJSON(MoppaUser user) {
+    public Response createUserInJSON(String input) {
+    	JsonReader jsonReader = Json.createReader(new StringReader(input));
+   	 	JsonObject object = jsonReader.readObject();
+   	 	jsonReader.close();
         JsonObject value = Json.createObjectBuilder()
-                .add("username", user.getUsername())
-                .add("taskValue", user.getPassword())                
+                .add("username", object.get("username"))
+                .add("password", object.get("password"))                
                 .build();
         return Response.status(200).entity(value).build();
     }
