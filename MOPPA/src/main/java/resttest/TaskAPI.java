@@ -59,23 +59,19 @@ public class TaskAPI {
         @ApiResponse(code = 500, message = "Something wrong in Server")})
     
     public Response createTaskInJSON(String input) throws MoppaException {
-    	boolean correct = true;
     	
     	JsonReader jsonReader = Json.createReader(new StringReader(input));
     	JsonObject object = jsonReader.readObject();
     	jsonReader.close();
     	
     	if (object.getString("taskValue").isEmpty()){
-    		correct = false;
     		throw new MoppaException("The task value cannot be null");
     	}
     		
-    	if (object.getString("taskValue").toString().matches("^[a-zA-Z]*$")){
-    		correct = false;
+    	if (object.getString("taskValue").matches("^[a-zA-Z]*$")){
     		throw new MoppaException("The value cannot contain letters or special characters");
     	}	
     	
-		if (correct){	
         double taskID = Double.parseDouble(object.getString("taskID"));
         int taskValue = Integer.parseInt(object.getString("taskValue"));
         double result = Double.parseDouble(object.getString("result"));
@@ -88,7 +84,7 @@ public class TaskAPI {
 
         Task newTask = new Task(taskID, taskValue, result, taskState, creatorUsername);
         tasks.add(newTask);
-		}
+		
         return Response.status(200).entity("Your task has been uploaded correctly").build();
 
     }
@@ -114,45 +110,39 @@ public class TaskAPI {
                         .build();
                 return Response.status(200).entity(value).build();
     		}
-    		if (found == true)
+    		if (found)
         		throw new MoppaException("There aren't tasks assigned to " + username);
     	}
         return Response.status(200).build();
     }
     
     @POST
-    @Path("/findTaskByTaskID")
+    @Path("/findTaskByTaskState")
     @Produces(MediaType.APPLICATION_JSON)
     @ApiOperation(value = "Say Hello World",notes = "Anything Else?")
     @ApiResponses(value = {
         @ApiResponse(code = 200, message = "OK"),
         @ApiResponse(code = 500, message = "Something wrong in Server")})
     
-    public Response findTaskByTaskIDInJSON(String taskID) throws MoppaException {
-    	if (taskID.matches("^[a-zA-Z]*$"))
-    		throw new MoppaException("The task ID cannot contain letters or special characters");
-    	
+    public Response findTaskByStateInJSON(String taskState) throws MoppaException {
     	boolean found = false;
-    	int i = 0;
-    	while (found || i < tasks.size()){
-    		if (tasks.get(i).getCreatorUsername().equals(taskID)){
+    	for (Task task : tasks){
+    		if (task.getTaskState().equals(taskState)){
+    			found = true;
     			JsonObject value = Json.createObjectBuilder()
-                        .add("taskID", tasks.get(i).getTaskID())
-                        .add("taskValue", tasks.get(i).getTaskValue())
-                        .add("result", tasks.get(i).getTaskResult())
-                        .add("result", tasks.get(i).getTaskState())
+                        .add("taskID", task.getTaskID())
+                        .add("taskValue", task.getTaskValue())
+                        .add("result", task.getTaskResult())
+                        .add("result", task.getTaskState())
                         .build();
-                tasks.add((Task)value);
-        		i++;
-        		found = true;
                 return Response.status(200).entity(value).build();
     		}
+    		if (found)
+        		throw new MoppaException("There aren't tasks with the state " + taskState);
     	}
-    	if (found)
-    		throw new MoppaException("There aren't tasks with id = " + taskID);
-
         return Response.status(200).build();
     }
+    
     
     
 }

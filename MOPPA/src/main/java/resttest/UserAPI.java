@@ -35,10 +35,6 @@ public class UserAPI {
    	 	if (object.getString("username").isEmpty() || object.getString("password").isEmpty())
     		throw new MoppaException("The username or the password cannot be null");
    	 	
-        JsonObject value = Json.createObjectBuilder()
-                .add("username", object.get("username"))
-                .add("password", object.get("password"))                
-                .build();
         return Response.status(200).entity("The user has been created").build();
     }
     
