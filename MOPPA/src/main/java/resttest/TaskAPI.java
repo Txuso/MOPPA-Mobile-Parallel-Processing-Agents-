@@ -41,7 +41,8 @@ public class TaskAPI {
                     .add("taskID", task.getTaskID())
                     .add("taskValue", task.getTaskValue())
                     .add("result", task.getTaskResult())
-                    .add("result", task.getTaskState())
+                    .add("taskState", task.getTaskState())
+                    .add("creatorUsername", task.getCreatorUsername())
                     .build();
             tasks.add((Task)value);
             return Response.status(200).entity(task).build();
@@ -57,7 +58,6 @@ public class TaskAPI {
     @ApiResponses(value = {
         @ApiResponse(code = 200, message = "OK"),
         @ApiResponse(code = 500, message = "Something wrong in Server")})
-    
     public Response createTaskInJSON(String input) throws MoppaException {
     	
     	JsonReader jsonReader = Json.createReader(new StringReader(input));
@@ -85,7 +85,7 @@ public class TaskAPI {
         Task newTask = new Task(taskID, taskValue, result, taskState, creatorUsername);
         tasks.add(newTask);
 		
-        return Response.status(200).entity("Your task has been uploaded correctly").build();
+        return Response.status(200).build();
 
     }
     
@@ -106,14 +106,17 @@ public class TaskAPI {
                         .add("taskID", task.getTaskID())
                         .add("taskValue", task.getTaskValue())
                         .add("result", task.getTaskResult())
-                        .add("result", task.getTaskState())
+                        .add("taskState", task.getTaskState())
+                        .add("creatorUsername", task.getCreatorUsername())
                         .build();
                 return Response.status(200).entity(value).build();
     		}
-    		if (found)
-        		throw new MoppaException("There aren't tasks assigned to " + username);
+    		
     	}
-        return Response.status(200).build();
+    	if (found == false)
+    		throw new MoppaException("There aren't tasks assigned to " + username);
+    	
+        return Response.status(200).entity(" All your tasks have been displayed").build();
     }
     
     @POST
