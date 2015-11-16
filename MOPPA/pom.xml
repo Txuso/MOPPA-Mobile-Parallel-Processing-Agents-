@@ -53,11 +53,16 @@
     <artifactId>grizzly-http-server</artifactId>
     <version>2.3.22</version>
  </dependency>
-   <dependency>
-        <groupId>com.impetus.kundera.client</groupId>
-        <artifactId>kundera-cassandra</artifactId>
-        <version>3.2</version>
-  </dependency>
+<dependency>
+  <groupId>com.datastax.cassandra</groupId>
+  <artifactId>cassandra-driver-core</artifactId>
+  <version>2.1.9</version>
+</dependency>
+<dependency>
+  <groupId>com.datastax.cassandra</groupId>
+  <artifactId>cassandra-driver-mapping</artifactId>
+  <version>2.1.9</version>
+</dependency>
 </dependencies>
 <reporting>
     <plugins>
@@ -71,29 +76,4 @@
       </plugin>
     </plugins>
   </reporting>
-  <repositories>
-  <repository>
-    <id>sonatype-nexus</id>
-    <name>Kundera Public Repository</name>
-    <url>https://oss.sonatype.org/content/repositories/releases</url>
-   <releases>
-       <enabled>true</enabled>
-   </releases>
-   <snapshots>
-       <enabled>false</enabled>
-   </snapshots>
-</repository>
-<repository>
-    <id>kundera-missing</id>
-    <name>Kundera Public Missing Resources Repository</name>
-    <url>http://kundera.googlecode.com/svn/maven2/maven-missing-resources</url>
-    <releases>
-       <enabled>true</enabled>
-  </releases>
-  <snapshots>
-      <enabled>true</enabled>
-  </snapshots>
-</repository>
-</repositories>
-
 </project>
