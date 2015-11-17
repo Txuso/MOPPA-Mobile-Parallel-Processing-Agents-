@@ -1,20 +1,52 @@
 package classes;
 
+	/**
+	 * 
+	 * @author Txuso
+	 * This class is related to the MoppaUsers
+	 */
 public class MoppaUser {
+	
+	/**
+	 * Moppa user's username.
+	 */
 	private String username;
+	
+	/**
+	 * Moppa user's password.
+	 */
 	private String password;
 	
-	public String getUsername() {
+	/**
+	 * 
+	 * @return it returns the username
+	 */
+	public final String getUsername() {
 		return username;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	
+	/**
+	 * 
+	 * @param user the username that is going to be changed
+	 */
+	public final void setUsername(final String user) {
+		this.username = user;
 	}
-	public String getPassword() {
+	
+	/**
+	 * 
+	 * @return it returns the password of the chosen user
+	 */
+	public final String getPassword() {
 		return password;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	
+	/**
+	 * 
+	 * @param newPassword the password that is going to be changed
+	 */
+	public final void setPassword(final String newPassword) {
+		this.password = newPassword;
 	}
 	
 }

@@ -1,4 +1,4 @@
-package resttest;
+package moppaapis;
 import cassandradb.EstablishConnection;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;

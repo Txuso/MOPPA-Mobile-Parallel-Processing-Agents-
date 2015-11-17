@@ -1,4 +1,4 @@
-package resttest;
+package moppaapis;
 import com.wordnik.swagger.jaxrs.config.BeanConfig;
 import java.io.IOException;
 import java.net.URI;
@@ -12,11 +12,30 @@ import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.moxy.json.MoxyJsonConfig;
 import org.glassfish.jersey.server.ResourceConfig;
 
-public class Main {
-
-    private static final URI BASE_URI = URI.create("http://localhost:8080/");
-
-    public static void main(String[] args) {
+/**
+ * 
+ * @author Txuso
+ * This class executes the server.
+ */
+public final class Main {
+	
+	/**
+	 * void constructor.
+	 */
+    private Main() {
+		super();
+	}
+    
+    /**
+     * Our URI.
+     */
+	private static final URI BASE_URI = URI.create("http://localhost:8080/");
+	
+	/**
+	 * 
+	 * @param args data
+	 */
+    public static void main(final String[] args) {
         try {
             BeanConfig beanConfig = new BeanConfig();
             beanConfig.setVersion("1.0");
@@ -26,9 +45,11 @@ public class Main {
             beanConfig.setDescription("Hello resources");
             beanConfig.setTitle("Hello API");
 
-            final HttpServer server = GrizzlyHttpServerFactory.createHttpServer(BASE_URI, createApp());
+            final HttpServer server = GrizzlyHttpServerFactory.
+            createHttpServer(BASE_URI, createApp());
 
-            System.out.println(String.format("Application started.%nHit enter to stop it..."));
+            System.out.println(String.format("Application started."
+            + "%nHit enter to stop it..."));
             System.in.read();
             server.shutdownNow();
             System.exit(0);
@@ -36,14 +57,24 @@ public class Main {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    /**
+     * 
+     * @return it return the resource configuration
+     * 
+     */
     public static ResourceConfig createApp() {
         return new ResourceConfig().
                 packages(TaskAPI.class.getPackage().getName(),
                         "com.wordnik.swagger.jaxrs.listing").
                 register(createMoxyJsonResolver());
     }
-
+    
+    /**
+     * 
+     * @return it returns the moxyJsonConfig.
+     * 
+     */
     public static ContextResolver<MoxyJsonConfig> createMoxyJsonResolver() {
         final MoxyJsonConfig moxyJsonConfig = new MoxyJsonConfig();
         Map<String, String> namespacePrefixMapper
