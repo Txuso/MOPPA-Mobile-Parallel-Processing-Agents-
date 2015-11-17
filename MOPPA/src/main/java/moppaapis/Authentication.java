@@ -1,4 +1,4 @@
-package resttest;
+package moppaapis;
 import cassandradb.EstablishConnection;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -7,15 +7,26 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
+/**
+ * 
+ * @author Mario
+ * 
+ *
+ */
 @Path("/login")
 public class Authentication {
-
+	/**
+	 * 
+	 * @param username
+	 * @param password
+	 * @return it returns the result of the login
+	 */
     @POST
-    @Produces("application/json")
-    @Consumes("application/x-www-form-urlencoded")
-    public Response authenticateUser(@FormParam("username") String username, 
-                                     @FormParam("password") String password) {
-
+	@Produces("application/json")
+	@Consumes("application/x-www-form-urlencoded")
+	public final Response authenticateUser(@FormParam("username")
+    final String username, @FormParam("password") final String password) {
+                            
         try {
 
             // Authenticate the user using the credentials provided

@@ -4,10 +4,26 @@ import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Session;
 
+/**
+ * 
+ * @author Mario
+ *
+ */
 public class EstablishConnection {
-
+	
+		/**
+		 * The name of the cluster.
+		 */
 		private String clusterName = "moppa";
+		
+		/**
+		 * The username of the database.
+		 */
 		private String username = "cassandra";
+		
+		/**
+		 * The password of the user.
+		 */
 		private String password = "cassandrapassword";
 		
 		private Cluster cluster;
