@@ -3,10 +3,10 @@ import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
-
+import classes.MoppaUser;
 import exceptions.InvalidData;
-
 import java.io.StringReader;
+import java.util.ArrayList;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
@@ -24,6 +24,11 @@ import javax.ws.rs.core.Response;
 @Path("/moppa/v1/user")
 @Api(value = "/user", description = "I am an User!")
 public class UserAPI {
+	
+	/**
+	 * tasks here we store all the Moppa Users.
+	 */
+    private ArrayList<MoppaUser> users = new ArrayList<MoppaUser>();
 	
 	/**
 	 * code for OK api response.
@@ -58,6 +63,12 @@ public class UserAPI {
 			throw new InvalidData("The username or the password cannot be null")
 			.except();
 		}
+   	 	
+   	 	for (MoppaUser user: users) {
+   	 		if (user.getUsername().equals(object.getString("username"))) {
+   	 			throw new InvalidData("The username already exists").except();
+   	 		}
+   	 	}
    	 	
         return Response.status(C200).
         	   entity("The user has been created").build();
