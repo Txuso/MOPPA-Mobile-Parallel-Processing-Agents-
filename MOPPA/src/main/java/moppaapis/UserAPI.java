@@ -70,9 +70,15 @@ public class UserAPI {
    	 		}
    	 	}
    	 	
+   	 	MoppaUser user = new MoppaUser(object.getString("username"),
+   	 	object.getString("password"));
+   	 	
+   	 	users.add(user);
+   	 	
         return Response.status(C200).
         	   entity("The user has been created").build();
     }
+    
     
     
 }
