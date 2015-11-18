@@ -3,6 +3,9 @@ package cassandradb;
 import java.util.UUID;
 
 import com.datastax.driver.core.*;
+import com.datastax.driver.mapping.Mapper;
+
+import classes.Task;
 public class CassandraTaskDAO implements TaskDAO {
 	
 	public CassandraTaskDAO() {
@@ -11,14 +14,13 @@ public class CassandraTaskDAO implements TaskDAO {
 	
 	public UUID insertTask (String username, int problem) {
 		
-		Session connection = CassandraDAOFactory.createConnection();
+		Session connection = CassandraDAOFactory.getConnection();
 		UUID uuid = java.util.UUID.randomUUID();
 		
 		try {
-			PreparedStatement stmt = connection.prepare("INSERT INTO tasks (taskid, username, problem, result, state) VALUES (?, ?, ?, ?, ?);");
-			BoundStatement bound_stmt = new BoundStatement(stmt);
-			
-			connection.execute(bound_stmt.bind(uuid, username, problem, null, "Waiting"));
+			Task task = new Task(uuid, username, problem, username, username); //popraviti
+			Mapper<Task> mapper = CassandraDAOFactory.getMappingManager().mapper(Task.class);
+			mapper.save(task);
 		}
 		
 		catch (Exception e) {
@@ -30,11 +32,13 @@ public class CassandraTaskDAO implements TaskDAO {
 		}
 
 		return uuid;
+		
+		//CHANGE THE METHODS BELOW ACCORDING TO THE FIRST ONE
 	}
 	
 	public ResultSet findTasksbyUsername (String username) {
 		
-		Session connection = CassandraDAOFactory.createConnection();
+		Session connection = CassandraDAOFactory.getConnection();
 		ResultSet results = null;
 		try {
 			PreparedStatement stmt = connection.prepare("SELECT * FROM tasks WHERE username = ?);");
@@ -56,7 +60,7 @@ public class CassandraTaskDAO implements TaskDAO {
 	
 	public ResultSet findTasksbyState (String username, String state) {
 		
-		Session connection = CassandraDAOFactory.createConnection();
+		Session connection = CassandraDAOFactory.getConnection();
 		ResultSet results = null;
 		try {
 			PreparedStatement stmt = connection.prepare("SELECT * FROM tasks WHERE username = ? AND state = ?);");
