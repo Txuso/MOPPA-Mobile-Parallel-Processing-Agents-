@@ -1,11 +1,28 @@
 package classes;
 
-	/**
+import java.util.UUID;
+
+import com.datastax.driver.mapping.annotations.Table;
+
+/**
 	 * 
 	 * @author Txuso
 	 * This class is related to the MoppaUsers
 	 */
+
+@Table(keyspace = "moppa", name = "users",
+readConsistency = "QUORUM",
+writeConsistency = "QUORUM",
+caseSensitiveKeyspace = false,
+caseSensitiveTable = false)
+
 public class MoppaUser {
+	
+	public MoppaUser(final String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
 	
 	/**
 	 * Moppa user's username.

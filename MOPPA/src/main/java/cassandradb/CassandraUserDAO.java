@@ -3,29 +3,25 @@ package cassandradb;
 import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.PreparedStatement;
 import com.datastax.driver.core.Session;
+import com.datastax.driver.mapping.Mapper;
+
+import classes.MoppaUser;
+import classes.Task;
 
 public class CassandraUserDAO implements UserDAO {
 
 	public int insertUser(String username, String password) {
-		
-		Session connection = CassandraDAOFactory.createConnection();
-		
+				
 		try {
-			PreparedStatement stmt = connection.prepare("INSERT INTO users (username, password) VALUES (?, ?);");
-			BoundStatement bound_stmt = new BoundStatement(stmt);
-			
-			connection.execute(bound_stmt.bind(username, password));
+			MoppaUser user = new MoppaUser(username, password); //check
+			Mapper<MoppaUser> mapper = CassandraDAOFactory.getMappingManager().mapper(MoppaUser.class);
+			mapper.save(user);
 		}
 		
 		catch (Exception e) {
 			//Logger			
 		}
-		
-		finally {
-			CassandraDAOFactory.closeConnection(connection);
-		}
-		
-		return 1;
+		return 1; //check
 	}
 
 }
