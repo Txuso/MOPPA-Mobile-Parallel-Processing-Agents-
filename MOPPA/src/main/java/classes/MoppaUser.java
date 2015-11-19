@@ -2,7 +2,7 @@ package classes;
 
 import com.datastax.driver.mapping.annotations.Table;
 
-/**
+	/**
 	 * 
 	 * @author Txuso
 	 * This class is related to the MoppaUsers
@@ -16,11 +16,14 @@ caseSensitiveTable = false)
 
 public class MoppaUser {
 	
+<<<<<<< HEAD
 	public MoppaUser(final String newUsername, final String newPassword) {
 		super();
 		this.username = newUsername;
 		this.password = newPassword;
 	}
+=======
+>>>>>>> branch 'master' of https://github.com/Txuso/MOPPA-Mobile-Parallel-Processing-Agents-
 	
 	/**
 	 * Moppa user's username.
@@ -32,6 +35,17 @@ public class MoppaUser {
 	 */
 	private String password;
 	
+	/**
+	 * 
+	 * @param newUsername the username that is going to be created
+	 * @param newPassword the password of the username
+	 */
+	public MoppaUser(final String newUsername, final String newPassword) {
+		super();
+		this.username = newUsername;
+		this.password = newPassword;
+	}
+
 	/**
 	 * 
 	 * @return it returns the username

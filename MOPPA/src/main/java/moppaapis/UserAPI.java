@@ -3,10 +3,10 @@ import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
-
+import classes.MoppaUser;
 import exceptions.InvalidData;
-
 import java.io.StringReader;
+import java.util.ArrayList;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
@@ -24,6 +24,11 @@ import javax.ws.rs.core.Response;
 @Path("/moppa/v1/user")
 @Api(value = "/user", description = "I am an User!")
 public class UserAPI {
+	
+	/**
+	 * tasks here we store all the Moppa Users.
+	 */
+    private ArrayList<MoppaUser> users = new ArrayList<MoppaUser>();
 	
 	/**
 	 * code for OK api response.
@@ -49,6 +54,8 @@ public class UserAPI {
         @ApiResponse(code = C200, message = "OK"),
         @ApiResponse(code = C500, message = "Something wrong in Server")})
 	public final Response createUserInJSON(final String input) {
+    	users.add(new MoppaUser("Txuso", "123"));
+    	users.add(new MoppaUser("Mario", "123"));
     	JsonReader jsonReader = Json.createReader(new StringReader(input));
    	 	JsonObject object = jsonReader.readObject();
    	 	jsonReader.close();
@@ -59,9 +66,21 @@ public class UserAPI {
 			.except();
 		}
    	 	
+   	 	for (MoppaUser user: users) {
+   	 		if (user.getUsername().equals(object.getString("username"))) {
+   	 			throw new InvalidData("The username already exists").except();
+   	 		}
+   	 	}
+   	 	
+   	 	MoppaUser user = new MoppaUser(object.getString("username"),
+   	 	object.getString("password"));
+   	 	
+   	 	users.add(user);
+   	 	
         return Response.status(C200).
         	   entity("The user has been created").build();
     }
+    
     
     
 }

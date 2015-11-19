@@ -11,6 +11,8 @@ import com.wordnik.swagger.annotations.ApiResponses;
 
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.UUID;
+
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
@@ -20,6 +22,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
 
 /**
  * 
@@ -33,7 +37,7 @@ public class TaskAPI {
 	/**
 	 * @value tasks here we store all the tasks
 	 */
-    private ArrayList<Task> tasks = new ArrayList<Task>();
+     private ArrayList<Task> tasks = new ArrayList<Task>();
     
     /**
      * maximum value accepted to compute.
@@ -62,6 +66,8 @@ public class TaskAPI {
     @ApiResponse(code = C200, message = "OK"),
     @ApiResponse(code = C500, message = "Something wrong in Server")})
 	public final Response getAllTasks() {
+    	tasks.add(new Task(new UUID(5, 5), "Txuso", 5, "120", "Waiting"));
+    	tasks.add(new Task(new UUID(6, 6), "Mario", 4, "24", "Done"));
     	if (tasks.size() == 0) {
 			throw new InvalidData("There"
 			+ " are not tasks created yet").except();
@@ -69,14 +75,13 @@ public class TaskAPI {
     	
     	for (Task task : tasks) {
     		JsonObject value = Json.createObjectBuilder()
-                    .add("taskID", (task.getTaskid()))
+                    .add("taskID", task.getTaskid().toString())
                     .add("taskValue", task.getProblem())
                     .add("result", task.getResult())
                     .add("taskState", task.getState())
                     .add("creatorUsername", task.getUsername())
-                    .build();
-            tasks.add((Task) value);
-            return Response.status(C200).entity(task).build();
+                    .build();            
+            return Response.status(C200).entity(value).build();
     	}
         return Response.status(C200).
         entity("All your tasks have been displayed").build();
@@ -100,9 +105,10 @@ public class TaskAPI {
     	JsonObject object = jsonReader.readObject();
     	jsonReader.close();
     	
-        double taskID = object.getInt("taskID"); //change to UUID
+    	
+        UUID taskID = new UUID(5,5);
         int taskValue = object.getInt("taskValue");
-        double result = object.getInt("result"); //change to String since the result of 100! has 158 digits
+        String result = object.getString("result");
         String taskState = object.getString("taskState");
         String creatorUsername = object.getString("creatorUsername");
         
@@ -111,8 +117,8 @@ public class TaskAPI {
     		+ "negative or greater than 100").except();
         }
 
-        Task newTask = new Task(taskID, taskValue, result,
-        taskState, creatorUsername);
+        Task newTask = new Task(taskID, creatorUsername, taskValue, result,
+        taskState);
         tasks.add(newTask);
         return Response.status(C200).build();
 
@@ -130,28 +136,27 @@ public class TaskAPI {
         @ApiResponse(code = C200, message = "OK"),
         @ApiResponse(code = C500, message = "Something wrong in Server")})
 	public final Response findTaskByUsernameInJSON(final String username) {
-    	boolean found = false;
+    	tasks.add(new Task(new UUID(5, 5), "Txuso", 5, "120", "Waiting"));
+    	tasks.add(new Task(new UUID(6, 6), "Mario", 4, "24", "Done"));
+    	if (username.isEmpty()) {
+    		throw new InvalidData("The introduced data isn't correct").except();
+    	}
+    		
     	for (Task task : tasks) {
     		if (task.getUsername().equals(username)) {
-    			found = true;
     			JsonObject value = Json.createObjectBuilder()
-                        .add("taskID", task.getTaskid())
+                        .add("taskID", task.getTaskid().toString())
                         .add("taskValue", task.getProblem())
                         .add("result", task.getResult())
                         .add("taskState", task.getState())
                         .add("creatorUsername", task.getUsername())
                         .build();
                 return Response.status(C200).entity(value).build();
-    		}
-    		
+    		} 		
     	}
-    	if (found) {
-			throw new TaskNotFound("There aren't tasks assigned to "
-    		+ username).except();
-		}
     	
-        return Response.status(C200).entity(""
-        + " All your tasks have been displayed").build();
+        return Response.status(Status.NOT_FOUND)
+        .entity(" There aren't tasks assigned to " + username).build();
     }
     /**
      * 
@@ -166,25 +171,24 @@ public class TaskAPI {
         @ApiResponse(code = C200, message = "OK"),
         @ApiResponse(code = C500, message = "Something wrong in Server")})
 	public final Response findTaskByStateInJSON(final String taskState) {
-    	boolean found = false;
+    	tasks.add(new Task(new UUID(5, 5), "Txuso", 5, "120", "Waiting"));
+    	tasks.add(new Task(new UUID(6, 6), "Mario", 4, "24", "Done"));
     	for (Task task : tasks) {
     		if (task.getState().equals(taskState)) {
-    			found = true;
     			JsonObject value = Json.createObjectBuilder()
-                        .add("taskID", task.getTaskid())
+                        .add("taskID", task.getTaskid().toString())
                         .add("taskValue", task.getProblem())
                         .add("result", task.getResult())
-                        .add("result", task.getState())
+                        .add("taskState", task.getState())
+                        .add("creatorUsername", task.getUsername())
                         .build();
                 return Response.status(C200).entity(value).build();
     		}
-    		if (found) {
-				throw new TaskNotFound("There aren't"
-				+ " tasks with the state " + taskState).except();
-			}
+			
     	}
-        return Response.status(C200).build();
-    }
+        return Response.status(Status.NOT_FOUND)
+        .entity(" There aren't tasks with the state" + taskState).build();
+     }
     
     
     
