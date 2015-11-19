@@ -31,84 +31,60 @@ public class TaskAPITest {
 	/**
 	 * Run the Response createTaskInJSON(String) method test.
 	 *
-	 * @throws Exception
+	 * @throws Exception if the taskValue is wrong
 	 *
 	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
-	public void testCreateTaskInJSON_1()
+	public final void testCreateTaskInJSON1()
 		throws Exception {
 		TaskAPI fixture = new TaskAPI();
-		String input = "{\"taskID\": 1234,\"taskValue\": 10,\"result\": \"12345\", \"taskState\": \"doing\",\"creatorUsername\": \"adb\"}";
+		String input = "{\"taskID\": 1234,\"taskValue\": 10,\"result\":"
+		+ " \"12345\", \"taskState\": \"doing\",\"creatorUsername\": "
+		+ "\"adb\"}";
 
 		Response result = fixture.createTaskInJSON(input);
 
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    javax.json.stream.JsonParsingException: Invalid token=EOF at (line no=1, column no=0, offset=-1). Expected tokens are: [CURLYOPEN, SQUAREOPEN]
-		//       at org.glassfish.json.JsonParserImpl.parsingException(JsonParserImpl.java:238)
-		//       at org.glassfish.json.JsonParserImpl.access$1200(JsonParserImpl.java:61)
-		//       at org.glassfish.json.JsonParserImpl$NoneContext.getNextEvent(JsonParserImpl.java:232)
-		//       at org.glassfish.json.JsonParserImpl$StateIterator.next(JsonParserImpl.java:172)
-		//       at org.glassfish.json.JsonParserImpl.next(JsonParserImpl.java:149)
-		//       at org.glassfish.json.JsonReaderImpl.readObject(JsonReaderImpl.java:101)
-		//       at moppaapis.TaskAPI.createTaskInJSON(TaskAPI.java:100)
 		assertNotNull(result);
 	}
 
 	/**
 	 * Run the Response createTaskInJSON(String) method test.
 	 *
-	 * @throws Exception
+	 * @throws Exception launched because the taskValue is negative
 	 *
 	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
-	public void testCreateTaskInJSON_2()
+	public final void testCreateTaskInJSONWithNegativeValue()
 		throws Exception {
 		TaskAPI fixture = new TaskAPI();
-		String input = "";
-
+		String input = "{\"taskID\": 1234,\"taskValue\": -5,\"result\":"
+				+ " \"12345\", \"taskState\": \"doing\",\"creatorUsername\": "
+				+ "\"adb\"}";
+		
 		Response result = fixture.createTaskInJSON(input);
 
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    javax.json.stream.JsonParsingException: Invalid token=EOF at (line no=1, column no=0, offset=-1). Expected tokens are: [CURLYOPEN, SQUAREOPEN]
-		//       at org.glassfish.json.JsonParserImpl.parsingException(JsonParserImpl.java:238)
-		//       at org.glassfish.json.JsonParserImpl.access$1200(JsonParserImpl.java:61)
-		//       at org.glassfish.json.JsonParserImpl$NoneContext.getNextEvent(JsonParserImpl.java:232)
-		//       at org.glassfish.json.JsonParserImpl$StateIterator.next(JsonParserImpl.java:172)
-		//       at org.glassfish.json.JsonParserImpl.next(JsonParserImpl.java:149)
-		//       at org.glassfish.json.JsonReaderImpl.readObject(JsonReaderImpl.java:101)
-		//       at moppaapis.TaskAPI.createTaskInJSON(TaskAPI.java:100)
 		assertNotNull(result);
 	}
 
 	/**
 	 * Run the Response createTaskInJSON(String) method test.
 	 *
-	 * @throws Exception
+	 * @throws Exception is launched because the taskValue is > 100
 	 *
 	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
-	public void testCreateTaskInJSON_3()
+	public final void testCreateTaskInJSONWithValueHigherThan100()
 		throws Exception {
 		TaskAPI fixture = new TaskAPI();
-		String input = "";
+		String input = "{\"taskID\": 1234,\"taskValue\": 1000,\"result\":"
+				+ " \"12345\", \"taskState\": \"doing\",\"creatorUsername\": "
+				+ "\"adb\"}";
 
 		Response result = fixture.createTaskInJSON(input);
 
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    javax.json.stream.JsonParsingException: Invalid token=EOF at (line no=1, column no=0, offset=-1). Expected tokens are: [CURLYOPEN, SQUAREOPEN]
-		//       at org.glassfish.json.JsonParserImpl.parsingException(JsonParserImpl.java:238)
-		//       at org.glassfish.json.JsonParserImpl.access$1200(JsonParserImpl.java:61)
-		//       at org.glassfish.json.JsonParserImpl$NoneContext.getNextEvent(JsonParserImpl.java:232)
-		//       at org.glassfish.json.JsonParserImpl$StateIterator.next(JsonParserImpl.java:172)
-		//       at org.glassfish.json.JsonParserImpl.next(JsonParserImpl.java:149)
-		//       at org.glassfish.json.JsonReaderImpl.readObject(JsonReaderImpl.java:101)
-		//       at moppaapis.TaskAPI.createTaskInJSON(TaskAPI.java:100)
 		assertNotNull(result);
 	}
 

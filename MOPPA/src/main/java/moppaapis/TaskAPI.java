@@ -22,6 +22,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
 
 /**
  * 
@@ -35,7 +37,7 @@ public class TaskAPI {
 	/**
 	 * @value tasks here we store all the tasks
 	 */
-    private ArrayList<Task> tasks = new ArrayList<Task>();
+     private ArrayList<Task> tasks = new ArrayList<Task>();
     
     /**
      * maximum value accepted to compute.
@@ -66,7 +68,6 @@ public class TaskAPI {
 	public final Response getAllTasks() {
     	tasks.add(new Task(new UUID(5, 5), "Txuso", 5, "120", "Waiting"));
     	tasks.add(new Task(new UUID(6, 6), "Mario", 4, "24", "Done"));
-    	System.out.println(tasks.size());
     	if (tasks.size() == 0) {
 			throw new InvalidData("There"
 			+ " are not tasks created yet").except();
@@ -79,8 +80,7 @@ public class TaskAPI {
                     .add("result", task.getResult())
                     .add("taskState", task.getState())
                     .add("creatorUsername", task.getUsername())
-                    .build();
-            tasks.add((Task) value);
+                    .build();            
             return Response.status(C200).entity(value).build();
     	}
         return Response.status(C200).
@@ -106,7 +106,7 @@ public class TaskAPI {
     	jsonReader.close();
     	
     	
-        UUID taskID = UUID.fromString(object.getString("taskID"));
+        UUID taskID = new UUID(5,5);
         int taskValue = object.getInt("taskValue");
         String result = object.getString("result");
         String taskState = object.getString("taskState");
@@ -136,10 +136,10 @@ public class TaskAPI {
         @ApiResponse(code = C200, message = "OK"),
         @ApiResponse(code = C500, message = "Something wrong in Server")})
 	public final Response findTaskByUsernameInJSON(final String username) {
-    	boolean found = false;
+    	tasks.add(new Task(new UUID(5, 5), "Txuso", 5, "120", "Waiting"));
+    	tasks.add(new Task(new UUID(6, 6), "Mario", 4, "24", "Done"));
     	for (Task task : tasks) {
     		if (task.getUsername().equals(username)) {
-    			found = true;
     			JsonObject value = Json.createObjectBuilder()
                         .add("taskID", task.getTaskid().toString())
                         .add("taskValue", task.getProblem())
@@ -148,16 +148,11 @@ public class TaskAPI {
                         .add("creatorUsername", task.getUsername())
                         .build();
                 return Response.status(C200).entity(value).build();
-    		}
-    		
+    		} 		
     	}
-    	if (found) {
-			throw new TaskNotFound("There aren't tasks assigned to "
-    		+ username).except();
-		}
     	
-        return Response.status(C200).entity(""
-        + " All your tasks have been displayed").build();
+        return Response.status(Status.NOT_FOUND)
+        .entity(" There aren't tasks assigned to " + username).build();
     }
     /**
      * 
@@ -172,25 +167,24 @@ public class TaskAPI {
         @ApiResponse(code = C200, message = "OK"),
         @ApiResponse(code = C500, message = "Something wrong in Server")})
 	public final Response findTaskByStateInJSON(final String taskState) {
-    	boolean found = false;
+    	tasks.add(new Task(new UUID(5, 5), "Txuso", 5, "120", "Waiting"));
+    	tasks.add(new Task(new UUID(6, 6), "Mario", 4, "24", "Done"));
     	for (Task task : tasks) {
     		if (task.getState().equals(taskState)) {
-    			found = true;
     			JsonObject value = Json.createObjectBuilder()
                         .add("taskID", task.getTaskid().toString())
                         .add("taskValue", task.getProblem())
                         .add("result", task.getResult())
-                        .add("result", task.getState())
+                        .add("taskState", task.getState())
+                        .add("creatorUsername", task.getUsername())
                         .build();
                 return Response.status(C200).entity(value).build();
     		}
-    		if (found) {
-				throw new TaskNotFound("There aren't"
-				+ " tasks with the state " + taskState).except();
-			}
+			
     	}
-        return Response.status(C200).build();
-    }
+        return Response.status(Status.NOT_FOUND)
+        .entity(" There aren't tasks with the state" + taskState).build();
+     }
     
     
     
