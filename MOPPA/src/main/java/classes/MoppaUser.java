@@ -2,7 +2,7 @@ package classes;
 
 import com.datastax.driver.mapping.annotations.Table;
 
-/**
+	/**
 	 * 
 	 * @author Txuso
 	 * This class is related to the MoppaUsers

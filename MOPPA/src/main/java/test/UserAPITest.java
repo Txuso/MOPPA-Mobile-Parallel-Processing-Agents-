@@ -2,13 +2,12 @@ package test;
 
 import javax.ws.rs.core.Response;
 import org.junit.*;
-
 import moppaapis.UserAPI;
-
 import static org.junit.Assert.*;
 
 /**
- * The class <code>UserAPITest</code> contains tests for the class <code>{@link UserAPI}</code>.
+ * The class <code>UserAPITest</code>
+ * contains tests for the class <code>{@link UserAPI}</code>.
  *
  * @generatedBy CodePro at 11/19/15 12:20 PM
  * @author Txuso
@@ -21,8 +20,7 @@ public class UserAPITest {
 	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
-	public void testUserAPI_1()
-		throws Exception {
+	public final void testUserAPICreateUserAPI() {
 		UserAPI result = new UserAPI();
 		assertNotNull(result);
 		// add additional test code here
@@ -31,140 +29,65 @@ public class UserAPITest {
 	/**
 	 * Run the Response createUserInJSON(String) method test.
 	 *
-	 * @throws Exception
+	 * @throws Exception is not thrown because it gives the correct result
 	 *
 	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
-	public void testCreateUserInJSON_1()
+	public final void testCreateUserInJSONCorrectValues()
 		throws Exception {
 		UserAPI fixture = new UserAPI();
-		String input = "";
-
+		String input = "{\"username\":\"Rodolfo\", \"password\": \"213\"}";
 		Response result = fixture.createUserInJSON(input);
-
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    javax.json.stream.JsonParsingException: Invalid token=EOF at (line no=1, column no=0, offset=-1). Expected tokens are: [CURLYOPEN, SQUAREOPEN]
-		//       at org.glassfish.json.JsonParserImpl.parsingException(JsonParserImpl.java:238)
-		//       at org.glassfish.json.JsonParserImpl.access$1200(JsonParserImpl.java:61)
-		//       at org.glassfish.json.JsonParserImpl$NoneContext.getNextEvent(JsonParserImpl.java:232)
-		//       at org.glassfish.json.JsonParserImpl$StateIterator.next(JsonParserImpl.java:172)
-		//       at org.glassfish.json.JsonParserImpl.next(JsonParserImpl.java:149)
-		//       at org.glassfish.json.JsonReaderImpl.readObject(JsonReaderImpl.java:101)
-		//       at moppaapis.UserAPI.createUserInJSON(UserAPI.java:58)
 		assertNotNull(result);
 	}
 
 	/**
 	 * Run the Response createUserInJSON(String) method test.
 	 *
-	 * @throws Exception
+	 * @throws Exception It is launched to inform that the username is null
 	 *
 	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
-	public void testCreateUserInJSON_2()
+	public final void testCreateUserInJSONNullUsername()
 		throws Exception {
 		UserAPI fixture = new UserAPI();
-		String input = "";
-
+		String input = "{\"username\":\"\", \"password\": \"213\"}";
 		Response result = fixture.createUserInJSON(input);
-
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    javax.json.stream.JsonParsingException: Invalid token=EOF at (line no=1, column no=0, offset=-1). Expected tokens are: [CURLYOPEN, SQUAREOPEN]
-		//       at org.glassfish.json.JsonParserImpl.parsingException(JsonParserImpl.java:238)
-		//       at org.glassfish.json.JsonParserImpl.access$1200(JsonParserImpl.java:61)
-		//       at org.glassfish.json.JsonParserImpl$NoneContext.getNextEvent(JsonParserImpl.java:232)
-		//       at org.glassfish.json.JsonParserImpl$StateIterator.next(JsonParserImpl.java:172)
-		//       at org.glassfish.json.JsonParserImpl.next(JsonParserImpl.java:149)
-		//       at org.glassfish.json.JsonReaderImpl.readObject(JsonReaderImpl.java:101)
-		//       at moppaapis.UserAPI.createUserInJSON(UserAPI.java:58)
 		assertNotNull(result);
 	}
 
 	/**
 	 * Run the Response createUserInJSON(String) method test.
 	 *
-	 * @throws Exception
+	 * @throws Exception It is launched to inform that the password is null
 	 *
 	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
-	public void testCreateUserInJSON_3()
+	public final void testCreateUserInJSONNullPassword()
 		throws Exception {
 		UserAPI fixture = new UserAPI();
-		String input = "";
-
+		String input = "{\"username\":\"Rodolfo\", \"password\": \"\"}";
 		Response result = fixture.createUserInJSON(input);
-
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    javax.json.stream.JsonParsingException: Invalid token=EOF at (line no=1, column no=0, offset=-1). Expected tokens are: [CURLYOPEN, SQUAREOPEN]
-		//       at org.glassfish.json.JsonParserImpl.parsingException(JsonParserImpl.java:238)
-		//       at org.glassfish.json.JsonParserImpl.access$1200(JsonParserImpl.java:61)
-		//       at org.glassfish.json.JsonParserImpl$NoneContext.getNextEvent(JsonParserImpl.java:232)
-		//       at org.glassfish.json.JsonParserImpl$StateIterator.next(JsonParserImpl.java:172)
-		//       at org.glassfish.json.JsonParserImpl.next(JsonParserImpl.java:149)
-		//       at org.glassfish.json.JsonReaderImpl.readObject(JsonReaderImpl.java:101)
-		//       at moppaapis.UserAPI.createUserInJSON(UserAPI.java:58)
+		
 		assertNotNull(result);
 	}
 
 	/**
 	 * Run the Response createUserInJSON(String) method test.
 	 *
-	 * @throws Exception
+	 * @throws Exception is launched because the user already exists
 	 *
 	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
-	public void testCreateUserInJSON_4()
+	public final void testCreateUserInJSONUserAlreadyExists()
 		throws Exception {
 		UserAPI fixture = new UserAPI();
-		String input = "";
-
+		String input = "{\"username\":\"Txuso\", \"password\": \"213\"}";
 		Response result = fixture.createUserInJSON(input);
-
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    javax.json.stream.JsonParsingException: Invalid token=EOF at (line no=1, column no=0, offset=-1). Expected tokens are: [CURLYOPEN, SQUAREOPEN]
-		//       at org.glassfish.json.JsonParserImpl.parsingException(JsonParserImpl.java:238)
-		//       at org.glassfish.json.JsonParserImpl.access$1200(JsonParserImpl.java:61)
-		//       at org.glassfish.json.JsonParserImpl$NoneContext.getNextEvent(JsonParserImpl.java:232)
-		//       at org.glassfish.json.JsonParserImpl$StateIterator.next(JsonParserImpl.java:172)
-		//       at org.glassfish.json.JsonParserImpl.next(JsonParserImpl.java:149)
-		//       at org.glassfish.json.JsonReaderImpl.readObject(JsonReaderImpl.java:101)
-		//       at moppaapis.UserAPI.createUserInJSON(UserAPI.java:58)
-		assertNotNull(result);
-	}
-
-	/**
-	 * Run the Response createUserInJSON(String) method test.
-	 *
-	 * @throws Exception
-	 *
-	 * @generatedBy CodePro at 11/19/15 12:20 PM
-	 */
-	@Test
-	public void testCreateUserInJSON_5()
-		throws Exception {
-		UserAPI fixture = new UserAPI();
-		String input = "";
-
-		Response result = fixture.createUserInJSON(input);
-
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    javax.json.stream.JsonParsingException: Invalid token=EOF at (line no=1, column no=0, offset=-1). Expected tokens are: [CURLYOPEN, SQUAREOPEN]
-		//       at org.glassfish.json.JsonParserImpl.parsingException(JsonParserImpl.java:238)
-		//       at org.glassfish.json.JsonParserImpl.access$1200(JsonParserImpl.java:61)
-		//       at org.glassfish.json.JsonParserImpl$NoneContext.getNextEvent(JsonParserImpl.java:232)
-		//       at org.glassfish.json.JsonParserImpl$StateIterator.next(JsonParserImpl.java:172)
-		//       at org.glassfish.json.JsonParserImpl.next(JsonParserImpl.java:149)
-		//       at org.glassfish.json.JsonReaderImpl.readObject(JsonReaderImpl.java:101)
-		//       at moppaapis.UserAPI.createUserInJSON(UserAPI.java:58)
 		assertNotNull(result);
 	}
 
@@ -203,7 +126,7 @@ public class UserAPITest {
 	 *
 	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		new org.junit.runner.JUnitCore().run(UserAPITest.class);
 	}
 }

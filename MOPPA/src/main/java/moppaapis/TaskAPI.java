@@ -138,6 +138,10 @@ public class TaskAPI {
 	public final Response findTaskByUsernameInJSON(final String username) {
     	tasks.add(new Task(new UUID(5, 5), "Txuso", 5, "120", "Waiting"));
     	tasks.add(new Task(new UUID(6, 6), "Mario", 4, "24", "Done"));
+    	if (username.isEmpty()) {
+    		throw new InvalidData("The introduced data isn't correct").except();
+    	}
+    		
     	for (Task task : tasks) {
     		if (task.getUsername().equals(username)) {
     			JsonObject value = Json.createObjectBuilder()

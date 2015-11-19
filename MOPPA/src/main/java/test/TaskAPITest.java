@@ -8,9 +8,9 @@ import moppaapis.TaskAPI;
 import static org.junit.Assert.*;
 
 /**
- * The class <code>TaskAPITest</code> contains tests for the class <code>{@link TaskAPI}</code>.
+ * The class <code>TaskAPITest</code> 
+ * contains tests for the class <code>{@link TaskAPI}</code>.
  *
- * @generatedBy CodePro at 11/19/15 12:20 PM
  * @author Txuso
  * @version $Revision: 1.0 $
  */
@@ -21,8 +21,7 @@ public class TaskAPITest {
 	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
-	public void testTaskAPI_1()
-		throws Exception {
+	public final void testTaskAPICreation() {
 		TaskAPI result = new TaskAPI();
 		assertNotNull(result);
 		// add additional test code here
@@ -36,7 +35,7 @@ public class TaskAPITest {
 	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
-	public final void testCreateTaskInJSON1()
+	public final void testCreateTaskInJSONCorrectInput()
 		throws Exception {
 		TaskAPI fixture = new TaskAPI();
 		String input = "{\"taskID\": 1234,\"taskValue\": 10,\"result\":"
@@ -91,266 +90,93 @@ public class TaskAPITest {
 	/**
 	 * Run the Response findTaskByStateInJSON(String) method test.
 	 *
-	 * @throws Exception
+	 * 
 	 *
 	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
-	public void testFindTaskByStateInJSON_1()
-		throws Exception {
+	public final void testFindTaskByStateInJSONCorrect() {
 		TaskAPI fixture = new TaskAPI();
-		String taskState = "";
-
+		String taskState = "{Waiting}";
 		Response result = fixture.findTaskByStateInJSON(taskState);
-
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.LinkageError: ClassCastException: attempting to castjar:file:/Users/Txuso/.m2/repository/javax/ws/rs/javax.ws.rs-api/2.0/javax.ws.rs-api-2.0.jar!/javax/ws/rs/ext/RuntimeDelegate.class to jar:file:/Users/Txuso/.m2/repository/javax/ws/rs/javax.ws.rs-api/2.0/javax.ws.rs-api-2.0.jar!/javax/ws/rs/ext/RuntimeDelegate.class
-		//       at javax.ws.rs.ext.RuntimeDelegate.findDelegate(RuntimeDelegate.java:146)
-		//       at javax.ws.rs.ext.RuntimeDelegate.getInstance(RuntimeDelegate.java:120)
-		//       at javax.ws.rs.core.Response$ResponseBuilder.newInstance(Response.java:848)
-		//       at javax.ws.rs.core.Response.status(Response.java:613)
-		//       at moppaapis.TaskAPI.findTaskByStateInJSON(TaskAPI.java:186)
 		assertNotNull(result);
 	}
 
 	/**
 	 * Run the Response findTaskByStateInJSON(String) method test.
 	 *
-	 * @throws Exception
+	 * @throws Exception it is launched because there aren't tasks 
+	 * with the input state
 	 *
 	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
-	public void testFindTaskByStateInJSON_2()
+	public final void testFindTaskByStateInJSONNoTaskWithThatState()
 		throws Exception {
 		TaskAPI fixture = new TaskAPI();
-		String taskState = "";
-
+		String taskState = "In process";
 		Response result = fixture.findTaskByStateInJSON(taskState);
-
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.LinkageError: ClassCastException: attempting to castjar:file:/Users/Txuso/.m2/repository/javax/ws/rs/javax.ws.rs-api/2.0/javax.ws.rs-api-2.0.jar!/javax/ws/rs/ext/RuntimeDelegate.class to jar:file:/Users/Txuso/.m2/repository/javax/ws/rs/javax.ws.rs-api/2.0/javax.ws.rs-api-2.0.jar!/javax/ws/rs/ext/RuntimeDelegate.class
-		//       at javax.ws.rs.ext.RuntimeDelegate.findDelegate(RuntimeDelegate.java:146)
-		//       at javax.ws.rs.ext.RuntimeDelegate.getInstance(RuntimeDelegate.java:120)
-		//       at javax.ws.rs.core.Response$ResponseBuilder.newInstance(Response.java:848)
-		//       at javax.ws.rs.core.Response.status(Response.java:613)
-		//       at moppaapis.TaskAPI.findTaskByStateInJSON(TaskAPI.java:186)
 		assertNotNull(result);
 	}
 
+
 	/**
-	 * Run the Response findTaskByStateInJSON(String) method test.
+	 * Run the Response findTaskByUsernameInJSON(String) method test.
 	 *
-	 * @throws Exception
 	 *
 	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
-	public void testFindTaskByStateInJSON_3()
-		throws Exception {
+	public final void testFindTaskByUsernameInJSONCorrectInput() {
 		TaskAPI fixture = new TaskAPI();
-		String taskState = "";
-
-		Response result = fixture.findTaskByStateInJSON(taskState);
-
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.LinkageError: ClassCastException: attempting to castjar:file:/Users/Txuso/.m2/repository/javax/ws/rs/javax.ws.rs-api/2.0/javax.ws.rs-api-2.0.jar!/javax/ws/rs/ext/RuntimeDelegate.class to jar:file:/Users/Txuso/.m2/repository/javax/ws/rs/javax.ws.rs-api/2.0/javax.ws.rs-api-2.0.jar!/javax/ws/rs/ext/RuntimeDelegate.class
-		//       at javax.ws.rs.ext.RuntimeDelegate.findDelegate(RuntimeDelegate.java:146)
-		//       at javax.ws.rs.ext.RuntimeDelegate.getInstance(RuntimeDelegate.java:120)
-		//       at javax.ws.rs.core.Response$ResponseBuilder.newInstance(Response.java:848)
-		//       at javax.ws.rs.core.Response.status(Response.java:613)
-		//       at moppaapis.TaskAPI.findTaskByStateInJSON(TaskAPI.java:186)
-		assertNotNull(result);
-	}
-
-	/**
-	 * Run the Response findTaskByStateInJSON(String) method test.
-	 *
-	 * @throws Exception
-	 *
-	 * @generatedBy CodePro at 11/19/15 12:20 PM
-	 */
-	@Test
-	public void testFindTaskByStateInJSON_4()
-		throws Exception {
-		TaskAPI fixture = new TaskAPI();
-		String taskState = "";
-
-		Response result = fixture.findTaskByStateInJSON(taskState);
-
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.LinkageError: ClassCastException: attempting to castjar:file:/Users/Txuso/.m2/repository/javax/ws/rs/javax.ws.rs-api/2.0/javax.ws.rs-api-2.0.jar!/javax/ws/rs/ext/RuntimeDelegate.class to jar:file:/Users/Txuso/.m2/repository/javax/ws/rs/javax.ws.rs-api/2.0/javax.ws.rs-api-2.0.jar!/javax/ws/rs/ext/RuntimeDelegate.class
-		//       at javax.ws.rs.ext.RuntimeDelegate.findDelegate(RuntimeDelegate.java:146)
-		//       at javax.ws.rs.ext.RuntimeDelegate.getInstance(RuntimeDelegate.java:120)
-		//       at javax.ws.rs.core.Response$ResponseBuilder.newInstance(Response.java:848)
-		//       at javax.ws.rs.core.Response.status(Response.java:613)
-		//       at moppaapis.TaskAPI.findTaskByStateInJSON(TaskAPI.java:186)
+		String username = "{Txuso}";
+		Response result = fixture.findTaskByUsernameInJSON(username);
 		assertNotNull(result);
 	}
 
 	/**
 	 * Run the Response findTaskByUsernameInJSON(String) method test.
 	 *
-	 * @throws Exception
+	 * @throws Exception it is launched because there are not results
 	 *
 	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
-	public void testFindTaskByUsernameInJSON_1()
+	public final void testFindTaskByUsernameInJSONNotResults()
 		throws Exception {
 		TaskAPI fixture = new TaskAPI();
-		String username = "";
-
+		String username = "{Rodolfo}";
 		Response result = fixture.findTaskByUsernameInJSON(username);
-
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.LinkageError: ClassCastException: attempting to castjar:file:/Users/Txuso/.m2/repository/javax/ws/rs/javax.ws.rs-api/2.0/javax.ws.rs-api-2.0.jar!/javax/ws/rs/ext/RuntimeDelegate.class to jar:file:/Users/Txuso/.m2/repository/javax/ws/rs/javax.ws.rs-api/2.0/javax.ws.rs-api-2.0.jar!/javax/ws/rs/ext/RuntimeDelegate.class
-		//       at javax.ws.rs.ext.RuntimeDelegate.findDelegate(RuntimeDelegate.java:146)
-		//       at javax.ws.rs.ext.RuntimeDelegate.getInstance(RuntimeDelegate.java:120)
-		//       at javax.ws.rs.core.Response$ResponseBuilder.newInstance(Response.java:848)
-		//       at javax.ws.rs.core.Response.status(Response.java:613)
-		//       at moppaapis.TaskAPI.findTaskByUsernameInJSON(TaskAPI.java:153)
-		assertNotNull(result);
-	}
-
-	/**
-	 * Run the Response findTaskByUsernameInJSON(String) method test.
-	 *
-	 * @throws Exception
-	 *
-	 * @generatedBy CodePro at 11/19/15 12:20 PM
-	 */
-	@Test
-	public void testFindTaskByUsernameInJSON_2()
-		throws Exception {
-		TaskAPI fixture = new TaskAPI();
-		String username = "";
-
-		Response result = fixture.findTaskByUsernameInJSON(username);
-
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.LinkageError: ClassCastException: attempting to castjar:file:/Users/Txuso/.m2/repository/javax/ws/rs/javax.ws.rs-api/2.0/javax.ws.rs-api-2.0.jar!/javax/ws/rs/ext/RuntimeDelegate.class to jar:file:/Users/Txuso/.m2/repository/javax/ws/rs/javax.ws.rs-api/2.0/javax.ws.rs-api-2.0.jar!/javax/ws/rs/ext/RuntimeDelegate.class
-		//       at javax.ws.rs.ext.RuntimeDelegate.findDelegate(RuntimeDelegate.java:146)
-		//       at javax.ws.rs.ext.RuntimeDelegate.getInstance(RuntimeDelegate.java:120)
-		//       at javax.ws.rs.core.Response$ResponseBuilder.newInstance(Response.java:848)
-		//       at javax.ws.rs.core.Response.status(Response.java:613)
-		//       at moppaapis.TaskAPI.findTaskByUsernameInJSON(TaskAPI.java:153)
-		assertNotNull(result);
-	}
-
-	/**
-	 * Run the Response findTaskByUsernameInJSON(String) method test.
-	 *
-	 * @throws Exception
-	 *
-	 * @generatedBy CodePro at 11/19/15 12:20 PM
-	 */
-	@Test
-	public void testFindTaskByUsernameInJSON_3()
-		throws Exception {
-		TaskAPI fixture = new TaskAPI();
-		String username = "";
-
-		Response result = fixture.findTaskByUsernameInJSON(username);
-
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.LinkageError: ClassCastException: attempting to castjar:file:/Users/Txuso/.m2/repository/javax/ws/rs/javax.ws.rs-api/2.0/javax.ws.rs-api-2.0.jar!/javax/ws/rs/ext/RuntimeDelegate.class to jar:file:/Users/Txuso/.m2/repository/javax/ws/rs/javax.ws.rs-api/2.0/javax.ws.rs-api-2.0.jar!/javax/ws/rs/ext/RuntimeDelegate.class
-		//       at javax.ws.rs.ext.RuntimeDelegate.findDelegate(RuntimeDelegate.java:146)
-		//       at javax.ws.rs.ext.RuntimeDelegate.getInstance(RuntimeDelegate.java:120)
-		//       at javax.ws.rs.core.Response$ResponseBuilder.newInstance(Response.java:848)
-		//       at javax.ws.rs.core.Response.status(Response.java:613)
-		//       at moppaapis.TaskAPI.findTaskByUsernameInJSON(TaskAPI.java:153)
 		assertNotNull(result);
 	}
 
 	/**
 	 * Run the Response getAllTasks() method test.
 	 *
-	 * @throws Exception
+	 * @throws Exception is launched if there aren't tasks created yet
 	 *
 	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
-	public void testGetAllTasks_1()
+	public final void testGetAllTasksCorrect()
 		throws Exception {
 		TaskAPI fixture = new TaskAPI();
-
 		Response result = fixture.getAllTasks();
-
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.LinkageError: ClassCastException: attempting to castjar:file:/Users/Txuso/.m2/repository/javax/ws/rs/javax.ws.rs-api/2.0/javax.ws.rs-api-2.0.jar!/javax/ws/rs/ext/RuntimeDelegate.class to jar:file:/Users/Txuso/.m2/repository/javax/ws/rs/javax.ws.rs-api/2.0/javax.ws.rs-api-2.0.jar!/javax/ws/rs/ext/RuntimeDelegate.class
-		//       at javax.ws.rs.ext.RuntimeDelegate.findDelegate(RuntimeDelegate.java:146)
-		//       at javax.ws.rs.ext.RuntimeDelegate.getInstance(RuntimeDelegate.java:120)
-		//       at javax.ws.rs.core.Response$ResponseBuilder.newInstance(Response.java:848)
-		//       at javax.ws.rs.core.Response.status(Response.java:590)
-		//       at exceptions.AbstractException.responseBuilder(AbstractException.java:86)
-		//       at exceptions.AbstractException.build(AbstractException.java:94)
-		//       at exceptions.AbstractException.except(AbstractException.java:102)
-		//       at moppaapis.TaskAPI.getAllTasks(TaskAPI.java:67)
 		assertNotNull(result);
 	}
 
 	/**
 	 * Run the Response getAllTasks() method test.
 	 *
-	 * @throws Exception
+	 * @throws Exception is launched if there aren't tasks created yet
 	 *
 	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
-	public void testGetAllTasks_2()
+	public final void testGetAllTasksNoTasks()
 		throws Exception {
 		TaskAPI fixture = new TaskAPI();
-
 		Response result = fixture.getAllTasks();
-
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.LinkageError: ClassCastException: attempting to castjar:file:/Users/Txuso/.m2/repository/javax/ws/rs/javax.ws.rs-api/2.0/javax.ws.rs-api-2.0.jar!/javax/ws/rs/ext/RuntimeDelegate.class to jar:file:/Users/Txuso/.m2/repository/javax/ws/rs/javax.ws.rs-api/2.0/javax.ws.rs-api-2.0.jar!/javax/ws/rs/ext/RuntimeDelegate.class
-		//       at javax.ws.rs.ext.RuntimeDelegate.findDelegate(RuntimeDelegate.java:146)
-		//       at javax.ws.rs.ext.RuntimeDelegate.getInstance(RuntimeDelegate.java:120)
-		//       at javax.ws.rs.core.Response$ResponseBuilder.newInstance(Response.java:848)
-		//       at javax.ws.rs.core.Response.status(Response.java:590)
-		//       at exceptions.AbstractException.responseBuilder(AbstractException.java:86)
-		//       at exceptions.AbstractException.build(AbstractException.java:94)
-		//       at exceptions.AbstractException.except(AbstractException.java:102)
-		//       at moppaapis.TaskAPI.getAllTasks(TaskAPI.java:67)
-		assertNotNull(result);
-	}
-
-	/**
-	 * Run the Response getAllTasks() method test.
-	 *
-	 * @throws Exception
-	 *
-	 * @generatedBy CodePro at 11/19/15 12:20 PM
-	 */
-	@Test
-	public void testGetAllTasks_3()
-		throws Exception {
-		TaskAPI fixture = new TaskAPI();
-
-		Response result = fixture.getAllTasks();
-
-		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.LinkageError: ClassCastException: attempting to castjar:file:/Users/Txuso/.m2/repository/javax/ws/rs/javax.ws.rs-api/2.0/javax.ws.rs-api-2.0.jar!/javax/ws/rs/ext/RuntimeDelegate.class to jar:file:/Users/Txuso/.m2/repository/javax/ws/rs/javax.ws.rs-api/2.0/javax.ws.rs-api-2.0.jar!/javax/ws/rs/ext/RuntimeDelegate.class
-		//       at javax.ws.rs.ext.RuntimeDelegate.findDelegate(RuntimeDelegate.java:146)
-		//       at javax.ws.rs.ext.RuntimeDelegate.getInstance(RuntimeDelegate.java:120)
-		//       at javax.ws.rs.core.Response$ResponseBuilder.newInstance(Response.java:848)
-		//       at javax.ws.rs.core.Response.status(Response.java:590)
-		//       at exceptions.AbstractException.responseBuilder(AbstractException.java:86)
-		//       at exceptions.AbstractException.build(AbstractException.java:94)
-		//       at exceptions.AbstractException.except(AbstractException.java:102)
-		//       at moppaapis.TaskAPI.getAllTasks(TaskAPI.java:67)
 		assertNotNull(result);
 	}
 
@@ -389,7 +215,7 @@ public class TaskAPITest {
 	 *
 	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		new org.junit.runner.JUnitCore().run(TaskAPITest.class);
 	}
 }

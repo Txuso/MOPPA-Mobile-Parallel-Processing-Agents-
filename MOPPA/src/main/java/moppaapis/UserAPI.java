@@ -54,6 +54,8 @@ public class UserAPI {
         @ApiResponse(code = C200, message = "OK"),
         @ApiResponse(code = C500, message = "Something wrong in Server")})
 	public final Response createUserInJSON(final String input) {
+    	users.add(new MoppaUser("Txuso", "123"));
+    	users.add(new MoppaUser("Mario", "123"));
     	JsonReader jsonReader = Json.createReader(new StringReader(input));
    	 	JsonObject object = jsonReader.readObject();
    	 	jsonReader.close();
