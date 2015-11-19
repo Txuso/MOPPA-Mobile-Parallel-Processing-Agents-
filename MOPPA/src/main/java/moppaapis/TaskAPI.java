@@ -2,8 +2,6 @@ package moppaapis;
 
 import classes.Task;
 import exceptions.InvalidData;
-import exceptions.TaskNotFound;
-
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiResponse;
@@ -106,7 +104,7 @@ public class TaskAPI {
     	jsonReader.close();
     	
     	
-        UUID taskID = new UUID(5,5);
+        UUID taskID = new UUID(5, 5);
         int taskValue = object.getInt("taskValue");
         String result = object.getString("result");
         String taskState = object.getString("taskState");

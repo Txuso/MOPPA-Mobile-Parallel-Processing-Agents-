@@ -1,17 +1,22 @@
 package test;
 
+import static org.junit.Assert.assertNotNull;
+
 import javax.ws.rs.core.Response;
-import org.junit.*;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 import moppaapis.UserAPI;
-import static org.junit.Assert.*;
 
 /**
  * The class <code>UserAPITest</code>
  * contains tests for the class <code>{@link UserAPI}</code>.
  *
- * @generatedBy CodePro at 11/19/15 12:20 PM
- * @author Txuso
- * @version $Revision: 1.0 $
+ * @ generatedBy CodePro at 11/19/15 12:20 PM
+ * @ author Txuso
+ * @ version $Revision: 1.0 $
  */
 public class UserAPITest {
 	/**

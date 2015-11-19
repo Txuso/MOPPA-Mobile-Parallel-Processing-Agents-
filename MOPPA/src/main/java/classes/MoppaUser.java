@@ -31,6 +31,11 @@ public class MoppaUser {
 	 * @param newUsername the username that is going to be created
 	 * @param newPassword the password of the username
 	 */
+	
+	public MoppaUser() {
+	    
+	}
+	
 	public MoppaUser(final String newUsername, final String newPassword) {
 		super();
 		this.username = newUsername;

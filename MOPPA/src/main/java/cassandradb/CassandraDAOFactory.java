@@ -14,7 +14,8 @@ import com.datastax.driver.mapping.MappingManager;
 public class CassandraDAOFactory extends DAOFactory {
 	
   private static final String CLUSTERNAME = "moppa";
-  private static final String USERNAME = "cassandra";
+  private static final String USERNAME = "cassandra"; 
+                       // Have to put it in properties file
   private static final String PASSWORD = "cassandrapassword";
   private static final String CONTACTPOINT = "127.0.0.1";
   private static final int PORT = 9042;

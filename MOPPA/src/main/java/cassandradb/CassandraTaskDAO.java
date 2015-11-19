@@ -10,7 +10,7 @@ import com.datastax.driver.mapping.Mapper;
 import com.datastax.driver.mapping.Result;
 
 import classes.Task;
-import utils.GeneratorUUID;
+import java.util.UUID;
 
 /**
  * 
@@ -27,8 +27,7 @@ public class CassandraTaskDAO implements TaskDAO {
 	
 	public final UUID insertTask(final String username, final int problem) {
 		
-		UUID uuid = GeneratorUUID
-		            .generateTaskID(); //can we use it directly in method call?
+		UUID uuid = UUID.randomUUID(); //can we use it directly in method call?
 		try {
 			Task task = new Task(
 			uuid, username, problem, "", "Waiting");
@@ -39,7 +38,7 @@ public class CassandraTaskDAO implements TaskDAO {
 		} catch (Exception e) {
 			//Logger, log4j suggestion
 		  }
-		return uuid;
+		return uuid; // Returns newly created TaskID
 	}
 	
 	public final Result<Task> findTasksbyUsername(final String username) {
@@ -48,7 +47,7 @@ public class CassandraTaskDAO implements TaskDAO {
 		Result<Task> tasks = null;
 		try {
 			PreparedStatement stmt = connection.prepare("SELECT * "
-			    + "FROM tasks WHERE username = ?);");
+          + "FROM tasks WHERE username = ? ALLOW FILTERING;");
 			BoundStatement boundStmt = new BoundStatement(stmt);
 			
 			ResultSet results   = connection.execute(boundStmt.bind(username));
@@ -68,7 +67,7 @@ public class CassandraTaskDAO implements TaskDAO {
 		Result<Task> tasks = null;
 		try {
 			PreparedStatement stmt = connection.prepare("SELECT * "
-			    + "FROM tasks WHERE username = ? AND state = ?);");
+          + "FROM tasks WHERE username = ? AND state = ? ALLOW FILTERING;");
 			BoundStatement boundStmt = new BoundStatement(stmt);
 			
 			ResultSet results = connection

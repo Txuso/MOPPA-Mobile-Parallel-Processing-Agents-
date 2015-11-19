@@ -2,7 +2,6 @@ package classes;
 
 import java.util.UUID;
 
-import com.datastax.driver.mapping.annotations.PartitionKey;
 import com.datastax.driver.mapping.annotations.Table;
 
 /**
@@ -32,9 +31,13 @@ public class Task {
 
 	private String username;
 	
-	public Task(final UUID uuid, final String newCreatorUsername, final int newTaskValue,
-	final String newTaskResult, final String newTaskState
-	) {
+	public Task() {
+	    
+	}
+	
+	public Task(final UUID uuid, 
+	            final String newCreatorUsername, final int newTaskValue,
+	            final String newTaskResult, final String newTaskState) {
 		super();
 		this.taskid = uuid;
 		this.problem = newTaskValue;
@@ -43,44 +46,44 @@ public class Task {
 		this.username = newCreatorUsername;
 	}
 
-	public UUID getTaskid() {
+	public final UUID getTaskid() {
 		return taskid;
 	}
 
-	public void setTaskid(UUID taskid) {
-		this.taskid = taskid;
+	public final void setTaskid(final UUID newTaskId) {
+		this.taskid = newTaskId;
 	}
 
-	public int getProblem() {
+	public final int getProblem() {
 		return problem;
 	}
 
-	public void setProblem(int problem) {
-		this.problem = problem;
+	public final void setProblem(final int newProblem) {
+		this.problem = newProblem;
 	}
 
-	public String getResult() {
+	public final String getResult() {
 		return result;
 	}
 
-	public void setResult(String result) {
-		this.result = result;
+	public final void setResult(final String newResult) {
+		this.result = newResult;
 	}
 
-	public String getState() {
+	public final String getState() {
 		return state;
 	}
 
-	public void setState(String state) {
-		this.state = state;
+	public final void setState(final String newState) {
+		this.state = newState;
 	}
 
-	public String getUsername() {
+	public final String getUsername() {
 		return username;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public final void setUsername(final String newUsername) {
+		this.username = newUsername;
 	}
 	
 	
