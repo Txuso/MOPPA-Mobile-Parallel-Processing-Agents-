@@ -4,38 +4,51 @@ import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Session;
 import com.datastax.driver.mapping.MappingManager;
 
+/**
+ * 
+ * @author Mario Measic-Gavran
+ * This class serves as a provider for connection details
+ * to CassandraDB and creating instances of DAO objects.
+ */
+
 public class CassandraDAOFactory extends DAOFactory {
 	
-  private static final String clusterName = "moppa";
-  private static final String username = "cassandra";
-  private static final String password = "cassandrapassword";
-  private static final String contactPoint = "127.0.0.1";
-  private static final int port = 9042;
-  private static Cluster cluster = Cluster.builder().addContactPoint(contactPoint).withPort(port).withCredentials(username, password).build();
-	private static Session session = cluster.connect(clusterName);
-	private static MappingManager manager = new MappingManager(session);
+  private static final String CLUSTERNAME = "moppa";
+  private static final String USERNAME = "cassandra";
+  private static final String PASSWORD = "cassandrapassword";
+  private static final String CONTACTPOINT = "127.0.0.1";
+  private static final int PORT = 9042;
+  private static final Cluster CLUSTER = Cluster.builder()
+                                         .addContactPoint(CONTACTPOINT)
+                                         .withPort(PORT)
+                                         .withCredentials(USERNAME, PASSWORD)
+                                         .build();
+	private static final Session SESSION = CLUSTER.connect(CLUSTERNAME);
+	private static final MappingManager MANAGER = new MappingManager(SESSION);
 	
 	public static Session getConnection() {
-		return session;
+		return SESSION;
 	}
 	
 	public static MappingManager getMappingManager() {
-		return manager;
+		return MANAGER;
 	}
 	
-	public static void closeConnection(Session session) {
-		if (!session.isClosed()) {
+	public static void closeConnection(final Session session) {
+		if (!SESSION.isClosed()) {
 			
-			session.close();
+		  SESSION.close();
 		}
 	}
 	
-	public TaskDAO getTaskDAO() {
+	@Override
+	public final TaskDAO getTaskDAO() {
 		
 		return new CassandraTaskDAO();
 	}
 	
-	public UserDAO getUserDAO() {
+	@Override
+	public final UserDAO getUserDAO() {
 		
 		return new CassandraUserDAO();
 	}

@@ -2,65 +2,83 @@ package cassandradb;
 
 import java.util.UUID;
 
-import com.datastax.driver.core.*;
+import com.datastax.driver.core.BoundStatement;
+import com.datastax.driver.core.PreparedStatement;
+import com.datastax.driver.core.ResultSet;
+import com.datastax.driver.core.Session;
 import com.datastax.driver.mapping.Mapper;
 import com.datastax.driver.mapping.Result;
 
 import classes.Task;
 import utils.GeneratorUUID;
+
+/**
+ * 
+ * @author Mario Measic-Gavran
+ * This class is used for creating a new Task 
+ * and inserting a record into CassandraDB.
+ */
+
 public class CassandraTaskDAO implements TaskDAO {
 	
 	public CassandraTaskDAO() {
 		
 	}
 	
-	public UUID insertTask (String username, int problem) {
+	public final UUID insertTask(final String username, final int problem) {
 		
-		UUID uuid = GeneratorUUID.generateTaskID(); //can we use it directly in method call?
+		UUID uuid = GeneratorUUID
+		            .generateTaskID(); //can we use it directly in method call?
 		try {
-			Task task = new Task(uuid, username, problem, "", "Waiting"); // check
-			Mapper<Task> mapper = CassandraDAOFactory.getMappingManager().mapper(Task.class);
+			Task task = new Task(
+			uuid, username, problem, "", "Waiting");
+			
+			Mapper<Task> mapper = CassandraDAOFactory
+			                      .getMappingManager().mapper(Task.class);
 			mapper.save(task);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			//Logger, log4j suggestion
-		}
+		  }
 		return uuid;
 	}
 	
-	public Result<Task> findTasksbyUsername (String username) {
+	public final Result<Task> findTasksbyUsername(final String username) {
 		
 		Session connection = CassandraDAOFactory.getConnection();
 		Result<Task> tasks = null;
 		try {
-			PreparedStatement stmt = connection.prepare("SELECT * FROM tasks WHERE username = ?);");
-			BoundStatement bound_stmt = new BoundStatement(stmt);
+			PreparedStatement stmt = connection.prepare("SELECT * "
+			    + "FROM tasks WHERE username = ?);");
+			BoundStatement boundStmt = new BoundStatement(stmt);
 			
-			ResultSet results = connection.execute(bound_stmt.bind(username));
-			Mapper<Task> mapper = CassandraDAOFactory.getMappingManager().mapper(Task.class);
+			ResultSet results   = connection.execute(boundStmt.bind(username));
+			Mapper<Task> mapper = CassandraDAOFactory.getMappingManager()
+			                      .mapper(Task.class);
 			tasks = mapper.map(results);
-		}
-		catch (Exception e) {
+			} catch (Exception e) {
 			//Logger
-		}
+			  }
 		return tasks;
 	}
 	
-	public Result<Task> findTasksbyState (String username, String state) {
+	public final Result<Task> findTasksbyState(final String username, 
+	                                           final String state) {
 		
 		Session connection = CassandraDAOFactory.getConnection();
 		Result<Task> tasks = null;
 		try {
-			PreparedStatement stmt = connection.prepare("SELECT * FROM tasks WHERE username = ? AND state = ?);");
-			BoundStatement bound_stmt = new BoundStatement(stmt);
+			PreparedStatement stmt = connection.prepare("SELECT * "
+			    + "FROM tasks WHERE username = ? AND state = ?);");
+			BoundStatement boundStmt = new BoundStatement(stmt);
 			
-			ResultSet results = connection.execute(bound_stmt.bind(username, state));
-			Mapper<Task> mapper = CassandraDAOFactory.getMappingManager().mapper(Task.class);
+			ResultSet results = connection
+			                    .execute(boundStmt.bind(username, state));
+			Mapper<Task> mapper = CassandraDAOFactory
+			                    .getMappingManager().mapper(Task.class);
 			tasks = mapper.map(results);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			//Logger
-		}
+		  }
 		return tasks;
 	}
 
