@@ -16,15 +16,6 @@ caseSensitiveTable = false)
 
 public class MoppaUser {
 	
-<<<<<<< HEAD
-	public MoppaUser(final String newUsername, final String newPassword) {
-		super();
-		this.username = newUsername;
-		this.password = newPassword;
-	}
-=======
->>>>>>> branch 'master' of https://github.com/Txuso/MOPPA-Mobile-Parallel-Processing-Agents-
-	
 	/**
 	 * Moppa user's username.
 	 */
