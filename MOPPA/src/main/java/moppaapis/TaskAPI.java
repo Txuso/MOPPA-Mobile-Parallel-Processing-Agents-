@@ -69,11 +69,11 @@ public class TaskAPI {
     	
     	for (Task task : tasks) {
     		JsonObject value = Json.createObjectBuilder()
-                    .add("taskID", task.getTaskID())
-                    .add("taskValue", task.getTaskValue())
-                    .add("result", task.getTaskResult())
-                    .add("taskState", task.getTaskState())
-                    .add("creatorUsername", task.getCreatorUsername())
+                    .add("taskID", (task.getTaskid()))
+                    .add("taskValue", task.getProblem())
+                    .add("result", task.getResult())
+                    .add("taskState", task.getState())
+                    .add("creatorUsername", task.getUsername())
                     .build();
             tasks.add((Task) value);
             return Response.status(C200).entity(task).build();
@@ -100,9 +100,9 @@ public class TaskAPI {
     	JsonObject object = jsonReader.readObject();
     	jsonReader.close();
     	
-        double taskID = object.getInt("taskID");
+        double taskID = object.getInt("taskID"); //change to UUID
         int taskValue = object.getInt("taskValue");
-        double result = object.getInt("result");
+        double result = object.getInt("result"); //change to String since the result of 100! has 158 digits
         String taskState = object.getString("taskState");
         String creatorUsername = object.getString("creatorUsername");
         
@@ -132,14 +132,14 @@ public class TaskAPI {
 	public final Response findTaskByUsernameInJSON(final String username) {
     	boolean found = false;
     	for (Task task : tasks) {
-    		if (task.getCreatorUsername().equals(username)) {
+    		if (task.getUsername().equals(username)) {
     			found = true;
     			JsonObject value = Json.createObjectBuilder()
-                        .add("taskID", task.getTaskID())
-                        .add("taskValue", task.getTaskValue())
-                        .add("result", task.getTaskResult())
-                        .add("taskState", task.getTaskState())
-                        .add("creatorUsername", task.getCreatorUsername())
+                        .add("taskID", task.getTaskid())
+                        .add("taskValue", task.getProblem())
+                        .add("result", task.getResult())
+                        .add("taskState", task.getState())
+                        .add("creatorUsername", task.getUsername())
                         .build();
                 return Response.status(C200).entity(value).build();
     		}
@@ -168,13 +168,13 @@ public class TaskAPI {
 	public final Response findTaskByStateInJSON(final String taskState) {
     	boolean found = false;
     	for (Task task : tasks) {
-    		if (task.getTaskState().equals(taskState)) {
+    		if (task.getState().equals(taskState)) {
     			found = true;
     			JsonObject value = Json.createObjectBuilder()
-                        .add("taskID", task.getTaskID())
-                        .add("taskValue", task.getTaskValue())
-                        .add("result", task.getTaskResult())
-                        .add("result", task.getTaskState())
+                        .add("taskID", task.getTaskid())
+                        .add("taskValue", task.getProblem())
+                        .add("result", task.getResult())
+                        .add("result", task.getState())
                         .build();
                 return Response.status(C200).entity(value).build();
     		}

@@ -45,8 +45,8 @@ public final class Main {
             beanConfig.setDescription("Hello resources");
             beanConfig.setTitle("Hello API");
 
-            final HttpServer server = GrizzlyHttpServerFactory.
-            createHttpServer(BASE_URI, createApp());
+            final HttpServer server = GrizzlyHttpServerFactory
+            .createHttpServer(BASE_URI, createApp());
 
             System.out.println(String.format("Application started."
             + "%nHit enter to stop it..."));
