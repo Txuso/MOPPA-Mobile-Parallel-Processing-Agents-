@@ -8,10 +8,9 @@ import moppaapis.UserAPI;
 import static org.junit.Assert.*;
 
 /**
- * The class <code>UserAPITest</code> contains
- * tests for the class <code>{@link UserAPI}</code>.
+ * The class <code>UserAPITest</code> contains tests for the class <code>{@link UserAPI}</code>.
  *
- * @generatedBy CodePro at 11/18/15 6:13 PM
+ * @generatedBy CodePro at 11/19/15 12:20 PM
  * @author Txuso
  * @version $Revision: 1.0 $
  */
@@ -19,10 +18,10 @@ public class UserAPITest {
 	/**
 	 * Run the UserAPI() constructor test.
 	 *
-	 * @generatedBy CodePro at 11/18/15 6:13 PM
+	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
-	public final void testUserAPI_1()
+	public void testUserAPI_1()
 		throws Exception {
 		UserAPI result = new UserAPI();
 		assertNotNull(result);
@@ -34,10 +33,10 @@ public class UserAPITest {
 	 *
 	 * @throws Exception
 	 *
-	 * @generatedBy CodePro at 11/18/15 6:13 PM
+	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
-	public final void testCreateUserInJSON_1()
+	public void testCreateUserInJSON_1()
 		throws Exception {
 		UserAPI fixture = new UserAPI();
 		String input = "";
@@ -62,7 +61,7 @@ public class UserAPITest {
 	 *
 	 * @throws Exception
 	 *
-	 * @generatedBy CodePro at 11/18/15 6:13 PM
+	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
 	public void testCreateUserInJSON_2()
@@ -90,7 +89,7 @@ public class UserAPITest {
 	 *
 	 * @throws Exception
 	 *
-	 * @generatedBy CodePro at 11/18/15 6:13 PM
+	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
 	public void testCreateUserInJSON_3()
@@ -118,7 +117,7 @@ public class UserAPITest {
 	 *
 	 * @throws Exception
 	 *
-	 * @generatedBy CodePro at 11/18/15 6:13 PM
+	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
 	public void testCreateUserInJSON_4()
@@ -146,7 +145,7 @@ public class UserAPITest {
 	 *
 	 * @throws Exception
 	 *
-	 * @generatedBy CodePro at 11/18/15 6:13 PM
+	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
 	public void testCreateUserInJSON_5()
@@ -175,7 +174,7 @@ public class UserAPITest {
 	 * @throws Exception
 	 *         if the initialization fails for some reason
 	 *
-	 * @generatedBy CodePro at 11/18/15 6:13 PM
+	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Before
 	public void setUp()
@@ -189,7 +188,7 @@ public class UserAPITest {
 	 * @throws Exception
 	 *         if the clean-up fails for some reason
 	 *
-	 * @generatedBy CodePro at 11/18/15 6:13 PM
+	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@After
 	public void tearDown()
@@ -202,7 +201,7 @@ public class UserAPITest {
 	 *
 	 * @param args the command line arguments
 	 *
-	 * @generatedBy CodePro at 11/18/15 6:13 PM
+	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	public static void main(String[] args) {
 		new org.junit.runner.JUnitCore().run(UserAPITest.class);

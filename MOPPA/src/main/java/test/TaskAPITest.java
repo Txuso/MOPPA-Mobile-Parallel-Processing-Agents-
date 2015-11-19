@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 /**
  * The class <code>TaskAPITest</code> contains tests for the class <code>{@link TaskAPI}</code>.
  *
- * @generatedBy CodePro at 11/18/15 6:14 PM
+ * @generatedBy CodePro at 11/19/15 12:20 PM
  * @author Txuso
  * @version $Revision: 1.0 $
  */
@@ -18,7 +18,7 @@ public class TaskAPITest {
 	/**
 	 * Run the TaskAPI() constructor test.
 	 *
-	 * @generatedBy CodePro at 11/18/15 6:14 PM
+	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
 	public void testTaskAPI_1()
@@ -33,14 +33,13 @@ public class TaskAPITest {
 	 *
 	 * @throws Exception
 	 *
-	 * @generatedBy CodePro at 11/18/15 6:14 PM
+	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
 	public void testCreateTaskInJSON_1()
 		throws Exception {
 		TaskAPI fixture = new TaskAPI();
-		String input = "{\"taskID\": 1234,\"taskValue\": 200,\"result\": 12345,"
-				+ " \"taskState\": \"doing\",\"creatorUsername\": \"adb\"}";
+		String input = "{\"taskID\": 1234,\"taskValue\": 10,\"result\": \"12345\", \"taskState\": \"doing\",\"creatorUsername\": \"adb\"}";
 
 		Response result = fixture.createTaskInJSON(input);
 
@@ -62,7 +61,7 @@ public class TaskAPITest {
 	 *
 	 * @throws Exception
 	 *
-	 * @generatedBy CodePro at 11/18/15 6:14 PM
+	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
 	public void testCreateTaskInJSON_2()
@@ -90,7 +89,7 @@ public class TaskAPITest {
 	 *
 	 * @throws Exception
 	 *
-	 * @generatedBy CodePro at 11/18/15 6:14 PM
+	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
 	public void testCreateTaskInJSON_3()
@@ -118,7 +117,7 @@ public class TaskAPITest {
 	 *
 	 * @throws Exception
 	 *
-	 * @generatedBy CodePro at 11/18/15 6:14 PM
+	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
 	public void testFindTaskByStateInJSON_1()
@@ -144,7 +143,7 @@ public class TaskAPITest {
 	 *
 	 * @throws Exception
 	 *
-	 * @generatedBy CodePro at 11/18/15 6:14 PM
+	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
 	public void testFindTaskByStateInJSON_2()
@@ -170,7 +169,7 @@ public class TaskAPITest {
 	 *
 	 * @throws Exception
 	 *
-	 * @generatedBy CodePro at 11/18/15 6:14 PM
+	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
 	public void testFindTaskByStateInJSON_3()
@@ -196,7 +195,7 @@ public class TaskAPITest {
 	 *
 	 * @throws Exception
 	 *
-	 * @generatedBy CodePro at 11/18/15 6:14 PM
+	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
 	public void testFindTaskByStateInJSON_4()
@@ -222,7 +221,7 @@ public class TaskAPITest {
 	 *
 	 * @throws Exception
 	 *
-	 * @generatedBy CodePro at 11/18/15 6:14 PM
+	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
 	public void testFindTaskByUsernameInJSON_1()
@@ -248,7 +247,7 @@ public class TaskAPITest {
 	 *
 	 * @throws Exception
 	 *
-	 * @generatedBy CodePro at 11/18/15 6:14 PM
+	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
 	public void testFindTaskByUsernameInJSON_2()
@@ -274,7 +273,7 @@ public class TaskAPITest {
 	 *
 	 * @throws Exception
 	 *
-	 * @generatedBy CodePro at 11/18/15 6:14 PM
+	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
 	public void testFindTaskByUsernameInJSON_3()
@@ -300,7 +299,7 @@ public class TaskAPITest {
 	 *
 	 * @throws Exception
 	 *
-	 * @generatedBy CodePro at 11/18/15 6:14 PM
+	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
 	public void testGetAllTasks_1()
@@ -328,7 +327,7 @@ public class TaskAPITest {
 	 *
 	 * @throws Exception
 	 *
-	 * @generatedBy CodePro at 11/18/15 6:14 PM
+	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
 	public void testGetAllTasks_2()
@@ -356,7 +355,7 @@ public class TaskAPITest {
 	 *
 	 * @throws Exception
 	 *
-	 * @generatedBy CodePro at 11/18/15 6:14 PM
+	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Test
 	public void testGetAllTasks_3()
@@ -385,7 +384,7 @@ public class TaskAPITest {
 	 * @throws Exception
 	 *         if the initialization fails for some reason
 	 *
-	 * @generatedBy CodePro at 11/18/15 6:14 PM
+	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@Before
 	public void setUp()
@@ -399,7 +398,7 @@ public class TaskAPITest {
 	 * @throws Exception
 	 *         if the clean-up fails for some reason
 	 *
-	 * @generatedBy CodePro at 11/18/15 6:14 PM
+	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	@After
 	public void tearDown()
@@ -412,7 +411,7 @@ public class TaskAPITest {
 	 *
 	 * @param args the command line arguments
 	 *
-	 * @generatedBy CodePro at 11/18/15 6:14 PM
+	 * @generatedBy CodePro at 11/19/15 12:20 PM
 	 */
 	public static void main(String[] args) {
 		new org.junit.runner.JUnitCore().run(TaskAPITest.class);

@@ -1,7 +1,5 @@
 package classes;
 
-import java.util.UUID;
-
 import com.datastax.driver.mapping.annotations.Table;
 
 /**
@@ -18,11 +16,6 @@ caseSensitiveTable = false)
 
 public class MoppaUser {
 	
-	public MoppaUser(final String username, String password) {
-		super();
-		this.username = username;
-		this.password = password;
-	}
 	
 	/**
 	 * Moppa user's username.

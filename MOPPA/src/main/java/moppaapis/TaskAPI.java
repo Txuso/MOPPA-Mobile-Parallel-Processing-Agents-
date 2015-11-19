@@ -11,6 +11,8 @@ import com.wordnik.swagger.annotations.ApiResponses;
 
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.UUID;
+
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
@@ -62,6 +64,9 @@ public class TaskAPI {
     @ApiResponse(code = C200, message = "OK"),
     @ApiResponse(code = C500, message = "Something wrong in Server")})
 	public final Response getAllTasks() {
+    	tasks.add(new Task(new UUID(5, 5), "Txuso", 5, "120", "Waiting"));
+    	tasks.add(new Task(new UUID(6, 6), "Mario", 4, "24", "Done"));
+    	System.out.println(tasks.size());
     	if (tasks.size() == 0) {
 			throw new InvalidData("There"
 			+ " are not tasks created yet").except();
@@ -69,14 +74,14 @@ public class TaskAPI {
     	
     	for (Task task : tasks) {
     		JsonObject value = Json.createObjectBuilder()
-                    .add("taskID", (task.getTaskid()))
+                    .add("taskID", task.getTaskid().toString())
                     .add("taskValue", task.getProblem())
                     .add("result", task.getResult())
                     .add("taskState", task.getState())
                     .add("creatorUsername", task.getUsername())
                     .build();
             tasks.add((Task) value);
-            return Response.status(C200).entity(task).build();
+            return Response.status(C200).entity(value).build();
     	}
         return Response.status(C200).
         entity("All your tasks have been displayed").build();
@@ -100,9 +105,10 @@ public class TaskAPI {
     	JsonObject object = jsonReader.readObject();
     	jsonReader.close();
     	
-        double taskID = object.getInt("taskID"); //change to UUID
+    	
+        UUID taskID = UUID.fromString(object.getString("taskID"));
         int taskValue = object.getInt("taskValue");
-        double result = object.getInt("result"); //change to String since the result of 100! has 158 digits
+        String result = object.getString("result");
         String taskState = object.getString("taskState");
         String creatorUsername = object.getString("creatorUsername");
         
@@ -111,8 +117,8 @@ public class TaskAPI {
     		+ "negative or greater than 100").except();
         }
 
-        Task newTask = new Task(taskID, taskValue, result,
-        taskState, creatorUsername);
+        Task newTask = new Task(taskID, creatorUsername, taskValue, result,
+        taskState);
         tasks.add(newTask);
         return Response.status(C200).build();
 
@@ -135,7 +141,7 @@ public class TaskAPI {
     		if (task.getUsername().equals(username)) {
     			found = true;
     			JsonObject value = Json.createObjectBuilder()
-                        .add("taskID", task.getTaskid())
+                        .add("taskID", task.getTaskid().toString())
                         .add("taskValue", task.getProblem())
                         .add("result", task.getResult())
                         .add("taskState", task.getState())
@@ -171,7 +177,7 @@ public class TaskAPI {
     		if (task.getState().equals(taskState)) {
     			found = true;
     			JsonObject value = Json.createObjectBuilder()
-                        .add("taskID", task.getTaskid())
+                        .add("taskID", task.getTaskid().toString())
                         .add("taskValue", task.getProblem())
                         .add("result", task.getResult())
                         .add("result", task.getState())
