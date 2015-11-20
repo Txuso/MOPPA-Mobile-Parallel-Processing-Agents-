@@ -163,7 +163,7 @@ public class TaskAPI {
         .entity(" There aren't tasks assigned to " + username).build();
     }
     /**
-     * 
+     * @param userName the username
      * @param taskState the input task state
      * @return it returns all the tasks with the given tasks states
      */
@@ -174,14 +174,18 @@ public class TaskAPI {
 	@ApiResponses(value = {
         @ApiResponse(code = C200, message = "OK"),
         @ApiResponse(code = C500, message = "Something wrong in Server")})
-	public final Response findTaskByStateInJSON(final String userName, final String taskState) {
+	public final Response findTaskByStateInJSON(final String input) {
+    	
+    	JsonReader jsonReader = Json.createReader(new StringReader(input));
+    	JsonObject object = jsonReader.readObject();
+    	jsonReader.close();
       
       DAOFactory factory = new CassandraDAOFactory();
       CassandraTaskDAO taskDAO = (CassandraTaskDAO) factory.getTaskDAO();
-      Result<Task> tasks = taskDAO.findTasksbyState(userName, taskState);
+      Result<Task> tasks = taskDAO.findTasksbyState(object.getString("userName"), object.getString("taskState"));
       
     	for (Task task : tasks) {
-    		if (task.getState().equals(taskState)) {
+    		if (task.getState().equals(object.getString("taskState"))) {
     			JsonObject value = Json.createObjectBuilder()
                         .add("taskID", task.getTaskid().toString())
                         .add("taskValue", task.getProblem())
@@ -194,7 +198,7 @@ public class TaskAPI {
 			
     	}
         return Response.status(Status.NOT_FOUND)
-        .entity(" There aren't tasks with the state" + taskState).build();
+        .entity(" There aren't tasks with the state" + object.getString("taskState")).build();
      }
     
     
