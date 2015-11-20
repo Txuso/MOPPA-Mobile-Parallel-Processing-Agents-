@@ -101,7 +101,8 @@ public class TaskAPITest {
   public final void testFindTaskByStateInJSONCorrect() {
     TaskAPI fixture = new TaskAPI();
     String taskState = "{Waiting}";
-    Response result = fixture.findTaskByStateInJSON(taskState);
+    String username = "Mario";
+    Response result = fixture.findTaskByStateInJSON(username, taskState);
     assertNotNull(result);
   }
 
@@ -117,8 +118,9 @@ public class TaskAPITest {
   public final void testFindTaskByStateInJSONNoTaskWithThatState()
     throws Exception {
     TaskAPI fixture = new TaskAPI();
+    String username = "Mario";
     String taskState = "In process";
-    Response result = fixture.findTaskByStateInJSON(taskState);
+    Response result = fixture.findTaskByStateInJSON(username, taskState);
     assertNotNull(result);
   }
 

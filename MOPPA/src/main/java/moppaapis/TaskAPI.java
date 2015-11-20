@@ -2,10 +2,16 @@ package moppaapis;
 
 import classes.Task;
 import exceptions.InvalidData;
+
+import com.datastax.driver.mapping.Result;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
+
+import cassandradb.CassandraDAOFactory;
+import cassandradb.CassandraTaskDAO;
+import cassandradb.DAOFactory;
 
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -168,9 +174,12 @@ public class TaskAPI {
 	@ApiResponses(value = {
         @ApiResponse(code = C200, message = "OK"),
         @ApiResponse(code = C500, message = "Something wrong in Server")})
-	public final Response findTaskByStateInJSON(final String taskState) {
-    	tasks.add(new Task(new UUID(5, 5), "Txuso", 5, "120", "Waiting"));
-    	tasks.add(new Task(new UUID(6, 6), "Mario", 4, "24", "Done"));
+	public final Response findTaskByStateInJSON(final String userName, final String taskState) {
+      
+      DAOFactory factory = new CassandraDAOFactory();
+      CassandraTaskDAO taskDAO = (CassandraTaskDAO) factory.getTaskDAO();
+      Result<Task> tasks = taskDAO.findTasksbyState(userName, taskState);
+      
     	for (Task task : tasks) {
     		if (task.getState().equals(taskState)) {
     			JsonObject value = Json.createObjectBuilder()
