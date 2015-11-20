@@ -40,16 +40,19 @@ public class CassandraDAOFactory extends DAOFactory {
 			
 		  SESSION.close();
 		}
+		else {
+		  // Do nothing, needs review
+		}
 	}
 	
 	@Override
-	public final TaskDAO getTaskDAO() {
+	public final CassandraTaskDAO getTaskDAO() {
 		
 		return new CassandraTaskDAO();
 	}
 	
 	@Override
-	public final UserDAO getUserDAO() {
+	public final CassandraUserDAO getUserDAO() {
 		
 		return new CassandraUserDAO();
 	}

@@ -25,7 +25,7 @@ public class CassandraUserDAO implements UserDAO {
 		} catch (Exception e) {
       LoggingHandler.writeErrorToLog(e);		
 		  }
-		return 1; //check
+		return 1; //Check
 	}
 
 }
