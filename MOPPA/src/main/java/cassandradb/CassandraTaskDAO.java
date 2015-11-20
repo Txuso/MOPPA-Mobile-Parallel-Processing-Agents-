@@ -10,7 +10,6 @@ import com.datastax.driver.mapping.Mapper;
 import com.datastax.driver.mapping.Result;
 
 import classes.Task;
-import utils.LoggingHandler;
 
 import java.util.UUID;
 

@@ -3,7 +3,6 @@ package cassandradb;
 import com.datastax.driver.mapping.Mapper;
 
 import classes.MoppaUser;
-import utils.LoggingHandler;
 
 /**
  * 
