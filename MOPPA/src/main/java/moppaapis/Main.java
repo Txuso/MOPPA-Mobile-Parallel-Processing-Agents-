@@ -15,7 +15,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 /**
  * 
  * @author Txuso
- * This class executes the server.
+ * This class starts the server.
  */
 public final class Main {
 	
