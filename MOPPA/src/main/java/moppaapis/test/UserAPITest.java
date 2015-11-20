@@ -2,6 +2,7 @@ package moppaapis.test;
 
 import static org.junit.Assert.assertNotNull;
 
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 
 import org.junit.After;
@@ -50,17 +51,17 @@ public class UserAPITest {
   /**
    * Run the Response createUserInJSON(String) method test.
    *
-   * @throws Exception It is launched to inform that the username is null
-   *
    * @generatedBy CodePro at 11/19/15 12:20 PM
    */
   @Test
-  public final void testCreateUserInJSONNullUsername()
-    throws Exception {
-    UserAPI fixture = new UserAPI();
-    String input = "{\"username\":\"\", \"password\": \"213\"}";
-    Response result = fixture.createUserInJSON(input);
-    assertNotNull(result);
+  public final void testCreateUserInJSONNullUsername() {
+	  try {
+	        String input = "{\"username\":\"\", \"password\": \"123\"}";
+	    	UserAPI fixture = new UserAPI();
+	    	fixture.createUserInJSON(input);
+	    } catch (WebApplicationException e) {
+	    	assertNotNull(Response.Status.NOT_ACCEPTABLE.getStatusCode());
+	    }
   }
 
   /**
@@ -71,13 +72,14 @@ public class UserAPITest {
    * @generatedBy CodePro at 11/19/15 12:20 PM
    */
   @Test
-  public final void testCreateUserInJSONNullPassword()
-    throws Exception {
-    UserAPI fixture = new UserAPI();
-    String input = "{\"username\":\"Rodolfo\", \"password\": \"\"}";
-    Response result = fixture.createUserInJSON(input);
-    
-    assertNotNull(result);
+  public final void testCreateUserInJSONNullPassword() {
+    try {
+        String input = "{\"username\":\"Rodolfo\", \"password\": \"\"}";
+    	UserAPI fixture = new UserAPI();
+    	fixture.createUserInJSON(input);
+    } catch (WebApplicationException e) {
+    	assertNotNull(Response.Status.NOT_ACCEPTABLE.getStatusCode());
+    }
   }
 
   /**
@@ -88,12 +90,15 @@ public class UserAPITest {
    * @generatedBy CodePro at 11/19/15 12:20 PM
    */
   @Test
-  public final void testCreateUserInJSONUserAlreadyExists()
-    throws Exception {
-    UserAPI fixture = new UserAPI();
-    String input = "{\"username\":\"Txuso\", \"password\": \"213\"}";
-    Response result = fixture.createUserInJSON(input);
-    assertNotNull(result);
+  public final void testCreateUserInJSONUserAlreadyExists() {
+    
+    try {
+    	UserAPI fixture = new UserAPI();
+        String input = "{\"username\":\"Txuso\", \"password\": \"213\"}";
+    	fixture.createUserInJSON(input);
+    } catch (WebApplicationException e) {
+    	assertNotNull(Response.Status.NOT_ACCEPTABLE.getStatusCode());
+    }
   }
 
   /**
