@@ -12,9 +12,9 @@ package cassandradb;
 
 public abstract class DAOFactory {
 	
-	public abstract CassandraTaskDAO getTaskDAO();
+	public abstract TaskDAO getTaskDAO();
 	
-	public abstract CassandraUserDAO getUserDAO();
+	public abstract UserDAO getUserDAO();
 
 	public static DAOFactory getDAOFactory() {
 		
