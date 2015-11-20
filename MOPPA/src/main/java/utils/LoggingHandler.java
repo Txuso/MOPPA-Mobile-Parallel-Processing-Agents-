@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 
 public class LoggingHandler {
   
-  private static Logger log = Logger.getLogger(LoggingHandler.class);
+  /*private static Logger log = Logger.getLogger(LoggingHandler.class);
   
   public final static void writeErrorToLog(final Exception e) {
     StringWriter sw = new StringWriter();
@@ -19,6 +19,6 @@ public class LoggingHandler {
 
   public static Logger getLogger() {
     return log;
-  }
+  }*/
  
 }

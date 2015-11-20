@@ -23,7 +23,7 @@ public class CassandraUserDAO implements UserDAO {
 			                           .mapper(MoppaUser.class);
 			mapper.save(user);
 		} catch (Exception e) {
-      LoggingHandler.writeErrorToLog(e);		
+      //LoggingHandler.writeErrorToLog(e);		
 		  }
 		return 1; //Check
 	}
