@@ -10,6 +10,8 @@ import com.datastax.driver.mapping.Mapper;
 import com.datastax.driver.mapping.Result;
 
 import classes.Task;
+import utils.LoggingHandler;
+
 import java.util.UUID;
 
 /**
@@ -36,7 +38,7 @@ public class CassandraTaskDAO implements TaskDAO {
 			                      .getMappingManager().mapper(Task.class);
 			mapper.save(task);
 		} catch (Exception e) {
-			//Logger, log4j suggestion
+			LoggingHandler.writeErrorToLog(e);
 		  }
 		return uuid; // Returns newly created TaskID
 	}
@@ -55,7 +57,7 @@ public class CassandraTaskDAO implements TaskDAO {
 			                      .mapper(Task.class);
 			tasks = mapper.map(results);
 			} catch (Exception e) {
-			//Logger
+	      LoggingHandler.writeErrorToLog(e);
 			  }
 		return tasks;
 	}
@@ -76,7 +78,7 @@ public class CassandraTaskDAO implements TaskDAO {
 			                    .getMappingManager().mapper(Task.class);
 			tasks = mapper.map(results);
 		} catch (Exception e) {
-			//Logger
+      LoggingHandler.writeErrorToLog(e);
 		  }
 		return tasks;
 	}

@@ -3,6 +3,7 @@ package cassandradb;
 import com.datastax.driver.mapping.Mapper;
 
 import classes.MoppaUser;
+import utils.LoggingHandler;
 
 /**
  * 
@@ -22,7 +23,7 @@ public class CassandraUserDAO implements UserDAO {
 			                           .mapper(MoppaUser.class);
 			mapper.save(user);
 		} catch (Exception e) {
-			//Logger			
+      LoggingHandler.writeErrorToLog(e);		
 		  }
 		return 1; //check
 	}
