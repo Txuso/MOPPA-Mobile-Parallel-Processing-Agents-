@@ -163,8 +163,7 @@ public class TaskAPI {
         .entity(" There aren't tasks assigned to " + username).build();
     }
     /**
-     * @param userName the username
-     * @param taskState the input task state
+     * @param input the username
      * @return it returns all the tasks with the given tasks states
      */
     @POST
@@ -182,8 +181,12 @@ public class TaskAPI {
       
       DAOFactory factory = new CassandraDAOFactory();
       CassandraTaskDAO taskDAO = (CassandraTaskDAO) factory.getTaskDAO();
-      Result<Task> tasks = taskDAO.findTasksbyState(object.getString("userName"), object.getString("taskState"));
-      
+      Result<Task> results = taskDAO.findTasksbyState(
+      object.getString("userName"), object.getString("taskState"));
+      for (Task task : results) {
+    	  
+      }
+      /*
     	for (Task task : tasks) {
     		if (task.getState().equals(object.getString("taskState"))) {
     			JsonObject value = Json.createObjectBuilder()
@@ -197,8 +200,10 @@ public class TaskAPI {
     		}
 			
     	}
+    	*/
         return Response.status(Status.NOT_FOUND)
-        .entity(" There aren't tasks with the state" + object.getString("taskState")).build();
+        .entity(" There aren't tasks with the state" 
+        + object.getString("taskState")).build();
      }
     
     
