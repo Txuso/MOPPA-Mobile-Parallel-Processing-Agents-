@@ -3,6 +3,9 @@ package moppaapis;
 import classes.Task;
 import exceptions.InvalidData;
 
+import com.datastax.driver.core.Cluster;
+import com.datastax.driver.core.Session;
+import com.datastax.driver.mapping.MappingManager;
 import com.datastax.driver.mapping.Result;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
@@ -42,6 +45,7 @@ public class TaskAPI {
 	 * @value tasks here we store all the tasks
 	 */
      private ArrayList<Task> tasks = new ArrayList<Task>();
+     private CassandraDAOFactory factory = new CassandraDAOFactory();
     
     /**
      * maximum value accepted to compute.
@@ -173,39 +177,30 @@ public class TaskAPI {
 	@ApiResponses(value = {
         @ApiResponse(code = C200, message = "OK"),
         @ApiResponse(code = C500, message = "Something wrong in Server")})
-	public final Response findTaskByStateInJSON(final String input) {
+	public Response findTaskByStateInJSON(final String input) {
     	
     	JsonReader jsonReader = Json.createReader(new StringReader(input));
     	JsonObject object = jsonReader.readObject();
     	jsonReader.close();
-      
-      DAOFactory factory = new CassandraDAOFactory();
-      CassandraTaskDAO taskDAO = (CassandraTaskDAO) factory.getTaskDAO();
-      Result<Task> results = taskDAO.findTasksbyState(
-      object.getString("userName"), object.getString("taskState"));
-      for (Task task : results) {
-    	  
-      }
-      /*
-    	for (Task task : tasks) {
-    		if (task.getState().equals(object.getString("taskState"))) {
+    	
+    	CassandraTaskDAO task = factory.getTaskDAO();
+    	
+    	Result<Task> tasks = task.findTasksbyState(object.getString("userName"), object.getString("taskState"));
+    	
+    	for (Task taskIterator : tasks) {
+    		if (taskIterator.getState().equals(object.getString("taskState"))) {
     			JsonObject value = Json.createObjectBuilder()
-                        .add("taskID", task.getTaskid().toString())
-                        .add("taskValue", task.getProblem())
-                        .add("result", task.getResult())
-                        .add("taskState", task.getState())
-                        .add("creatorUsername", task.getUsername())
+                        .add("taskID", taskIterator.getTaskid().toString())
+                        .add("taskValue", taskIterator.getProblem())
+                        .add("result", taskIterator.getResult())
+                        .add("taskState", taskIterator.getState())
+                        .add("creatorUsername", taskIterator.getUsername())
                         .build();
                 return Response.status(C200).entity(value).build();
-    		}
-			
-    	}
-    	*/
-        return Response.status(Status.NOT_FOUND)
-        .entity(" There aren't tasks with the state" 
-        + object.getString("taskState")).build();
+    	 }
+
      }
-    
-    
-    
+      return Response.status(Status.NOT_FOUND)
+      .entity(" There aren't tasks assigned to " + object.getString("taskState")).build();    
+    }
 }
