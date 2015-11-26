@@ -45,7 +45,6 @@ public class TaskAPI {
 	 * @value tasks here we store all the tasks
 	 */
      private ArrayList<Task> tasks = new ArrayList<Task>();
-     private CassandraDAOFactory factory = new CassandraDAOFactory();
     
     /**
      * maximum value accepted to compute.
@@ -183,6 +182,7 @@ public class TaskAPI {
     	JsonObject object = jsonReader.readObject();
     	jsonReader.close();
     	
+      CassandraDAOFactory factory = new CassandraDAOFactory();
     	CassandraTaskDAO task = factory.getTaskDAO();
     	
     	Result<Task> tasks = task.findTasksbyState(object.getString("userName"), object.getString("taskState"));
