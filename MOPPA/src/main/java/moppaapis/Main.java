@@ -1,6 +1,8 @@
 package moppaapis;
 import com.wordnik.swagger.jaxrs.config.BeanConfig;
 
+import cassandradb.CassandraDAOFactory;
+
 import java.io.IOException;
 import java.net.URI;
 import java.util.HashMap;
@@ -20,7 +22,7 @@ import org.glassfish.jersey.server.ResourceConfig;
  * This class starts the server.
  */
 public final class Main {
-	
+  public static CassandraDAOFactory factory;
 	/**
 	 * void constructor.
 	 */
@@ -49,12 +51,14 @@ public final class Main {
 
             final HttpServer server = GrizzlyHttpServerFactory
             .createHttpServer(BASE_URI, createApp());
+            
 
             System.out.println(String.format("Application started."
             + "%nHit enter to stop it..."));
             System.in.read();
             server.shutdownNow();
             System.exit(0);
+            
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }

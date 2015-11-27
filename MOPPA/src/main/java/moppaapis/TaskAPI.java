@@ -183,24 +183,35 @@ public class TaskAPI {
     	jsonReader.close();
     	
       CassandraDAOFactory factory = new CassandraDAOFactory();
-    	CassandraTaskDAO task = factory.getTaskDAO();
     	
-    	Result<Task> tasks = task.findTasksbyState(object.getString("userName"), object.getString("taskState"));
-    	
-    	for (Task taskIterator : tasks) {
-    		if (taskIterator.getState().equals(object.getString("taskState"))) {
-    			JsonObject value = Json.createObjectBuilder()
-                        .add("taskID", taskIterator.getTaskid().toString())
-                        .add("taskValue", taskIterator.getProblem())
-                        .add("result", taskIterator.getResult())
-                        .add("taskState", taskIterator.getState())
-                        .add("creatorUsername", taskIterator.getUsername())
-                        .build();
-                return Response.status(C200).entity(value).build();
-    	 }
+    	try {
+      	CassandraTaskDAO task = factory.getTaskDAO();
+      	
+      	Result<Task> tasks = task.findTasksbyState
+      	                     (object.getString("userName"), object.getString("taskState"));
+      	
+      	for (Task taskIterator : tasks) {
+      		if (taskIterator.getState().equals(object.getString("taskState"))) {
+      			JsonObject value = Json.createObjectBuilder()
+                          .add("taskID", taskIterator.getTaskid().toString())
+                          .add("taskValue", taskIterator.getProblem())
+                          .add("result", taskIterator.getResult())
+                          .add("taskState", taskIterator.getState())
+                          .add("creatorUsername", taskIterator.getUsername())
+                          .build();
+                  return Response.status(C200).entity(value).build();        
+                  }
+      }
+      } catch (Exception e) {
+        //Log
+          
+      } finally {
+    	  factory.closeConnection();
+    	}
 
-     }
-      return Response.status(Status.NOT_FOUND)
-      .entity(" There aren't tasks assigned to " + object.getString("taskState")).build();    
-    }
+ 
+    	return Response.status(Status.NOT_FOUND)
+             .entity(" There aren't tasks assigned to " 
+             + object.getString("taskState")).build();    
+   }  	
 }

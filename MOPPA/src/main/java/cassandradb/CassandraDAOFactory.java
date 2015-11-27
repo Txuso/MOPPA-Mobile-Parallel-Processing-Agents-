@@ -27,10 +27,9 @@ public class CassandraDAOFactory extends DAOFactory {
   private MappingManager MANAGER;
   
   public CassandraDAOFactory() {
-    this.CLUSTER = Cluster.builder().addContactPoint(CONTACTPOINT).withPort(PORT).withCredentials(USERNAME, PASSWORD).build();
-    this.SESSION = CLUSTER.connect(CLUSTERNAME);
-    this.MANAGER = new MappingManager(SESSION);
-    System.out.println("Created CassandraDAOFactory");
+      this.CLUSTER = Cluster.builder().addContactPoint(CONTACTPOINT).withPort(PORT).withCredentials(USERNAME, PASSWORD).build();
+      this.SESSION = CLUSTER.connect(CLUSTERNAME);
+      this.MANAGER = new MappingManager(SESSION);
   }
 
   public Session getConnection() {

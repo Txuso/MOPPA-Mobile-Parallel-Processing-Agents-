@@ -79,7 +79,6 @@ public class CassandraTaskDAO implements TaskDAO {
 			                    .execute(boundStmt.bind(username, state));
 			Mapper<Task> mapper = manager.mapper(Task.class);
 			tasks = mapper.map(results);
-			System.out.println("Query finished.");
 		} catch (Exception e) {
       //LoggingHandler.writeErrorToLog(e);
 		  System.out.println(e.toString());
