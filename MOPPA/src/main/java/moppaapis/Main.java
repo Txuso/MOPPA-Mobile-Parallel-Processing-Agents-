@@ -22,7 +22,6 @@ import org.glassfish.jersey.server.ResourceConfig;
  * This class starts the server.
  */
 public final class Main {
-  public static CassandraDAOFactory factory;
 	/**
 	 * void constructor.
 	 */
