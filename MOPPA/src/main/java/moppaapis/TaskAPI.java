@@ -132,16 +132,15 @@ public class TaskAPI {
         
         Result<Task> tasks = task.findTasksbyUsername(
                              object.getString("userName"));
-        if (tasks.all().isEmpty()) {
-        	return Response.status(Status.NOT_FOUND)
-        		      .entity(" There are no tasks assigned to this username: "
-        		      + object.getString("userName"))
-        		      .build();
-        	
-        }
         JSONObject value = new JSONObject();
         Collection<JSONObject> tasksJSON = new ArrayList<JSONObject>();
-        
+      
+        if (tasks.isExhausted()) {
+          return Response.status(Status.NOT_FOUND)
+                  .entity(" There are no tasks assigned to this username: "
+                  + object.getString("userName"))
+                  .build();
+        }
         
     	for (Task taskIterator : tasks) {
     	  
@@ -194,10 +193,10 @@ public class TaskAPI {
         JSONObject value = new JSONObject();
         Collection<JSONObject> tasksJSON = new ArrayList<JSONObject>();
         
-        if (tasks.all().isEmpty()) {
+        if (tasks.isExhausted()) {
         	return Response.status(Status.NOT_FOUND)
-                    .entity(" There are no tasks assigned to username" 
-                    + object.getString("userName") + " with the state"
+                    .entity(" There are no tasks assigned to username: " 
+                    + object.getString("userName") + " with the state: "
                     + object.getString("taskState")).build(); 
         }
       	
