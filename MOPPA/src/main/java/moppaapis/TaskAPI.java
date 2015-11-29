@@ -3,35 +3,26 @@ package moppaapis;
 import classes.Task;
 import exceptions.InvalidData;
 
-import com.datastax.driver.core.Cluster;
-import com.datastax.driver.core.Session;
-import com.datastax.driver.mapping.MappingManager;
 import com.datastax.driver.mapping.Result;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
-
 import cassandradb.CassandraDAOFactory;
 import cassandradb.CassandraTaskDAO;
-import cassandradb.DAOFactory;
-
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
-
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONObject;
 
@@ -202,6 +193,12 @@ public class TaskAPI {
       	                     object.getString("taskState"));
         JSONObject value = new JSONObject();
         Collection<JSONObject> tasksJSON = new ArrayList<JSONObject>();
+        
+        if (tasks.all().isEmpty()) {
+        	return Response.status(Status.NOT_FOUND)
+                    .entity(" There aren't tasks assigned to " 
+                    + object.getString("taskState")).build(); 
+        }
       	
       	for (Task taskIterator : tasks) {
       	  
@@ -222,10 +219,7 @@ public class TaskAPI {
       } finally {
     	  factory.closeConnection();
     	}
-
- 
-    	return Response.status(Status.NOT_FOUND)
-             .entity(" There aren't tasks assigned to " 
-             + object.getString("taskState")).build();    
+    	return Response.status(C200).
+    		      entity("All the tasks have been displayed.").build(); 
    }  	
 }
