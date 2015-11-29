@@ -44,12 +44,7 @@ import org.codehaus.jettison.json.JSONObject;
 @Path("/moppa/v1/task")
 @Api(value = "/task", description = "I am a task!")
 public class TaskAPI {
-	
-	/**
-	 * @value tasks here we store all the tasks
-	 */
-     private ArrayList<Task> tasks = new ArrayList<Task>(); // Why do we use this? 28.11.2015 - Mario Measic-Gavran
-    
+	    
     /**
      * maximum value accepted to compute.
      */
@@ -65,39 +60,6 @@ public class TaskAPI {
 	 */
 	private static final int C500 = 500;
 	
-	/**
-	 * 
-	 * @return it returns all the tasks
-	 * @throws MoppaException
-	 */
-    @GET
-	@Path("/getTask")
-	@Produces(MediaType.APPLICATION_JSON)
-	@ApiResponses(value = {
-    @ApiResponse(code = C200, message = "OK"),
-    @ApiResponse(code = C500, message = "Something wrong in Server")})
-	public final Response getAllTasks() {
-    	tasks.add(new Task(new UUID(5, 5), "Txuso", 5, "120", "Waiting"));
-    	tasks.add(new Task(new UUID(6, 6), "Mario", 4, "24", "Done"));
-    	if (tasks.size() == 0) {
-			throw new InvalidData("There"
-			+ " are not tasks created yet").except();
-		}
-    	
-    	for (Task task : tasks) {
-    		JsonObject value = Json.createObjectBuilder()
-                    .add("taskID", task.getTaskid().toString())
-                    .add("taskValue", task.getProblem())
-                    .add("result", task.getResult())
-                    .add("taskState", task.getState())
-                    .add("creatorUsername", task.getUsername())
-                    .build();            
-            return Response.status(C200).entity(value).build();
-    	}
-        return Response.status(C200).
-        entity("All your tasks have been displayed").build();
-
-    }
     /**
      * 
      * @param input information given by the user
@@ -179,6 +141,13 @@ public class TaskAPI {
         
         Result<Task> tasks = task.findTasksbyUsername(
                              object.getString("userName"));
+        if (tasks.all().isEmpty()) {
+        	return Response.status(Status.NOT_FOUND)
+        		      .entity(" There are no tasks assigned to this username: "
+        		      + object.getString("userName"))
+        		      .build();
+        	
+        }
         JSONObject value = new JSONObject();
         Collection<JSONObject> tasksJSON = new ArrayList<JSONObject>();
         
@@ -201,10 +170,10 @@ public class TaskAPI {
     	} finally {
         factory.closeConnection();
       }
-      return Response.status(Status.NOT_FOUND)
-      .entity(" There are no tasks assigned to this username: "
-      + object.getString("userName"))
-      .build();
+      return Response.status(C200).
+      entity("All the tasks have been displayed.").build();
+
+      
     }
     /**
      * @param input the username
