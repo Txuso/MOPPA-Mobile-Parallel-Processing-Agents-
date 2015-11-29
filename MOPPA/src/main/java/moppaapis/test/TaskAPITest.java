@@ -154,36 +154,6 @@ public class TaskAPITest {
   }
 
   /**
-   * Run the Response getAllTasks() method test.
-   *
-   * @throws Exception is launched if there aren't tasks created yet
-   *
-   * @generatedBy CodePro at 11/19/15 12:20 PM
-   */
-  @Test
-  public final void testGetAllTasksCorrect()
-    throws Exception {
-    TaskAPI fixture = new TaskAPI();
-    Response result = fixture.getAllTasks();
-    assertNotNull(result);
-  }
-
-  /**
-   * Run the Response getAllTasks() method test.
-   *
-   * @throws Exception is launched if there aren't tasks created yet
-   *
-   * @generatedBy CodePro at 11/19/15 12:20 PM
-   */
-  @Test
-  public final void testGetAllTasksNoTasks()
-    throws Exception {
-    TaskAPI fixture = new TaskAPI();
-    Response result = fixture.getAllTasks();
-    assertNotNull(result);
-  }
-
-  /**
    * Perform pre-test initialization.
    *
    * @throws Exception
