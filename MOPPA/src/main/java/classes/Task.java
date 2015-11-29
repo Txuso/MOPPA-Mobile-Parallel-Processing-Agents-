@@ -19,72 +19,76 @@ caseSensitiveKeyspace = false,
 caseSensitiveTable = false)
 
 public class Task {
-	
-	
-	private UUID taskid;
+  
+  /*@PartitionKey(0)
+  private UUID taskid;
+  @PartitionKey(1)
+  private String username;*/
 
-	private int problem;
+  public UUID taskid;
 
-	private String result;
+  private int problem;
 
-	private String state;
+  private String result;
 
-	private String username;
-	
-	public Task() {
-	    
-	}
-	
-	public Task(final UUID uuid, 
-	            final String newCreatorUsername, final int newTaskValue,
-	            final String newTaskResult, final String newTaskState) {
-		super();
-		this.taskid = uuid;
-		this.problem = newTaskValue;
-		this.result = newTaskResult;
-		this.state = newTaskState;
-		this.username = newCreatorUsername;
-	}
+  private String state;
 
-	public final UUID getTaskid() {
-		return taskid;
-	}
+  private String username;
+  
+  public Task() {
+    
+  }
+  
+  public Task(final UUID uuid, final String newCreatorUsername, final int newTaskValue,
+  final String newTaskResult, final String newTaskState
+  ) {
+    super();
+    this.taskid = uuid;
+    this.problem = newTaskValue;
+    this.result = newTaskResult;
+    this.state = newTaskState;
+    this.username = newCreatorUsername;
+  }
 
-	public final void setTaskid(final UUID newTaskId) {
-		this.taskid = newTaskId;
-	}
+  public UUID getTaskid() {
+    return taskid;
+  }
 
-	public final int getProblem() {
-		return problem;
-	}
+  public void setTaskid(UUID taskid) {
+    this.taskid = taskid;
+  }
 
-	public final void setProblem(final int newProblem) {
-		this.problem = newProblem;
-	}
+  public int getProblem() {
+    return problem;
+  }
 
-	public final String getResult() {
-		return result;
-	}
+  public void setProblem(int problem) {
+    this.problem = problem;
+  }
 
-	public final void setResult(final String newResult) {
-		this.result = newResult;
-	}
+  public String getResult() {
+    return result;
+  }
 
-	public final String getState() {
-		return state;
-	}
+  public void setResult(String result) {
+    this.result = result;
+  }
 
-	public final void setState(final String newState) {
-		this.state = newState;
-	}
+  public String getState() {
+    return state;
+  }
 
-	public final String getUsername() {
-		return username;
-	}
+  public void setState(String state) {
+    this.state = state;
+  }
 
-	public final void setUsername(final String newUsername) {
-		this.username = newUsername;
-	}
-	
-	
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+  
+  
 }

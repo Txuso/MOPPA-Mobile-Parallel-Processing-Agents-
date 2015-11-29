@@ -45,7 +45,7 @@ public class CassandraTaskDAO implements TaskDAO {
 			Mapper<Task> mapper = manager.mapper(Task.class);
 			mapper.save(task);
 		} catch (Exception e) {
-			//LoggingHandler.writeErrorToLog(e);
+			e.printStackTrace();
 		  }
 		return uuid; // Returns newly created TaskID
 	}
