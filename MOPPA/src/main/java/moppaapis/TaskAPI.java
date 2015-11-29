@@ -196,7 +196,8 @@ public class TaskAPI {
         
         if (tasks.all().isEmpty()) {
         	return Response.status(Status.NOT_FOUND)
-                    .entity(" There aren't tasks assigned to " 
+                    .entity(" There are no tasks assigned to username" 
+                    + object.getString("userName") + " with the state"
                     + object.getString("taskState")).build(); 
         }
       	
