@@ -3,6 +3,9 @@ import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
+
+import cassandradb.CassandraDAOFactory;
+import cassandradb.UserDAO;
 import classes.MoppaUser;
 import exceptions.InvalidData;
 import java.io.StringReader;
@@ -15,6 +18,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 /**
  * 
@@ -24,12 +28,7 @@ import javax.ws.rs.core.Response;
 @Path("/moppa/v1/user")
 @Api(value = "/user", description = "I am an User!")
 public class UserAPI {
-	
-	/**
-	 * tasks here we store all the Moppa Users.
-	 */
-    private ArrayList<MoppaUser> users = new ArrayList<MoppaUser>();
-	
+		
 	/**
 	 * code for OK api response.
 	 */
@@ -54,8 +53,6 @@ public class UserAPI {
         @ApiResponse(code = C200, message = "OK"),
         @ApiResponse(code = C500, message = "Something wrong in Server")})
 	public final Response createUserInJSON(final String input) {
-    	users.add(new MoppaUser("Txuso", "123"));
-    	users.add(new MoppaUser("Mario", "123"));
     	JsonReader jsonReader = Json.createReader(new StringReader(input));
    	 	JsonObject object = jsonReader.readObject();
    	 	jsonReader.close();
@@ -64,23 +61,34 @@ public class UserAPI {
    	 			|| object.getString("password").isEmpty()) {
 			throw new InvalidData("The username or the password cannot be null")
 			.except();
-		}
-   	 	
-   	 	for (MoppaUser user: users) {
-   	 		if (user.getUsername().equals(object.getString("username"))) {
-   	 			throw new InvalidData("The username already exists").except();
-   	 		}
    	 	}
    	 	
-   	 	MoppaUser user = new MoppaUser(object.getString("username"),
-   	 	object.getString("password"));
+   	 	CassandraDAOFactory factory = new CassandraDAOFactory();
    	 	
-   	 	users.add(user);
+   	 	try {
+   	 	  UserDAO user = factory.getUserDAO();
+   	 	  int success = user.insertUser(object.getString("userName"), object.getString("password"));
+   	 	  if (success != 1) {
+   	 	    return Response.status(Status.NOT_FOUND)
+              .entity("User has not been created. Please contact the administrator.")
+              .build();
+   	 	  }
+   	 	  else {
+     	 	  return Response.status(C200)
+              .entity("User " + object.getString("userName") + " has been created.")
+              .build();
+   	 	  }  
    	 	
-        return Response.status(C200).
-        	   entity("The user has been created").build();
-    }
-    
-    
-    
+   	 	} catch (Exception e) {
+   	 	  
+   	 	  
+   	 	} finally {
+   	 	  factory.closeConnection();
+   	 	}
+   	 	
+      return Response.status(Status.NOT_FOUND)
+          .entity(" User has not been created, contact the administrator.")
+          .build();
+
+    }    
 }
