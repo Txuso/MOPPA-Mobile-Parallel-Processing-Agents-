@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<section name="ExternalProjectImportWizard">
+		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
+		<item value="false" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
+		<item value="false" key="WizardProjectsImportPage.STORE_NESTED_PROJECTS"/>
+		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="/Users/Txuso/Desktop/RMI/4.4_ObserverUtils"/>
+			<item value="/Users/Txuso/Desktop/RMI/4.4.2_DonationObserver_Client"/>
+			<item value="/Users/Txuso/Desktop/RMI/4.4.2_DonationObserver_Server"/>
+			<item value="/Users/Txuso/Desktop/RMI/4.4_SMS-Observer_Server"/>
+			<item value="/Users/Txuso/Desktop/RMI/4.4_SMS-Observer_Client"/>
+			<item value="/Users/Txuso/Desktop/RMI DONATION/ObserverUtils"/>
+			<item value="/Users/Txuso/Desktop/RMI DONATION/Donation/DonationServer"/>
+			<item value="/Users/Txuso/Desktop/RMI DONATION/Donation/DonationClient"/>
+			<item value="/Users/Txuso/Desktop/RMI DONATION/DonationClient"/>
+			<item value="/Users/Txuso/Desktop/RMI DONATION/DonationServer"/>
+			<item value="/Users/Txuso/Desktop/RMI DONATION/Tralala_AuthentificationServer"/>
+			<item value="/Users/Txuso/Desktop/RMI DONATION/4.4.2_DonationObserver_Server"/>
+			<item value="/Users/Txuso/Desktop/RMI DONATION/4.4.2_DonationObserver_Client"/>
+			<item value="/Users/Txuso/Desktop/Tralala_AuthentificationServer"/>
+			<item value="/Users/Txuso/Desktop/4.4.2_DonationObserver_Client"/>
+			<item value="/Users/Txuso/Desktop/4.4.2_DonationObserver_Server"/>
+			<item value="/Users/Txuso/Desktop/2.2_exampleRMI_Client"/>
+			<item value="/Users/Txuso/Desktop/2.2_exampleRMI_Server"/>
+			<item value="/Volumes/Txuso HDD/Users/Txuso/Documents/LANAK/DEUSTO - Informatika/3 curso/Primer Semestre/SoftwareDesign/SoftwareDesign/2.2_exampleRMI_Client"/>
+			<item value="/Volumes/Txuso HDD/Users/Txuso/Documents/LANAK/DEUSTO - Informatika/3 curso/Primer Semestre/SoftwareDesign/SoftwareDesign/2.2_exampleRMI_Server"/>
+		</list>
+		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
+			<item value=""/>
+		</list>
+	</section>
+	<section name="ResourceNavigator">
+		<item value="Aggregate for window 1445005773360" key="ResourceWorkingSetFilter.STORE_WORKING_SET"/>
+		<item value="1" key="ResourceViewer.STORE_SORT_TYPE"/>
+	</section>
 	<section name="NewWizardAction">
 	</section>
 </section>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="MavenProjectWizardArchetypePage">
+		<item value="All Catalogs" key="catalog"/>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
 			<item value="[artifactId]-TRUNK"/>
@@ -24,6 +25,7 @@
 	</section>
 	<section name="MavenProjectWizardLocationPage">
 		<list key="location">
+			<item value="/Volumes/Txuso HDD/Users/Txuso/Documents/LANAK/UAB - master informatika/Lehengo Maila/SDQ/MOPPA/MOPPA/pom.xml"/>
 			<item value="/Volumes/Txuso HDD/Users/Txuso/Documents/LANAK/UAB - master informatika/Lehengo Maila/SDQ/MOPPA/resttest/src/main/java/resttest/Main.java"/>
 		</list>
 		<list key="projectNameTemplate">
@@ -69,13 +71,10 @@
 	</section>
 	<section name="MavenProjectWizardArtifactPage">
 		<list key="groupId">
-			<item value="com.uab.sdq"/>
 		</list>
 		<list key="name">
-			<item value="MOPPA Project"/>
 		</list>
 		<list key="artifactId">
-			<item value="MOPPA"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>

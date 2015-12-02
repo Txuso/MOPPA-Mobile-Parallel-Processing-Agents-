@@ -1,2 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="javax.ws.rs.WebApplicationException"/>
+<fullyQualifiedTypeName name="javax.ws.rs.core.Response"/>
+<fullyQualifiedTypeName name="javax.ws.rs.core.Response.Status"/>
+<fullyQualifiedTypeName name="es.deusto.ingenieria.sd.rmi.server.IServer"/>
+<fullyQualifiedTypeName name="java.rmi.registry.LocateRegistry"/>
+<fullyQualifiedTypeName name="es.deusto.ingenieria.sd.donation.server.CollectorWindow"/>
+<fullyQualifiedTypeName name="es.deusto.ingenieria.sd.donation.server.remote.IAuthentication"/>
+<fullyQualifiedTypeName name="server.remote.ICollector"/>
+<fullyQualifiedTypeName name="client.Donor"/>
+<fullyQualifiedTypeName name="client.remote.DonorRemoteObserver"/>
+<fullyQualifiedTypeName name="es.deusto.ingenieria.sd.util.observer.remote.IRemoteObservable"/>
+<fullyQualifiedTypeName name="es.deusto.ingenieria.sd.donation.server.remote.ICollector"/>
+<fullyQualifiedTypeName name="exceptions.InvalidData"/>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="exceptions.TaskNotFound"/>
+<fullyQualifiedTypeName name="org.junit.Test"/>
+</qualifiedTypeNameHistroy>

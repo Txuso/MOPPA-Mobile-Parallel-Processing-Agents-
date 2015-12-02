@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="739" key="DIALOG_WIDTH"/>
+	<item value="40" key="DIALOG_Y_ORIGIN"/>
+	<item value="0" key="org.eclipse.egit.ui.internal.clone.GitSelectWizardPageWizardSel"/>
+	<item value="248" key="DIALOG_X_ORIGIN"/>
+	<item value="523" key="DIALOG_HEIGHT"/>
+	<item value="1|.Helvetica Neue DeskInterface|11.0|0|COCOA|1|.HelveticaNeueDeskInterface-Regular" key="DIALOG_FONT_NAME"/>
+	<item value="true" key="CommitDialog.showUntracked"/>
+	<list key="CommitDialog.authorValues">
+		<item value="Txuso &lt;Txuso@192.168.0.192&gt;"/>
+		<item value="Txuso &lt;Txuso@10.109.82.202&gt;"/>
+		<item value="Txuso &lt;Txuso@10.109.77.241&gt;"/>
+		<item value="Txuso &lt;Txuso@10.109.76.53&gt;"/>
+		<item value="Txuso &lt;Txuso@10.109.75.124&gt;"/>
+		<item value="Txuso &lt;Txuso@10.109.76.117&gt;"/>
+		<item value="Txuso &lt;Txuso@10.109.72.20&gt;"/>
+		<item value="Txuso &lt;Txuso@10.109.77.245&gt;"/>
+		<item value="Txuso &lt;Txuso@josus-mbp&gt;"/>
+		<item value="Txuso &lt;Txuso@192.168.0.203&gt;"/>
+	</list>
+	<list key="CommitDialog.committerValues">
+		<item value="Txuso &lt;Txuso@192.168.0.192&gt;"/>
+		<item value="Txuso &lt;Txuso@10.109.82.202&gt;"/>
+		<item value="Txuso &lt;Txuso@10.109.77.241&gt;"/>
+		<item value="Txuso &lt;Txuso@10.109.76.53&gt;"/>
+		<item value="Txuso &lt;Txuso@10.109.75.124&gt;"/>
+		<item value="Txuso &lt;Txuso@10.109.76.117&gt;"/>
+		<item value="Txuso &lt;Txuso@10.109.72.20&gt;"/>
+		<item value="Txuso &lt;Txuso@10.109.77.245&gt;"/>
+		<item value="Txuso &lt;Txuso@josus-mbp&gt;"/>
+		<item value="Txuso &lt;Txuso@192.168.0.203&gt;"/>
+	</list>
+	<list key="RepositorySelectionPage.UsedUris">
+		<item value="https://github.com/Txuso/MOPPA-Mobile-Parallel-Processing-Agents-"/>
+		<item value="https://github.com/Txuso/MOPPA-Mobile-Parallel-Processing-Agents-.git"/>
+	</list>
+	<section name="org.eclipse.egit.ui.internal.dialogs.ResetTargetSelectionDialog.dialogBounds">
+		<item value="525" key="DIALOG_WIDTH"/>
+		<item value="0" key="DIALOG_Y_ORIGIN"/>
+		<item value="728" key="DIALOG_HEIGHT"/>
+		<item value="355" key="DIALOG_X_ORIGIN"/>
+		<item value="1|.Helvetica Neue DeskInterface|11.0|0|COCOA|1|.HelveticaNeueDeskInterface-Regular" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="GitImportWizard">
+		<item value="true" key="GitProjectsImportPage.STORE_NESTED_PROJECTS"/>
+	</section>
+	<section name="org.eclipse.egit.ui.internal.dialogs.MergeTargetSelectionDialog.dialogBounds">
+		<item value="525" key="DIALOG_WIDTH"/>
+		<item value="0" key="DIALOG_Y_ORIGIN"/>
+		<item value="686" key="DIALOG_HEIGHT"/>
+		<item value="250" key="DIALOG_X_ORIGIN"/>
+		<item value="1|.Helvetica Neue DeskInterface|11.0|0|COCOA|1|.HelveticaNeueDeskInterface-Regular" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="GitCommitMessageComponent">
+	</section>
+	<section name="org.eclipse.egit.ui.COMMIT_DIALOG_SECTION">
+		<item value="626" key="DIALOG_WIDTH"/>
+		<item value="0" key="DIALOG_Y_ORIGIN"/>
+		<item value="284" key="DIALOG_X_ORIGIN"/>
+		<item value="623" key="DIALOG_HEIGHT"/>
+		<item value="1|.Helvetica Neue DeskInterface|11.0|0|COCOA|1|.HelveticaNeueDeskInterface-Regular" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="org.eclipse.egit.ui.internal.dialogs.RebaseTargetSelectionDialog.dialogBounds">
+		<item value="525" key="DIALOG_WIDTH"/>
+		<item value="43" key="DIALOG_Y_ORIGIN"/>
+		<item value="250" key="DIALOG_X_ORIGIN"/>
+		<item value="512" key="DIALOG_HEIGHT"/>
+		<item value="1|.Helvetica Neue DeskInterface|11.0|0|COCOA|1|.HelveticaNeueDeskInterface-Regular" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="org.eclipse.egit.ui.internal.pull.PullResultDialog.dialogBounds">
+		<item value="1235" key="DIALOG_WIDTH"/>
+		<item value="129" key="DIALOG_Y_ORIGIN"/>
+		<item value="389" key="DIALOG_HEIGHT"/>
+		<item value="0" key="DIALOG_X_ORIGIN"/>
+		<item value="1|.Helvetica Neue DeskInterface|11.0|0|COCOA|1|.HelveticaNeueDeskInterface-Regular" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="org.eclipse.egit.ui.internal.fetch.FetchResultDialog.dialogBounds">
+		<item value="643" key="DIALOG_WIDTH"/>
+		<item value="91" key="DIALOG_Y_ORIGIN"/>
+		<item value="440" key="DIALOG_HEIGHT"/>
+		<item value="191" key="DIALOG_X_ORIGIN"/>
+		<item value="1|.Helvetica Neue DeskInterface|11.0|0|COCOA|1|.HelveticaNeueDeskInterface-Regular" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="org.eclipse.egit.ui.internal.merge.MergeResultDialog.dialogBounds">
+		<item value="1002" key="DIALOG_WIDTH"/>
+		<item value="274" key="DIALOG_Y_ORIGIN"/>
+		<item value="171" key="DIALOG_HEIGHT"/>
+		<item value="116" key="DIALOG_X_ORIGIN"/>
+		<item value="1|.Helvetica Neue DeskInterface|11.0|0|COCOA|1|.HelveticaNeueDeskInterface-Regular" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="org.eclipse.egit.ui.internal.push.PushResultDialog.dialogBounds">
+		<item value="650" key="DIALOG_WIDTH"/>
+		<item value="255" key="DIALOG_Y_ORIGIN"/>
+		<item value="270" key="DIALOG_X_ORIGIN"/>
+		<item value="440" key="DIALOG_HEIGHT"/>
+		<item value="1|.Helvetica Neue DeskInterface|11.0|0|COCOA|1|.HelveticaNeueDeskInterface-Regular" key="DIALOG_FONT_NAME"/>
+		<list key="sashWeights">
+			<item value="600"/>
+			<item value="400"/>
+		</list>
+	</section>
+	<section name="org.eclipse.egit.ui.internal.staging.StagingView">
+		<item value="200,200" key="HORIZONTAL_SASH_FORM_WEIGHT"/>
+		<item value="false" key="sortItemState"/>
+		<item value="200,200" key="STAGING_SASH_FORM_WEIGHT"/>
+	</section>
+</section>
