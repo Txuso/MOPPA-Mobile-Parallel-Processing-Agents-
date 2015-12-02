@@ -75,14 +75,16 @@ public class TaskAPI {
         CassandraTaskDAO task = factory.getTaskDAO();
         
         int taskValue = object.getInt("taskValue");
-        String creatorUsername = object.getString("creatorUsername");
+        String userName = object.getString("userName");
 
         if (taskValue < 0 || taskValue > MAX_VALUE) {
-        throw new InvalidData("The value cannot be "
-        + "negative or greater than 100").except();
+        return Response.status(Status.NOT_ACCEPTABLE)
+               .entity("The value cannot be "
+               + "negative or greater than 100. Please review the values.")
+               .build();
         }
         
-        UUID uuid = task.insertTask(creatorUsername, taskValue);
+        UUID uuid = task.insertTask(userName, taskValue);
         
         if (!uuid.toString().isEmpty()) {
           JsonObject value = Json.createObjectBuilder()
@@ -120,9 +122,10 @@ public class TaskAPI {
       jsonReader.close();
       
     	if (object.getString("userName").isEmpty()) {
-    		throw new InvalidData("System couldn't read your username. "
-    		                      + "Please contact the administrator.")
-    		                      .except();
+        return Response.status(Status.NOT_ACCEPTABLE)
+               .entity("System couldn't read your username. "
+               + "Please contact the administrator.")
+               .build();
     	}
     		
       CassandraDAOFactory factory = new CassandraDAOFactory();
@@ -132,16 +135,15 @@ public class TaskAPI {
         
         Result<Task> tasks = task.findTasksbyUsername(
                              object.getString("userName"));
-        if (tasks.all().isEmpty()) {
-        	return Response.status(Status.NOT_FOUND)
-        		      .entity(" There are no tasks assigned to this username: "
-        		      + object.getString("userName"))
-        		      .build();
-        	
-        }
         JSONObject value = new JSONObject();
         Collection<JSONObject> tasksJSON = new ArrayList<JSONObject>();
-        
+      
+        if (tasks.isExhausted()) {
+          return Response.status(Status.NOT_FOUND)
+                  .entity(" There are no tasks assigned to this username: "
+                  + object.getString("userName"))
+                  .build();
+        }
         
     	for (Task taskIterator : tasks) {
     	  
@@ -194,10 +196,10 @@ public class TaskAPI {
         JSONObject value = new JSONObject();
         Collection<JSONObject> tasksJSON = new ArrayList<JSONObject>();
         
-        if (tasks.all().isEmpty()) {
+        if (tasks.isExhausted()) {
         	return Response.status(Status.NOT_FOUND)
-                    .entity(" There are no tasks assigned to username" 
-                    + object.getString("userName") + " with the state"
+                    .entity(" There are no tasks assigned to username: " 
+                    + object.getString("userName") + " with the state: "
                     + object.getString("taskState")).build(); 
         }
       	
