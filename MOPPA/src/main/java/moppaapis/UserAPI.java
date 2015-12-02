@@ -1,4 +1,5 @@
 package moppaapis;
+
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiResponse;
@@ -47,6 +48,7 @@ public class UserAPI {
 	 * @throws MoppaException
 	 */
     @POST
+    @Path("/createUser")
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "Say Hello World", notes = "Anything Else?")
 	@ApiResponses(value = {
@@ -57,25 +59,29 @@ public class UserAPI {
    	 	JsonObject object = jsonReader.readObject();
    	 	jsonReader.close();
    	 	
-   	 	if (object.getString("username").isEmpty()
+   	 	if (object.getString("userName").isEmpty()
    	 			|| object.getString("password").isEmpty()) {
-			throw new InvalidData("The username or the password cannot be null")
-			.except();
+            return Response.status(Status.NOT_FOUND)
+                .entity("User has not been created. You have to provide data."
+                + "Please contact the administrator.")
+                .build();
    	 	}
-   	 	
    	 	CassandraDAOFactory factory = new CassandraDAOFactory();
    	 	
    	 	try {
    	 	  UserDAO user = factory.getUserDAO();
-   	 	  int success = user.insertUser(object.getString("userName"), object.getString("password"));
+   	 	  int success = user.insertUser(object
+   	 	                .getString("userName"), object
+   	 	                .getString("password"));
    	 	  if (success != 1) {
    	 	    return Response.status(Status.NOT_FOUND)
-              .entity("User has not been created. Please contact the administrator.")
+              .entity("User has not been created. "
+              + "Please contact the administrator.")
               .build();
-   	 	  }
-   	 	  else {
+   	 	  } else {
      	 	  return Response.status(C200)
-              .entity("User " + object.getString("userName") + " has been created.")
+              .entity("User " + object
+              .getString("userName") + " has been created.")
               .build();
    	 	  }  
    	 	
