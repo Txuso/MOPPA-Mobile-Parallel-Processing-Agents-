@@ -1,14 +1,11 @@
 package moppaapis.test;
 
 import static org.junit.Assert.assertNotNull;
-
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import moppaapis.UserAPI;
 
 /**

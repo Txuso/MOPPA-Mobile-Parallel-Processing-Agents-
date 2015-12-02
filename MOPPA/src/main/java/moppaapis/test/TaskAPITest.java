@@ -1,11 +1,12 @@
 package moppaapis.test;
 
 import javax.ws.rs.core.Response;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import exceptions.InvalidData;
+import exceptions.TaskNotFound;
 import moppaapis.TaskAPI;
 
 import static org.junit.Assert.assertNotNull;
@@ -41,9 +42,8 @@ public class TaskAPITest {
   public final void testCreateTaskInJSONCorrectInput()
     throws Exception {
     TaskAPI fixture = new TaskAPI();
-    String input = "{\"taskID\": 1234,\"taskValue\": 10,\"result\":"
-    + " \"12345\", \"taskState\": \"doing\",\"creatorUsername\": "
-    + "\"adb\"}";
+    String input = "\"taskValue\": 10,\"creatorUsername\": "
+    + "\"Mario\"}";
 
     Response result = fixture.createTaskInJSON(input);
 
@@ -61,13 +61,17 @@ public class TaskAPITest {
   public final void testCreateTaskInJSONWithNegativeValue()
     throws Exception {
     TaskAPI fixture = new TaskAPI();
-    String input = "{\"taskID\": 1234,\"taskValue\": -5,\"result\":"
-        + " \"12345\", \"taskState\": \"doing\",\"creatorUsername\": "
-        + "\"adb\"}";
-    
-    Response result = fixture.createTaskInJSON(input);
+    String input = "\"taskValue\": -10,\"creatorUsername\": "
+    	    + "\"Mario\"}";
+    try {
+        Response result = fixture.createTaskInJSON(input);
+        assertNotNull(result);
 
-    assertNotNull(result);
+    } catch (Exception e) {
+    	 throw new InvalidData("The value cannot be "
+    		        + "negative or greater than 100").except();
+    }
+
   }
 
   /**
@@ -81,13 +85,18 @@ public class TaskAPITest {
   public final void testCreateTaskInJSONWithValueHigherThan100()
     throws Exception {
     TaskAPI fixture = new TaskAPI();
-    String input = "{\"taskID\": 1234,\"taskValue\": 1000,\"result\":"
-        + " \"12345\", \"taskState\": \"doing\",\"creatorUsername\": "
-        + "\"adb\"}";
+    String input = "\"taskValue\": 1000,\"creatorUsername\": "
+    	    + "\"Mario\"}";
 
-    Response result = fixture.createTaskInJSON(input);
+    try {
+        Response result = fixture.createTaskInJSON(input);
+        assertNotNull(result);
 
-    assertNotNull(result);
+    } catch (Exception e) {
+    	 throw new InvalidData("The value cannot be "
+    		        + "negative or greater than 100").except();
+    }
+
   }
 
   /**
@@ -118,8 +127,15 @@ public class TaskAPITest {
     throws Exception {
     TaskAPI fixture = new TaskAPI();
     String input = "{\"userName\": \"Mario\", \"taskState\": \"Done\"}";
-    Response result = fixture.findTaskByStateInJSON(input);
-    assertNotNull(result);
+    try {
+        Response result = fixture.findTaskByStateInJSON(input);
+        assertNotNull(result);
+
+    } catch (Exception e) {
+    	throw new InvalidData("There are no tasks assigned"
+    	+ " to username with that state").except();
+    }
+
   }
 
 
@@ -132,7 +148,7 @@ public class TaskAPITest {
   @Test
   public final void testFindTaskByUsernameInJSONCorrectInput() {
     TaskAPI fixture = new TaskAPI();
-    String username = "{Txuso}";
+    String username = "{Mario}";
     Response result = fixture.findTaskByUsernameInJSON(username);
     assertNotNull(result);
   }
@@ -149,8 +165,14 @@ public class TaskAPITest {
     throws Exception {
     TaskAPI fixture = new TaskAPI();
     String username = "{Rodolfo}";
-    Response result = fixture.findTaskByUsernameInJSON(username);
-    assertNotNull(result);
+    try {
+    	Response result = fixture.findTaskByUsernameInJSON(username);
+        assertNotNull(result);
+    } catch (Exception e) {
+    	throw new TaskNotFound("There are no tasks assigned "
+        + "to this username.").except();
+    }
+    
   }
 
   /**
