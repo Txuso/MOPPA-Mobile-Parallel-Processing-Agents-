@@ -1,8 +1,5 @@
 package moppaapis;
 import com.wordnik.swagger.jaxrs.config.BeanConfig;
-
-import cassandradb.CassandraDAOFactory;
-
 import java.io.IOException;
 import java.net.URI;
 import java.util.HashMap;

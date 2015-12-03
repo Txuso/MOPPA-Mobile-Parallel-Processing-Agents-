@@ -1,9 +1,7 @@
 package moppaapis;
 
 import classes.Task;
-import exceptions.InvalidData;
 import redis.clients.jedis.Jedis;
-
 import com.datastax.driver.mapping.Result;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
@@ -14,7 +12,6 @@ import cassandradb.CassandraTaskDAO;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -59,7 +56,8 @@ public class TaskAPI {
      * @return it return OK message if the task has been created
      * @throws MoppaException
      */
-    @POST
+    @SuppressWarnings("resource")
+	@POST
 	@Path("/createTask")
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "Say Hello World", notes = "Anything Else?")
@@ -97,7 +95,7 @@ public class TaskAPI {
               .add("taskId", uuid.toString())
               .add("taskValue", taskValue)
               .build();
-          Jedis jedis = new Jedis("localhost");
+		  Jedis jedis = new Jedis("localhost");
           jedis.rpush("tasks", payload.toString());
 
           return Response.status(C200).entity(value).build();
