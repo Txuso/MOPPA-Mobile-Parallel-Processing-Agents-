@@ -4,6 +4,7 @@ import javax.ws.rs.core.Response;
 import org.junit.*;
 
 import exceptions.InvalidData;
+import exceptions.TaskNotFound;
 import moppaapis.MobileTaskAPI;
 import static org.junit.Assert.*;
 
@@ -61,6 +62,31 @@ public class MobileTaskAPITest {
 			
 		} catch (Exception e) {
 			throw new InvalidData("There are no tasks assigned"
+			    	+ " to username with that state").except();
+		}
+		
+		
+	}
+	
+	/**
+	 * Run the Response getTask(String) method test.
+	 *
+	 * @throws Exception is launched because the name is empty
+	 *
+	 * @generatedBy CodePro at 12/4/15 11:17 AM
+	 */
+	@Test
+	public final void testGetTaskNoTasksFound()
+		throws Exception {
+		MobileTaskAPI fixture = new MobileTaskAPI();
+		String input = "Samsung Galaxy A3";
+		try {
+			
+			Response result = fixture.getTask(input);
+			assertNotNull(result);
+			
+		} catch (Exception e) {
+			throw new TaskNotFound("There are no tasks assigned"
 			    	+ " to username with that state").except();
 		}
 		
