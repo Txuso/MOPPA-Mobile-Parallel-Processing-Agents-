@@ -70,7 +70,9 @@ public final class Main {
         return new ResourceConfig().
                 packages(TaskAPI.class.getPackage().getName(),
                         "com.wordnik.swagger.jaxrs.listing").
-                register(createMoxyJsonResolver());
+                register(createMoxyJsonResolver()).
+                register(new CrossDomainFilter());
+
     }
     
     /**
