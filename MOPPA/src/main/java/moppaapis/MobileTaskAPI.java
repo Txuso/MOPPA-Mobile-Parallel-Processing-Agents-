@@ -132,16 +132,17 @@ public class MobileTaskAPI {
         UUID taskID = java.util.UUID.fromString(object.getString("taskID"));
         String taskResult = object.getString("taskResult");
         
-        int success = task.updateTask(taskID, taskResult);
+        boolean success = task.updateTask(taskID, taskResult);
         
-        if (success == 1) {
+        if (success) {
           JsonObject value = Json.createObjectBuilder()
               .add("taskID has been updated - ", taskID.toString())
               .build();
-
-
           return Response.status(C200).entity(value).build();
-        }
+        } else
+          return Response.status(Status.NOT_ACCEPTABLE)
+            .entity(" Task has not been updated, contact the administrator.")
+            .build();
       } catch (Exception e) {
         //Log
     

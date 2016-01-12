@@ -86,6 +86,16 @@ public class TaskAPI {
                .build();
         }
         
+        Result<Task> tasks = task.checkIfTaskExists(taskValueInt);
+        
+        if (!tasks.isExhausted()) {
+          Task taskIterator = tasks.one();
+          return Response.status(Status.NOT_FOUND)
+              .entity(" There is already task created with this value: "
+              + object.getString("taskValue") + ". The result is: " + taskIterator.getResult().toString())
+              .build();
+        }
+        
         UUID uuid = task.insertTask(userName, taskValueInt);
         
         if (!uuid.toString().isEmpty()) {

@@ -5,6 +5,7 @@ import java.util.UUID;
 import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.PreparedStatement;
 import com.datastax.driver.core.ResultSet;
+import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
 import com.datastax.driver.mapping.Mapper;
 import com.datastax.driver.mapping.MappingManager;
@@ -40,7 +41,7 @@ public class CassandraTaskDAO implements TaskDAO {
 		UUID uuid = UUID.randomUUID(); //can we use it directly in method call?
 		try {
 			Task task = new Task(
-			uuid, username, problem, "", "Waiting");
+			uuid, username, problem, "0", "Waiting");
 			
 			Mapper<Task> mapper = manager.mapper(Task.class);
 			mapper.save(task);
@@ -86,7 +87,7 @@ public class CassandraTaskDAO implements TaskDAO {
 		return tasks;
 	  }
 	
-	public final int updateTask(final UUID taskid,
+	public final boolean updateTask(final UUID taskid,
 	                            final String taskResult) {
 	  String taskState = "Done";
 	  try {
@@ -101,7 +102,28 @@ public class CassandraTaskDAO implements TaskDAO {
 	    
 	  } catch (Exception e) {
     e.printStackTrace();
+    return false;
     }
-	  return 1;
+	  return true;
+	}
+	
+	public final Result<Task> checkIfTaskExists (final int taskValue) {
+	  
+    Result<Task> tasks = null;
+	  try {
+      PreparedStatement stmt = session.prepare("SELECT * "
+          + "FROM tasks WHERE problem = ? ALLOW FILTERING;");
+      BoundStatement boundStmt = new BoundStatement(stmt);
+      ResultSet results = session
+                          .execute(boundStmt.bind(taskValue));
+      Mapper<Task> mapper = manager.mapper(Task.class);
+      tasks = mapper.map(results);
+
+    } catch (Exception e) {
+      //LoggingHandler.writeErrorToLog(e);
+      System.out.println(e.toString());
+    }
+    return tasks;
+	  
 	}
 }
