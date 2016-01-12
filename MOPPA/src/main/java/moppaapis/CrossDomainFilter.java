@@ -9,9 +9,7 @@ import javax.ws.rs.container.ContainerResponseFilter;
 /**
  * 
  * Filter implemented to allow CORS. 
- * 
- * @author David Garcia Centelles
- *
+ *  *
  */
 public class CrossDomainFilter implements ContainerResponseFilter {
 
