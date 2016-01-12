@@ -42,7 +42,7 @@ public class TaskAPITest {
   public final void testCreateTaskInJSONCorrectInput()
     throws Exception {
     TaskAPI fixture = new TaskAPI();
-    String input = "\"taskValue\": 10,\"creatorUsername\": "
+    String input = "\"taskValue\": 10,\"userName\": "
     + "\"Mario\"}";
 
     Response result = fixture.createTaskInJSON(input);
@@ -148,7 +148,7 @@ public class TaskAPITest {
   @Test
   public final void testFindTaskByUsernameInJSONCorrectInput() {
     TaskAPI fixture = new TaskAPI();
-    String username = "{Mario}";
+    String username = "{Rodolfo}";
     Response result = fixture.findTaskByUsernameInJSON(username);
     assertNotNull(result);
   }

@@ -75,17 +75,18 @@ public class TaskAPI {
       try {
         CassandraTaskDAO task = factory.getTaskDAO();
         
-        int taskValue = object.getInt("taskValue");
+        String taskValue = object.getString("taskValue");
+        int taskValueInt = Integer.parseInt(taskValue);
         String userName = object.getString("userName");
 
-        if (taskValue < 0 || taskValue > MAX_VALUE) {
+        if (taskValueInt < 0 || taskValueInt > MAX_VALUE) {
         return Response.status(Status.NOT_ACCEPTABLE)
                .entity("The value cannot be "
                + "negative or greater than 100. Please review the values.")
                .build();
         }
         
-        UUID uuid = task.insertTask(userName, taskValue);
+        UUID uuid = task.insertTask(userName, taskValueInt);
         
         if (!uuid.toString().isEmpty()) {
           JsonObject value = Json.createObjectBuilder()
@@ -95,7 +96,7 @@ public class TaskAPI {
               .add("taskId", uuid.toString())
               .add("taskValue", taskValue)
               .build();
-		  Jedis jedis = new Jedis("localhost");
+          Jedis jedis = new Jedis("localhost");
           jedis.rpush("tasks", payload.toString());
 
           return Response.status(C200).entity(value).build();
@@ -115,7 +116,7 @@ public class TaskAPI {
      * @param input tasks assigned to the corresponding user name.
      * @return it returns all the tasks assigned to the user name
      */
-    @POST
+  @POST
 	@Path("/findTaskByUsername")
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "Say Hello World", notes = "Anything Else?")

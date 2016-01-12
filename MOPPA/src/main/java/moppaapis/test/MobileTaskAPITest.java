@@ -1,5 +1,6 @@
 package moppaapis.test;
 
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import org.junit.*;
 
@@ -38,9 +39,9 @@ public class MobileTaskAPITest {
 	@Test
 	public final void testGetTaskCorrect() {
 		MobileTaskAPI fixture = new MobileTaskAPI();
-	    String input = "{Txuso Samsung A3}";
-		Response result = fixture.getTask(input);
-		assertNotNull(result);
+    String input = "\"phoneName\": \"\"Samsung S3\"}";
+	    Response result = fixture.getTask(input);
+	    assertNotNull(result);
 	}
 
 	/**
@@ -54,15 +55,14 @@ public class MobileTaskAPITest {
 	public final void testGetTaskEmptyName()
 		throws Exception {
 		MobileTaskAPI fixture = new MobileTaskAPI();
-		String input = "";
+    String input = "\"phoneName\": \"\"\"}";
 		try {
 			
 			Response result = fixture.getTask(input);
-			assertNotNull(result);
 			
-		} catch (Exception e) {
-			throw new InvalidData("There are no tasks assigned"
-			    	+ " to username with that state").except();
+		} catch (WebApplicationException e) {
+      assertEquals(e.getResponse().getStatus(), Response.Status.NOT_ACCEPTABLE.getStatusCode());
+
 		}
 		
 		
@@ -79,7 +79,7 @@ public class MobileTaskAPITest {
 	public final void testGetTaskNoTasksFound()
 		throws Exception {
 		MobileTaskAPI fixture = new MobileTaskAPI();
-		String input = "Samsung Galaxy A3";
+    String input = "\"phoneName\": \"\" Samsung S3\"}";
 		try {
 			
 			Response result = fixture.getTask(input);
