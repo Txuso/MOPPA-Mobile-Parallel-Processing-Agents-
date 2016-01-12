@@ -216,7 +216,7 @@ public class TaskAPI {
         
         if (tasks.isExhausted()) {
         	return Response.status(Status.NOT_FOUND)
-                    .entity(" There are no tasks assigned to username: " 
+                    .entity(" There are no tasks assigned to " 
                     + object.getString("userName") + " with the state: "
                     + object.getString("taskState")).build(); 
         }
