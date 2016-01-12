@@ -84,6 +84,24 @@ public class CassandraTaskDAO implements TaskDAO {
 		  System.out.println(e.toString());
 		  }
 		return tasks;
+	  }
+	
+	public final int updateTask(final UUID taskid,
+	                            final String taskResult) {
+	  String taskState = "Done";
+	  try {
+	    
+	     Mapper<Task> mapper = manager.mapper(Task.class);
+	     Task task = mapper.get(taskid);
+	     
+	     task.setResult(taskResult);
+	     task.setState(taskState);
+	     
+	     mapper.save(task);
+	    
+	  } catch (Exception e) {
+    e.printStackTrace();
+    }
+	  return 1;
 	}
-
 }

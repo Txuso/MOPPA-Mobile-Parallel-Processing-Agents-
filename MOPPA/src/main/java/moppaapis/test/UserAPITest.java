@@ -40,7 +40,7 @@ public class UserAPITest {
   public final void testCreateUserInJSONCorrectValues()
     throws Exception {
     UserAPI fixture = new UserAPI();
-    String input = "{\"username\":\"Rodolfo\", \"password\": \"213\"}";
+    String input = "{\"userName\":\"Rodolfo\", \"password\": \"213\"}";
     Response result = fixture.createUserInJSON(input);
     assertNotNull(result);
   }
@@ -53,7 +53,7 @@ public class UserAPITest {
   @Test
   public final void testCreateUserInJSONNullUsername() {
 	  try {
-	        String input = "{\"username\":\"\", \"password\": \"123\"}";
+	        String input = "{\"userName\":\"\", \"password\": \"123\"}";
 	    	UserAPI fixture = new UserAPI();
 	    	fixture.createUserInJSON(input);
 	    } catch (WebApplicationException e) {
@@ -71,7 +71,7 @@ public class UserAPITest {
   @Test
   public final void testCreateUserInJSONNullPassword() {
     try {
-        String input = "{\"username\":\"Rodolfo\", \"password\": \"\"}";
+        String input = "{\"userName\":\"Rodolfo\", \"password\": \"\"}";
     	UserAPI fixture = new UserAPI();
     	fixture.createUserInJSON(input);
     } catch (WebApplicationException e) {
@@ -91,7 +91,7 @@ public class UserAPITest {
     
     try {
     	UserAPI fixture = new UserAPI();
-        String input = "{\"username\":\"Txuso\", \"password\": \"213\"}";
+        String input = "{\"userName\":\"Txuso\", \"password\": \"213\"}";
     	fixture.createUserInJSON(input);
     } catch (WebApplicationException e) {
     	assertNotNull(Response.Status.NOT_ACCEPTABLE.getStatusCode());
