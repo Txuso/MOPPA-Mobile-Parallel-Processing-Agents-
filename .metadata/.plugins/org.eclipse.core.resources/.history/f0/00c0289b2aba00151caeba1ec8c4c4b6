@@ -1,5 +1,0 @@
-var login = angular.module("login", []);
-var register = angular.module("register", []);
-var myApp = angular.module("myApp", ["createTask","findTaskByUser", "findTaskByState"]);
-
-

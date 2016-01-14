@@ -1,4 +1,0 @@
-angular.module('moppaModule.controllers', [])
-    .controller('controller', function ($scope, $http, $interval, $window){   
-    	
-    })

@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Copy element &apos;MobileTaskAPITest.java&apos; to &apos;MOPPA/src/main/java/moppaapis.test&apos;&#x0A;- Original project: &apos;MOPPATest&apos;&#x0A;- Destination element: &apos;MOPPA/src/main/java/moppaapis.test&apos;&#x0A;- Original element: &apos;moppaapis.MobileTaskAPITest.java&apos;" description="Copy compilation unit" destination="=MOPPA/src\/main\/java&lt;moppaapis.test" element1="/java&lt;moppaapis{MobileTaskAPITest.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1449224243044" units="1" version="1.0"/>
-</session>

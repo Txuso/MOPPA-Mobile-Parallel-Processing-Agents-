@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Move package &apos;resttest&apos; to &apos;MOPPA/src/main/java&apos;&#x0A;- Original project: &apos;resttest&apos;&#x0A;- Destination element: &apos;MOPPA/src/main/java&apos;&#x0A;- Original element: &apos;resttest/src/main/java/resttest&apos;&#x0A;- Update references to refactored element" description="Move package" destination="=MOPPA/src\/main\/java" element1="/src\/main\/java&lt;resttest" flags="589830" fragments="1" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.movePackages" stamp="1445951169350" version="1.0"/>
-</session>

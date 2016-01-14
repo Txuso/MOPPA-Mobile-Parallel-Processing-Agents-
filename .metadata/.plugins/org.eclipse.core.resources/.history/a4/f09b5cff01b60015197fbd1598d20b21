@@ -1,8 +1,0 @@
-
-app.controller("bC",function($scope) {
-    
-    $scope.onclickbutton = function() {
-        $scope.firstName	= "Josu";
-        $scope.lastName= "Rubio";
-    };
-});

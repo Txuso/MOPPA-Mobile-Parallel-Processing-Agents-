@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename type &apos;es.deusto.ingenieria.sd.donation.client.gui&apos; to &apos;Donor_GUI&apos;&#x0A;- Original project: &apos;4.4.2_DonationObserver_Client&apos;&#x0A;- Original element: &apos;es.deusto.ingenieria.sd.donation.client.gui&apos;&#x0A;- Renamed element: &apos;es.deusto.ingenieria.sd.donation.client.Donor_GUI&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;gui&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;es.deusto.ingenieria.sd.donation.client{gui.java[gui" matchStrategy="1" name="Donor_GUI" qualified="false" references="true" similarDeclarations="false" stamp="1451061199162" textual="false" version="1.0"/>
-</session>
