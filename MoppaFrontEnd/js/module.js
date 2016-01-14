@@ -10,14 +10,14 @@ createTask.controller("createTask", function ($scope, $http, $interval, $window)
     	
  		$http({
         method: 'POST',
-        url: 'localhost:8080/moppa/v1/task/createTask',
+        url: 'http://192.168.85.131:8080/moppa/v1/task/createTask',
 		data: { 'userName' : $scope.userName , 'taskValue' : $scope.taskValue }
         }).
         success(function(data, status, headers, config) {
-		$scope.error = "The Task has been sent";
+		$scope.error = "The task with the value " + $scope.taskValue + " has been sent to processing.";
 		            }).
         error(function(data, status, headers, config) {	
-		$scope.error = "The number must be between 1 and 100";
+		$scope.error = "The value must be between 1 and 100.";
 
        });
     };
@@ -30,7 +30,7 @@ findTaskByUser.controller("findTaskByUser", function($scope, $http, $interval, $
     	
  		$http({
         method: 'POST',
-        url: 'localhost:8080/moppa/v1/task/findTaskByUsername',
+        url: 'http://192.168.85.131:8080/moppa/v1/task/findTaskByUsername',
 		data: { 'userName' : $scope.findUserName }
         }).
         success(function(data, status, headers, config) {
@@ -59,7 +59,7 @@ findTaskByState.controller("findTaskByState", function($scope, $http, $interval,
     	$scope.error3 = "Wait untill the petition is processed...";
  		$http({
         method: 'POST',
-        url: 'localhost:8080/moppa/v1/task/findTaskByTaskState',
+        url: 'http://192.168.85.131:8080/moppa/v1/task/findTaskByTaskState',
 		data: { 'userName' : $scope.taskUserName, 'taskState' : $scope.checkboxSelection}
         }).
         success(function(data, status, headers, config) {

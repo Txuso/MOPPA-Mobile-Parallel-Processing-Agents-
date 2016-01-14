@@ -85,10 +85,10 @@ public class MobileTaskAPI {
         jsonReader.close();
         
         return Response.status(C200)
-            .entity("Task " + taskRedisJSON
-            .getString("taskId") 
-            + " has been taken from the Redis queue"
-            + " and sent for processing.")
+            .entity("{\"taskID\": \"" + taskRedisJSON
+            .getString("taskId") + "\", \"taskValue\" : \""
+            + taskRedisJSON.getString("taskValue")
+            + "\"}")
             .build();
         
       } catch (Exception e) {
