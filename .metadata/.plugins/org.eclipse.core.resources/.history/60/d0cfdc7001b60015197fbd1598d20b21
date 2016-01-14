@@ -1,0 +1,13 @@
+app.controller("myCtrl", function($scope) {
+    $scope.firstName	= "John";
+    $scope.lastName= "Doe";
+});
+
+app.controller("bC",function($scope) {
+    $scope.firstName	= "John";
+    $scope.lastName= "Doe";
+    
+    $scope.setMessage = function(msg) {
+        $scope.myMessage = msg;
+    };
+});

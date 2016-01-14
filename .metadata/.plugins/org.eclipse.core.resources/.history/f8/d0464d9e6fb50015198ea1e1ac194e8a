@@ -1,0 +1,3 @@
+angular.module('SQA2014.controllers', [])
+    .controller('controller', function ($scope, $http, $interval, $window){    	
+    })

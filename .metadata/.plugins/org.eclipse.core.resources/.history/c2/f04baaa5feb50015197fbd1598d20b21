@@ -1,0 +1,6 @@
+var myApp = angular.module('moppaModule', []);
+
+myApp.controller("newController", function($scope) {
+	  $scope.error = 'evening';
+	  $scope.user = 'Gingerbread Baby';
+	});

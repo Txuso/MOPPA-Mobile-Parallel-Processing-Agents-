@@ -4,13 +4,9 @@ import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
-
 import cassandradb.CassandraDAOFactory;
 import cassandradb.UserDAO;
-import classes.MoppaUser;
-import exceptions.InvalidData;
 import java.io.StringReader;
-import java.util.ArrayList;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;

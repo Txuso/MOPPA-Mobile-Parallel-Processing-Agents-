@@ -1,0 +1,20 @@
+angular.module('moppaModule.controllers', [])
+    .controller('controller', function ($scope, $http, $interval, $window){   
+
+       	$scope.createTask = function() {
+    		$scope.error = "(There was an error, try it later)";
+    		$scope.taskValue = $scope.number;
+    		$scope.number = "";
+         		$http({
+                    method: 'POST',
+                    url: 'localhost:8080/moppa/v1/task/createTask',
+    			data: { 'creatorUsername' : $scope.userId , 'taskValue' : $scope.last_number }
+                }).
+                success(function(data, status, headers, config) {
+    			$scope.error = "(Ok)";
+    			            }).
+                error(function(data, status, headers, config){	
+    			$scope.error = "(Error: The number must between 1 and 100)";				
+               });
+       	};
+    })

@@ -1,0 +1,258 @@
+<html ng-app="myApp">
+<title>MOPPA Project</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+        <link rel="stylesheet" href="assets/css/main.css" />
+        <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+        <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script src="js/module.js"></script>
+<body data-ng-controller="createTask">
+<!-- Nav -->
+            <nav id="nav">
+                <ul class="container">
+                    <li><a href="#top">Top</a></li>
+                    <li><a href="#work">Work</a></li>
+                    <li><a href="#portfolio">Calculator</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Home -->
+            <div class="wrapper style1 first">
+                <article class="container" id="top">
+                    <div class="row">
+                        <div class="4u 12u(mobile)">
+                            <span class="image fit"><img src="images/logo.png" alt="" /></span>
+                        </div>
+                        <div class="8u 12u(mobile)">
+                            <header>
+                                <h1>Hi, I'm <strong>Moppa</strong>.</h1>
+                            </header>
+                            <p>And I will help you solving all your factorial calculations.</p>
+                            <a href="#work" class="button big scrolly">Discover</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            
+                <!-- Work -->
+            <div class="wrapper style2">
+                <article id="work">
+                    <header>
+                        <h2>This is how I work.</h2>
+                        <p>Have a glance to what I do</p>
+                    </header>
+                    <div class="container">
+                        <div class="row">
+                            <div class="4u 12u(mobile)">
+                                <section class="box style1">
+                                    <span class="image fit"><img src="images/math.jpg" alt="" /></span>                                    
+                                    <h3>Factorial Calculations</h3>
+                                    <p>You Engineer, use my powerful system to introduce a factorial number between 1 and 100.</p>
+                                </section>
+                            </div>
+                            <div class="4u 12u(mobile)">
+                                <section class="box style1">
+                                    <span class="image fit"><img src="images/android.jpg" alt="" /></span>                                    
+                                    <h3>Android Solutions</h3>
+                                    <p>All the Android devices around the world will solve the Factorial calculation you introduced in my Moppa system.</p>
+                                </section>
+                            </div>
+                            <div class="4u 12u(mobile)">
+                                <section class="box style1">
+                                    <span class="image fit"><img src="images/results.png" alt="" /></span>                                    
+                                    <h3>See The Results</h3>
+                                    <p>When the factorial calculations are resolved the results are displayed and filtered by Task State & User Name </p>
+                                </section>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <footer>
+                        <p>Do you want to try me out?</p>
+                        <a href="#portfolio" class="button big scrolly">Go to the Calculator</a>
+                    </footer>
+                </article>
+            </div>
+            
+                <!-- Portfolio -->
+            <div class="wrapper style3" data-ng-controller="findTaskByState">
+                <article id="portfolio">
+                    <header>
+                        <h2>Here is my powerful calculator</h2>
+                        <p>Enjoy the three available functionalities that will make your life easier.</p>
+                    </header>
+                    <div class="container" >
+                        <div class="row">
+                           <div class="4u 12u(mobile)" >
+                                <article class="box style2">
+                                    <a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
+                                    <h3>Find a Task by the State</h3>
+                                    <p>Find the tasks by the available state </p>
+                                    <p >
+                                    <input type="radio" name="radioB" value="Doing" ng-model="checkboxSelection"/> Doing
+                                     
+                                    <input type="radio" name="radioB" value="Done" ng-model="checkboxSelection"/> Done
+                                                                        
+                                    </p>    
+                                    <p>User Name : <input type="text" placeholder="Type an user" data-ng-model="taskValue" data-ng-focus="oninputfocus()">
+                                    <p>Task Value : <input type="text" placeholder="Type an user" data-ng-model="userName" data-ng-focus="oninputfocus()">
+                                    
+                                    </p>          
+                           
+                                    <button type="button" data-ng-click="findTaskState()">Search</button>
+                                    <h3>{{error}}</h3>
+                                    
+                                </article>
+                            </div>
+                            <div class="4u 12u(mobile)" >
+                                <article class="box style2">
+                                    <a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
+                                    <h3>Find a Task by the State</h3>
+                                    <p>Find the tasks by the available state </p>
+                                    <p >
+                                    <input type="radio" name="radioB" value="Doing" ng-model="checkboxSelection"/> Doing
+                                     
+                                    <input type="radio" name="radioB" value="Done" ng-model="checkboxSelection"/> Done
+                                                                        
+                                    </p>    
+                                    <p>User Name : <input type="text" placeholder="Type an user" data-ng-model="taskUserName" data-ng-focus="oninputfocus()">
+                                    </p>          
+                           
+                                    <button type="button" data-ng-click="findTaskState()">Search</button>
+                                    <h3>{{error3}}</h3>
+                                    
+                                </article>
+                            </div>
+                            <div class="4u 12u(mobile)">
+                                <article class="box style2" data-ng-controller="findTaskByUser">
+                                    <a href="#" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
+                                    <h3>Find a Task by User</h3>
+                                    <p>Introduce an User Name</p>
+                                     <div>
+                                        <p>Name : <input type="text" placeholder="Type an user" data-ng-model=findUserName></p>
+                                        <button type="button" data-ng-click="findTaskByUser()">Search</button>
+                                        <h3>{{error2}}</h3>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                   </div>
+                        
+                        <div>
+                        
+                        <table class="results">
+                        <tr id="title">
+                            <td>TASK ID</td>
+                            <td>NUMBER</td>
+                            <td>STATUS</td>
+                            <td>RESULT</td>
+                            <td>CREATOR USERNAME</td>
+                        </tr>
+                        <tr data-ng-repeat="r in results">
+                            <td>{{r.taskID}}</td>
+                            <td>{{r.numberCalculate}}</td>
+                            <td>{{r.numberStatus}}</td>
+                            <td>{{r.numberResult}}</td>
+                            <td>{{r.tuserName}}</td>
+                        </tr>
+                        </table>
+
+                    </div>
+                    <footer>
+                        <p>If you have questions do not hesitate in contacting our team.</p>
+                        <a href="#contact" class="button big scrolly">Get in touch with us</a>
+                    </footer>
+                </article>
+            </div>
+            
+                    <!-- Contact -->
+            <div class="wrapper style4">
+                <article id="contact" class="container 75%">
+                    <header>
+                        <h2>Have me make stuff for you.</h2>
+                        <p>Our team will be grateful to help you</p>
+                    </header>
+                    <div>
+                        <div class="row">
+                            <div class="12u">
+                                <form method="post" action="#">
+                                    <div>
+                                        <div class="row">
+                                            <div class="6u 12u(mobile)">
+                                                <input type="text" name="name" id="name" placeholder="Name" />
+                                            </div>
+                                            <div class="6u 12u(mobile)">
+                                                <input type="text" name="email" id="email" placeholder="Email" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="12u">
+                                                <input type="text" name="subject" id="subject" placeholder="Subject" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="12u">
+                                                <textarea name="message" id="message" placeholder="Message"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row 200%">
+                                            <div class="12u">
+                                                <ul class="actions">
+                                                    <li><input type="submit" value="Send Message" /></li>
+                                                    <li><input type="reset" value="Clear Form" class="alt" /></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="12u">
+                                <hr />
+                                <h3>Find me on ...</h3>
+                                <ul class="social">
+                                    <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+                                    <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                                    <li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+                                    <li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+                                    <li><a href="#" class="icon fa-tumblr"><span class="label">Tumblr</span></a></li>
+                                    <li><a href="#" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
+                                    <li><a href="https://github.com/Txuso/MOPPA-Mobile-Parallel-Processing-Agents-" class="icon fa-github"><span class="label">Github</span></a></li>
+                                    <!--
+                                    <li><a href="#" class="icon fa-rss"><span>RSS</span></a></li>
+                                    <li><a href="#" class="icon fa-instagram"><span>Instagram</span></a></li>
+                                    <li><a href="#" class="icon fa-foursquare"><span>Foursquare</span></a></li>
+                                    <li><a href="#" class="icon fa-skype"><span>Skype</span></a></li>
+                                    <li><a href="#" class="icon fa-soundcloud"><span>Soundcloud</span></a></li>
+                                    <li><a href="#" class="icon fa-youtube"><span>YouTube</span></a></li>
+                                    <li><a href="#" class="icon fa-blogger"><span>Blogger</span></a></li>
+                                    <li><a href="#" class="icon fa-flickr"><span>Flickr</span></a></li>
+                                    <li><a href="#" class="icon fa-vimeo"><span>Vimeo</span></a></li>
+                                    -->
+                                </ul>
+                                <hr />
+                            </div>
+                        </div>
+                    </div>
+                    <footer>
+                        <ul id="copyright">
+                            <li>&copy; Moppa Project. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                        </ul>
+                    </footer>
+                </article>
+            </div>
+
+<!-- Scripts -->
+            <script src="assets/js/jquery.min.js"></script>
+            <script src="assets/js/jquery.scrolly.min.js"></script>
+            <script src="assets/js/skel.min.js"></script>
+            <script src="assets/js/skel-viewport.min.js"></script>
+            <script src="assets/js/util.js"></script>
+            <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+            <script src="assets/js/main.js"></script>
+</body>
+</html>

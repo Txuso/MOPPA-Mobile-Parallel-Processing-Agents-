@@ -1,0 +1,11 @@
+app.controller("myCtrl", function($scope) {
+    $scope.firstName	= "John";
+    $scope.lastName= "Doe";
+});
+
+app.controller("bC",function($scope) {
+    
+    $scope.onclickbutton = function() {
+        $scope.myMessage = msg;
+    };
+});

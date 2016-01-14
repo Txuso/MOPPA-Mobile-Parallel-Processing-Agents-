@@ -1,0 +1,47 @@
+<div ng-app="myAppp">
+    <div data-ng-controller="customersCtrl">
+            <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        
+  <table>
+  <tr ng-repeat="x in names">
+    <td>{{ x.Name }}</td>
+    <td>{{ x.Country }}</td>
+  </tr>
+</table>
+
+</div>
+
+<script>
+var mockDataForThisTest = "json=" + encodeURI(JSON.stringify([
+                                                              {
+                                                              id: 1,
+                                                              firstName: "Peter",
+                                                              lastName: "Jhons"},
+                                                          {
+                                                              id: 2,
+                                                              firstName: "David",
+                                                              lastName: "Bowie"}
+                                                          ]));
+
+
+                                                          var app = angular.module('myAppp', []);
+
+                                                          function PeopleCtrl($scope, $http) {
+
+                                                              $scope.people = [];
+
+                                                              $scope.loadPeople = function() {
+                                                                  var httpRequest = $http({
+                                                                      method: 'POST',
+                                                                      url: '/echo/json/',
+                                                                      data: mockDataForThisTest
+
+                                                                  }).success(function(data, status) {
+                                                                      $scope.people = data;
+                                                                  });
+
+                                                              };
+
+                                                          }
+</script>
+</div>

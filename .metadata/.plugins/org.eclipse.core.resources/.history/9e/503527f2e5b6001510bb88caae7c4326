@@ -1,0 +1,21 @@
+<div ng-app="myAppp">
+    <div data-ng-controller="customersCtrl">
+            <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        
+  <table>
+  <tr ng-repeat="x in names">
+    <td>{{ x.Name }}</td>
+    <td>{{ x.Country }}</td>
+  </tr>
+</table>
+
+</div>
+
+<script>
+var app = angular.module('myAppp', []);
+app.controller('customersCtrl', function($scope, $http) {
+    $http.get("http://www.w3schools.com/angular/customers.php")
+    .then(function (response) {$scope.names = response.data.records;});
+});
+</script>
+</div>

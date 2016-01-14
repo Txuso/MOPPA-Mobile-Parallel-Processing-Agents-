@@ -1,9 +1,7 @@
 package moppaapis;
 
 import classes.Task;
-import exceptions.InvalidData;
 import redis.clients.jedis.Jedis;
-
 import com.datastax.driver.mapping.Result;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
@@ -14,7 +12,6 @@ import cassandradb.CassandraTaskDAO;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -59,7 +56,8 @@ public class TaskAPI {
      * @return it return OK message if the task has been created
      * @throws MoppaException
      */
-    @POST
+    @SuppressWarnings("resource")
+	@POST
 	@Path("/createTask")
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "Say Hello World", notes = "Anything Else?")
@@ -77,17 +75,28 @@ public class TaskAPI {
       try {
         CassandraTaskDAO task = factory.getTaskDAO();
         
-        int taskValue = object.getInt("taskValue");
+        String taskValue = object.getString("taskValue");
+        int taskValueInt = Integer.parseInt(taskValue);
         String userName = object.getString("userName");
 
-        if (taskValue < 0 || taskValue > MAX_VALUE) {
+        if (taskValueInt < 0 || taskValueInt > MAX_VALUE) {
         return Response.status(Status.NOT_ACCEPTABLE)
                .entity("The value cannot be "
                + "negative or greater than 100. Please review the values.")
                .build();
         }
         
-        UUID uuid = task.insertTask(userName, taskValue);
+        Result<Task> tasks = task.checkIfTaskExists(taskValueInt);
+        
+        if (!tasks.isExhausted()) {
+          Task taskIterator = tasks.one();
+          return Response.status(Status.NOT_FOUND)
+              .entity(" There is already task created with this value: "
+              + object.getString("taskValue") + ". The result is: " + taskIterator.getResult().toString())
+              .build();
+        }
+        
+        UUID uuid = task.insertTask(userName, taskValueInt);
         
         if (!uuid.toString().isEmpty()) {
           JsonObject value = Json.createObjectBuilder()
@@ -117,7 +126,7 @@ public class TaskAPI {
      * @param input tasks assigned to the corresponding user name.
      * @return it returns all the tasks assigned to the user name
      */
-    @POST
+  @POST
 	@Path("/findTaskByUsername")
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "Say Hello World", notes = "Anything Else?")
@@ -207,7 +216,7 @@ public class TaskAPI {
         
         if (tasks.isExhausted()) {
         	return Response.status(Status.NOT_FOUND)
-                    .entity(" There are no tasks assigned to username: " 
+                    .entity(" There are no tasks assigned to " 
                     + object.getString("userName") + " with the state: "
                     + object.getString("taskState")).build(); 
         }

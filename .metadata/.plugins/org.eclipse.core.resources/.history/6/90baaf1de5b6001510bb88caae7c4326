@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="tableJson">
+    <head>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+            <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+            <title>Angular Framework</title>
+        </head>
+        <body>
+            <div ng-controller="tableJsonCtrl">
+                <table border="1" cellpadding="10">
+                    <tr ng-repeat="items in phones">
+                        <td>{{items.name}}</td>
+                        <td>{{items.snippet}}</td>
+                        <td>{{items.age}}</td>
+                    </tr>
+                </table>
+            </div>
+            <script>
+    var tableJson = angular.module('tableJson', []);
+    tableJson.controller('tableJsonCtrl', function($scope){
+    $scope.phones = [
+    { "name": "Nexus S",
+    "snippet": "Fast just got faster with Nexus S.",
+    "age": 0
+    },
+    { "name": "Apple iPhone 4S (White) (8 GB)",
+    "snippet": "3.5 Inch Widescreen Diagonal",
+    "age": 1
+    },
+    { "name": "Samsung Galaxy Core 2 (White)",
+    "snippet": "powerful 1.2 GHz Quad Core processor and Android 4.4 Kitkat Operating System",
+    "age": 2
+    },
+    {
+    "name": "Micromax Canvas HD Plus A190, white gold",
+    "snippet": "4.76 GB for mass storage",
+    "age": 2
+    }
+    ];
+     
+    })
+    </script>
+            <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        </body>
+    </html>

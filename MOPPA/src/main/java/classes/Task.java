@@ -2,6 +2,7 @@ package classes;
 
 import java.util.UUID;
 
+import com.datastax.driver.mapping.annotations.PartitionKey;
 import com.datastax.driver.mapping.annotations.Table;
 
 /**
@@ -20,11 +21,7 @@ caseSensitiveTable = false)
 
 public class Task {
   
-  /*@PartitionKey(0)
-  private UUID taskid;
-  @PartitionKey(1)
-  private String username;*/
-
+  @PartitionKey
   public UUID taskid;
 
   private int problem;
@@ -37,6 +34,10 @@ public class Task {
   
   public Task() {
     
+  }
+  
+  public Task(final UUID uuid) {
+    this.taskid = uuid;
   }
   
   public Task(final UUID uuid, final String newCreatorUsername, final int newTaskValue,

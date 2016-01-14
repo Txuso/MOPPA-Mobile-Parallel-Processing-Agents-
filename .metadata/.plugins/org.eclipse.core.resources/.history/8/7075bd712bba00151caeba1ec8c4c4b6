@@ -1,0 +1,24 @@
+var login = angular.module("login", []);
+var register = angular.module("register", []);
+var myApp = angular.module("login", ["login","register"]);
+
+login.controller("login", function ($scope, $http, $interval, $window) {
+    
+    $scope.login = function() {
+    	
+ 		$http({
+        method: 'POST',
+        url: 'localhost:8080/moppa/v1/user',
+		data: { 'userName' : $scope.userName , 'taskValue' : $scope.taskValue }
+        }).
+        success(function(data, status, headers, config) {
+		$scope.error = "The Task has been sent";
+		            }).
+        error(function(data, status, headers, config) {	
+		$scope.error = "The number must be between 1 and 100";
+
+       });
+    };
+});
+
+
