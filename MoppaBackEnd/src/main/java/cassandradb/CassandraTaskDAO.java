@@ -36,9 +36,8 @@ public class CassandraTaskDAO implements TaskDAO {
     
   }
 
-  public final UUID insertTask(final String username, final int problem) {
+  public final boolean insertTask(final UUID uuid, final String username, final int problem) {
 		
-		UUID uuid = UUID.randomUUID(); //can we use it directly in method call?
 		try {
 			Task task = new Task(
 			uuid, username, problem, "0", "Waiting");
@@ -47,8 +46,9 @@ public class CassandraTaskDAO implements TaskDAO {
 			mapper.save(task);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		  }
-		return uuid; // Returns newly created TaskID
+		return true;
 	}
 	
 	public final Result<Task> findTasksbyUsername(final String username) {
@@ -87,13 +87,13 @@ public class CassandraTaskDAO implements TaskDAO {
 		return tasks;
 	  }
 	
-	public final boolean updateTask(final UUID taskid,
-	                            final String taskResult) {
+	public final boolean updateTask(final UUID taskID,
+	                                final String taskResult) {
 	  String taskState = "Done";
 	  try {
 	    
 	     Mapper<Task> mapper = manager.mapper(Task.class);
-	     Task task = mapper.get(taskid);
+	     Task task = mapper.get(taskID);
 	     
 	     task.setResult(taskResult);
 	     task.setState(taskState);
@@ -107,7 +107,7 @@ public class CassandraTaskDAO implements TaskDAO {
 	  return true;
 	}
 	
-	public final Result<Task> checkIfTaskExists (final int taskValue) {
+	public final Result<Task> checkIfTaskExists(final int taskValue) {
 	  
     Result<Task> tasks = null;
 	  try {

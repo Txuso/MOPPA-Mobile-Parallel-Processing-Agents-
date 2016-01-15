@@ -1,20 +1,20 @@
-var login = angular.module("login", []);
-var moppaLogin = angular.module("moppaLogin", ["login"]);
+var login = angular.module("loginUser", []);
+var moppaLogin = angular.module("moppaLogin", ["loginUser"]);
 
-login.controller("login", function ($scope, $http, $interval, $window) {
+login.controller("loginUser", function ($scope, $http, $interval, $window) {
     
-    $scope.login = function() {
+    $scope.loginUser = function() {
 
  		$http({
         method: 'POST',
-        url: 'http://192.168.85.131:8080/moppa/v1/user/login',
+        url: 'http://192.168.85.131:8080/moppa/v1/user/loginUser',
 		data: { 'userName' : $scope.userName , 'password' : $scope.password}
         }).
         success(function(data, status, headers, config) {
         	window.location ="moppa.html"
         }).
         error(function(data, status, headers, config) {	
-        	window.location ="moppa.html"
+        	$scope.error = "Invalid credentials. Please review your input and try again."
 
 
        });

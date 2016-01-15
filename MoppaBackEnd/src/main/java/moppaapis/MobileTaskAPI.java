@@ -34,7 +34,7 @@ import org.codehaus.jettison.json.JSONObject;
  *
  */
 @Path("/moppa/v1/mobiletask")
-@Api(value = "/mobiletask", description = "I am a Mobile Task!")
+@Api(value = "/mobiletask", description = "Feel free to try this feature, it's awesome.")
 public class MobileTaskAPI {
   
   /**
@@ -58,99 +58,117 @@ public class MobileTaskAPI {
 	@POST
   @Path("/getTask")
   @Produces(MediaType.APPLICATION_JSON)
-  @ApiOperation(value = "Get task for Mobile", notes = "Anything Else?")
+  @ApiOperation(value = "Feel free to take some tasks.", notes = "What more do you want?")
   @ApiResponses(value = {
-        @ApiResponse(code = C200, message = "OK"),
-        @ApiResponse(code = C500, message = "Something wrong in Server")})
+        @ApiResponse(code = C200, message = "OK."),
+        @ApiResponse(code = C500, message = "Something wrong in the Server.")})
   public final Response getTask(final String input) {
       JsonReader jsonReader = Json.createReader(new StringReader(input));
-      JsonObject object = jsonReader.readObject();
+      JsonObject jsonObject = jsonReader.readObject();
       jsonReader.close();
       
-      if (object.getString("phoneName").isEmpty()) {
-            return Response.status(Status.NOT_FOUND)
-                .entity("You have to provide phone data."
-                + "Please contact the administrator.")
-                .build();
+      String phoneName = jsonObject.getString("phoneName").trim();
+      
+      if (phoneName.isEmpty()) {
+        JsonObject payload = Json.createObjectBuilder()
+            .add("message", "Provide phone data.")
+            .build();
+        return Response.status(Status.NOT_FOUND)
+            .entity(payload)
+            .build();
       }
       
       try {
-        
         Jedis jedis = new Jedis();
         String taskRedis = jedis.lpop("tasks");
         
         JsonReader readTask = Json
                               .createReader(new StringReader(taskRedis));
-        JsonObject taskRedisJSON = readTask.readObject();
+        JsonObject jsonObjectTask = readTask.readObject();
         jsonReader.close();
         
-        return Response.status(C200)
-            .entity("{\"taskID\": \"" + taskRedisJSON
-            .getString("taskId") + "\", \"taskValue\" : \""
-            + taskRedisJSON.getString("taskValue")
-            + "\"}")
+        String taskID = jsonObjectTask.getString("taskID");
+        String taskValue = jsonObjectTask.getString("taskValue");
+        
+        JsonObject value = Json.createObjectBuilder()
+            .add("taskID", taskID)
+            .add("taskValue", taskValue)
             .build();
-        
+                
+        return Response.status(C200)
+            .entity(value)
+            .build();
+
       } catch (Exception e) {
-        
-        
+        //Logging
       }
-      
-      return Response.status(Status.NOT_FOUND)
-          .entity("There are no tasks to process. "
-          + "Please wait few seconds and try again.")
+      JsonObject payload = Json.createObjectBuilder()
+          .add("message", "No tasks to process. Please wait few seconds and try again.")
           .build();
-  
+      return Response.status(Status.NOT_FOUND)
+          .entity(payload)
+          .build();
     }   
     
   @POST
   @Path("/returnTask")
   @Produces(MediaType.APPLICATION_JSON)
-  @ApiOperation(value = "Return calculation for Mobile", notes = "Anything Else?")
+  @ApiOperation(value = "Return me some calculations you have done.", notes = "I don't need anything, just calculations.")
   @ApiResponses(value = {
         @ApiResponse(code = C200, message = "OK"),
-        @ApiResponse(code = C500, message = "Something wrong in Server")})
+        @ApiResponse(code = C500, message = "Something wrong in the Server.")})
   public final Response returnTask(final String input) {
       JsonReader jsonReader = Json.createReader(new StringReader(input));
-      JsonObject object = jsonReader.readObject();
+      JsonObject jsonObject = jsonReader.readObject();
       jsonReader.close();
       
-      if (object.getString("phoneName").isEmpty()
-          || object.getString("taskID").isEmpty()
-          || object.getString("taskResult").isEmpty()) {
-            return Response.status(Status.NOT_FOUND)
-                .entity("Some of the important data is missing."
-                + "Please authenticate yourself, provide the calculation"
-                + " and the taskID.")
-                .build();
+      String phoneName = jsonObject.getString("phoneName").trim();
+      UUID taskID = java.util.UUID.fromString(jsonObject.getString("taskID").trim());
+      String taskResult = jsonObject.getString("taskResult").trim();
+ 
+      if (phoneName.isEmpty()
+          || taskID.toString().isEmpty()
+          || taskResult.isEmpty()) {
+        JsonObject payload = Json.createObjectBuilder()
+            .add("message", "Some of the important data is missing.")
+            .build();
+        return Response.status(Status.NOT_FOUND)
+            .entity(payload)
+            .build();
       }
+      
       CassandraDAOFactory factory = new CassandraDAOFactory();
       
       try {
         CassandraTaskDAO task = factory.getTaskDAO();
         
-        UUID taskID = java.util.UUID.fromString(object.getString("taskID"));
-        String taskResult = object.getString("taskResult");
-        
         boolean success = task.updateTask(taskID, taskResult);
         
         if (success) {
-          JsonObject value = Json.createObjectBuilder()
-              .add("taskID has been updated - ", taskID.toString())
+          JsonObject payload = Json.createObjectBuilder()
+              .add("taskID", taskID.toString())
+              .add("message", "Task received")
               .build();
-          return Response.status(C200).entity(value).build();
-        } else
+          return Response.status(C200).entity(payload).build();
+        } else {
+          JsonObject payload = Json.createObjectBuilder()
+          .add("message", "Task not updated. Contact the administrator.")
+          .build();
           return Response.status(Status.NOT_ACCEPTABLE)
-            .entity(" Task has not been updated, contact the administrator.")
+            .entity(payload)
             .build();
+        }
       } catch (Exception e) {
         //Log
     
       } finally {
        factory.closeConnection();
       }
+      JsonObject payload = Json.createObjectBuilder()
+      .add("message", "Task not updated. Contact the administrator.")
+      .build();
       return Response.status(Status.NOT_FOUND)
-          .entity(" Task has not been updated, contact the administrator.")
+          .entity(payload)
           .build();
     }
 }

@@ -32,7 +32,7 @@ import org.codehaus.jettison.json.JSONObject;
  * This class deals with the tasks created by the users
  */
 @Path("/moppa/v1/task")
-@Api(value = "/task", description = "I am a task!")
+@Api(value = "/task", description = "Feel free to create a task.")
 public class TaskAPI {
 	    
     /**
@@ -60,14 +60,14 @@ public class TaskAPI {
 	@POST
 	@Path("/createTask")
 	@Produces(MediaType.APPLICATION_JSON)
-	@ApiOperation(value = "Say Hello World", notes = "Anything Else?")
+	@ApiOperation(value = "Create task.", notes = "What else do you need?")
 	@ApiResponses(value = {
-        @ApiResponse(code = C200, message = "OK"),
-        @ApiResponse(code = C500, message = "Something wrong in Server")})
+        @ApiResponse(code = C200, message = "OK."),
+        @ApiResponse(code = C500, message = "Something wrong in the Server.")})
 	public final Response createTaskInJSON(final String input) {
     	
     	JsonReader jsonReader = Json.createReader(new StringReader(input));
-    	JsonObject object = jsonReader.readObject();
+    	JsonObject jsonObject = jsonReader.readObject();
     	jsonReader.close();
     	
     	CassandraDAOFactory factory = new CassandraDAOFactory();
@@ -75,41 +75,57 @@ public class TaskAPI {
       try {
         CassandraTaskDAO task = factory.getTaskDAO();
         
-        String taskValue = object.getString("taskValue");
+        String taskValue = jsonObject.getString("taskValue");
+        String userName = jsonObject.getString("userName");
+        UUID uuid = UUID.randomUUID();
+        
         int taskValueInt = Integer.parseInt(taskValue);
-        String userName = object.getString("userName");
 
         if (taskValueInt < 0 || taskValueInt > MAX_VALUE) {
-        return Response.status(Status.NOT_ACCEPTABLE)
-               .entity("The value cannot be "
-               + "negative or greater than 100. Please review the values.")
-               .build();
+          JsonObject payload = Json.createObjectBuilder()
+              .add("message", "Value must be between 1 and 100")
+              .build();
+          return Response.status(Status.NOT_ACCEPTABLE)
+                 .entity(payload)
+                 .build();
         }
         
         Result<Task> tasks = task.checkIfTaskExists(taskValueInt);
         
         if (!tasks.isExhausted()) {
           Task taskIterator = tasks.one();
+          String taskResult = taskIterator.getResult();
+          JsonObject payload = Json.createObjectBuilder()
+              .add("taskValue", taskValue)
+              .add("taskResult", taskResult)
+              .add("message", "Task already exists. If the value is 0, please wait and try in a few hours.")
+              .build();
           return Response.status(Status.NOT_FOUND)
-              .entity(" There is already task created with this value: "
-              + object.getString("taskValue") + ". The result is: " + taskIterator.getResult().toString())
+              .entity(payload)
               .build();
         }
         
-        UUID uuid = task.insertTask(userName, taskValueInt);
+        boolean success = task.insertTask(uuid, userName, taskValueInt);
         
-        if (!uuid.toString().isEmpty()) {
-          JsonObject value = Json.createObjectBuilder()
-              .add("newTaskID", uuid.toString())
-              .build();
+        if (success) {
           JsonObject payload = Json.createObjectBuilder()
-              .add("taskId", uuid.toString())
+              .add("taskID", uuid.toString())
               .add("taskValue", taskValue)
+              .add("message", "Task created")
               .build();
-          Jedis jedis = new Jedis("localhost");
+          Jedis jedis = new Jedis("localhost");  //Needs replacement
           jedis.rpush("tasks", payload.toString());
 
-          return Response.status(C200).entity(value).build();
+          return Response.status(C200).entity(payload).build();
+        }
+        
+        else {
+          JsonObject payload = Json.createObjectBuilder()
+              .add("message", "Unable to create the task")
+              .build();
+          return Response.status(Status.NOT_FOUND)
+              .entity(payload)
+              .build();
         }
       } catch (Exception e) {
         //Log
@@ -117,8 +133,11 @@ public class TaskAPI {
       } finally {
        factory.closeConnection();
       }
+      JsonObject payload = Json.createObjectBuilder()
+          .add("message", "Task has not been created. Please provide correct parameters or contact the administrator.")
+          .build();
       return Response.status(Status.NOT_FOUND)
-          .entity(" Task has not been created, contact the administrator.")
+          .entity(payload)
           .build();
     }
     /**
@@ -129,20 +148,24 @@ public class TaskAPI {
   @POST
 	@Path("/findTaskByUsername")
 	@Produces(MediaType.APPLICATION_JSON)
-	@ApiOperation(value = "Say Hello World", notes = "Anything Else?")
+	@ApiOperation(value = "Find tasks by username.", notes = "What else do you need?")
 	@ApiResponses(value = {
-        @ApiResponse(code = C200, message = "OK"),
-        @ApiResponse(code = C500, message = "Something wrong in Server")})
+        @ApiResponse(code = C200, message = "OK."),
+        @ApiResponse(code = C500, message = "Something wrong in the Server.")})
 	public final Response findTaskByUsernameInJSON(final String input) {
       
       JsonReader jsonReader = Json.createReader(new StringReader(input));
-      JsonObject object = jsonReader.readObject();
+      JsonObject jsonObject = jsonReader.readObject();
       jsonReader.close();
       
-    	if (object.getString("userName").isEmpty()) {
+      String userName = jsonObject.getString("userName").trim();
+      
+    	if (userName.isEmpty()) {
+        JsonObject payload = Json.createObjectBuilder()
+            .add("message", "Username not provided")
+            .build();
         return Response.status(Status.NOT_ACCEPTABLE)
-               .entity("System couldn't read your username. "
-               + "Please contact the administrator.")
+               .entity(payload)
                .build();
     	}
     		
@@ -151,40 +174,44 @@ public class TaskAPI {
       try {
         CassandraTaskDAO task = factory.getTaskDAO();
         
-        Result<Task> tasks = task.findTasksbyUsername(
-                             object.getString("userName"));
+        Result<Task> tasks = task.findTasksbyUsername(userName);
         JSONObject value = new JSONObject();
         Collection<JSONObject> tasksJSON = new ArrayList<JSONObject>();
       
         if (tasks.isExhausted()) {
+          JsonObject payload = Json.createObjectBuilder()
+              .add("userName", userName)
+              .add("message", "No tasks assigned")
+              .build();
           return Response.status(Status.NOT_FOUND)
-                  .entity(" There are no tasks assigned to this username: "
-                  + object.getString("userName"))
-                  .build();
+                 .entity(payload)
+                 .build();
         }
         
-    	for (Task taskIterator : tasks) {
-    	  
-    	  JSONObject taskJSON = new JSONObject();
-    	  taskJSON.put("taskID", taskIterator.getTaskid().toString());
-    	  taskJSON.put("taskValue", taskIterator.getProblem());
-    	  taskJSON.put("result", taskIterator.getResult());
-    	  taskJSON.put("taskState", taskIterator.getState());
-    	  taskJSON.put("userName", taskIterator.getUsername());
-    	  
-    	  tasksJSON.add(taskJSON);
+      	for (Task taskIterator : tasks) {
+      	  JSONObject taskJSON = new JSONObject();
+          taskJSON.put("taskID", taskIterator.getTaskid().toString());
+          taskJSON.put("taskValue", taskIterator.getProblem());
+          taskJSON.put("result", taskIterator.getResult());
+          taskJSON.put("taskState", taskIterator.getState());
+          taskJSON.put("userName", taskIterator.getUsername());  
+          tasksJSON.add(taskJSON);
     		}
+    	
     	value.put("tasks", new JSONArray(tasksJSON));
-      return Response.status(C200).entity(value.toString()).build();
+      return Response.status(C200)
+             .entity(value.toString()).build();
       } catch (Exception e) {
     	  //Log
     	} finally {
         factory.closeConnection();
       }
-      return Response.status(C200).
-      entity("All the tasks have been displayed.").build();
-
       
+    JsonObject payload = Json.createObjectBuilder()
+        .add("message", "Please provide correct parameters or contact the administrator")
+        .build();
+    return Response.status(Status.NOT_ACCEPTABLE)
+           .entity(payload).build();
     }
     /**
      * @param input the username
@@ -193,32 +220,37 @@ public class TaskAPI {
     @POST
   @Path("/findTaskByTaskState")
   @Produces(MediaType.APPLICATION_JSON)
-  @ApiOperation(value = "Say Hello World", notes = "Anything Else?")
+  @ApiOperation(value = "Find tasks by their state Done/Waiting.", notes = "What else do you need?")
   @ApiResponses(value = {
         @ApiResponse(code = C200, message = "OK"),
-        @ApiResponse(code = C500, message = "Something wrong in Server")})
+        @ApiResponse(code = C500, message = "Something wrong in the Server.")})
   public final Response findTaskByStateInJSON(final String input) {
     	
     	JsonReader jsonReader = Json.createReader(new StringReader(input));
-    	JsonObject object = jsonReader.readObject();
+    	JsonObject jsonObject = jsonReader.readObject();
     	jsonReader.close();
+    	
+    	String userName = jsonObject.getString("userName").trim();
+    	String taskState = jsonObject.getString("taskState").trim();
     	
       CassandraDAOFactory factory = new CassandraDAOFactory();
     	
     	try {
       	CassandraTaskDAO task = factory.getTaskDAO();
       	
-      	Result<Task> tasks = task.findTasksbyState(
-      	                     object.getString("userName"), 
-      	                     object.getString("taskState"));
+      	Result<Task> tasks = task.findTasksbyState(userName, taskState); 
         JSONObject value = new JSONObject();
         Collection<JSONObject> tasksJSON = new ArrayList<JSONObject>();
         
         if (tasks.isExhausted()) {
-        	return Response.status(Status.NOT_FOUND)
-                    .entity(" There are no tasks assigned to " 
-                    + object.getString("userName") + " with the state: "
-                    + object.getString("taskState")).build(); 
+          JsonObject payload = Json.createObjectBuilder()
+              .add("userName", userName)
+              .add("taskState",  taskState)
+              .add("message", "No tasks assigned with this state or username")
+              .build();
+          return Response.status(Status.NOT_FOUND)
+                 .entity(payload)
+                 .build();
         }
       	
       	for (Task taskIterator : tasks) {
@@ -240,7 +272,11 @@ public class TaskAPI {
       } finally {
     	  factory.closeConnection();
     	}
-    	return Response.status(C200).
-    		      entity("All the tasks have been displayed.").build(); 
+    	
+      JsonObject payload = Json.createObjectBuilder()
+          .add("message", "Please provide correct parameters or contact the administrator")
+          .build();
+      return Response.status(Status.NOT_ACCEPTABLE)
+             .entity(payload).build();
    }  	
 }

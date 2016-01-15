@@ -1,5 +1,9 @@
 package cassandradb;
 
+import classes.MoppaUser;
+
+import com.datastax.driver.mapping.Result;
+
 /**
  * 
  * @author Mario Measic-Gavran
@@ -8,5 +12,7 @@ package cassandradb;
 
 public interface UserDAO {
 	
-	int insertUser(String username, String password);
+	boolean insertUser(String userName, String password);
+	Result<MoppaUser> checkIfUserExists (String userName);
+	Result<MoppaUser> loginUser(String userName, String password);
 }

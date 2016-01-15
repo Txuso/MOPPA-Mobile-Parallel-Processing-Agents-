@@ -27,12 +27,13 @@
 <div class="module form-module">
   <div >
   </div>
-  <div class="form" data-ng-controller="login">
+  <div class="form" data-ng-controller="loginUser">
     <h2>Login to your Moppa Account</h2>
     <form>
       <input type="text" placeholder="Username" data-ng-model="userName"/>
       <input type="password" placeholder="Password" data-ng-model="password"/>
-      <button type="button" data-ng-click="login()">Login</button>
+      <button type="button" data-ng-click="loginUser()">Login</button>
+      <p>{{error}}</p>
     </form>
   </div>
     

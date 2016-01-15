@@ -17,7 +17,7 @@ createTask.controller("createTask", function ($scope, $http, $interval, $window)
 		$scope.error = "The task with the value " + $scope.taskValue + " has been sent to processing.";
 		            }).
         error(function(data, status, headers, config) {	
-		$scope.error = "The value must be between 1 and 100.";
+		$scope.error = data;
 
        });
     };

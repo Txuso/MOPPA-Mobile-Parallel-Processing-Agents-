@@ -13,7 +13,7 @@ import classes.Task;
  */
 public interface TaskDAO {
 	
-	UUID insertTask(String username, int problem);
+	boolean insertTask(UUID uuid, String username, int problem);
 	Result<Task> findTasksbyUsername(String username);
 	Result<Task> findTasksbyState(String username, String state);
 }
