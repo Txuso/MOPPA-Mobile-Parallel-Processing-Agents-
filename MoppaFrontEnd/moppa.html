@@ -8,7 +8,7 @@
         <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
         <script src="js/module.js"></script>
-<body data-ng-controller="findTaskByUser">
+<body >
 <!-- Nav -->
             <nav id="nav">
                 <ul class="container">
@@ -78,8 +78,8 @@
             </div>
             
                 <!-- Portfolio -->
-            <div class="wrapper style3" data-ng-controller="findTaskByState">
-                <article id="portfolio">
+            <div class="wrapper style3" data-ng-controller="findTaskByState" >
+                <article id="portfolio" data-ng-controller="findTaskByUser">
                     <header>
                         <h2>Here is my powerful calculator</h2>
                         <p>Enjoy the three available functionalities that will make your life easier.</p>
@@ -124,7 +124,7 @@
                                     <h3>Find a Task by User</h3>
                                     <p>Introduce an User Name</p>
                                      <div>
-                                        <p>Name : <input type="text" placeholder="Type an user" data-ng-model=findUserName></p>
+                                        <p>Name : <input type="text" placeholder="Type an user" data-ng-model="findUserName"></p>
                                         <button type="button" data-ng-click="findTaskByUser()">Search</button>
                                         <h3>{{error2}}</h3>
                                     </div>
@@ -140,13 +140,13 @@
                             <td>NUMBER</td>
                             <td>STATUS</td>
                             <td>RESULT</td>
-                            <td>CREATOR USERNAME</td>
+                            <td>OWNER</td>
                             </tr>
                             <tr data-ng-repeat="tasks in ocw.tasks">
-                                <td>{{ tasks.taskID }}</td>
-                                <td>{{tasks.taskValue}}</td>
-                                <td>{{tasks.taskResult}}</td>
+                               <td>{{ tasks.taskID }}</td>
+                               <td>{{tasks.taskValue}}</td>
                                <td>{{tasks.taskState}}</td>
+                               <td>{{tasks.taskResult}}</td>                             
                                <td>{{tasks.userName}}</td>
     
                             </tr>
