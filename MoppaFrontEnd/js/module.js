@@ -26,28 +26,7 @@ createTask.controller("createTask", function ($scope, $http, $interval, $window)
 findTaskByUser.controller("findTaskByUser", function($scope, $http, $interval, $window) {
 	
 	$scope.findTaskByUser = function() {
-		var json = {
-			    "tasks":
-			    	 [
-			          {
-			             "taskID":"1111",
-			             "taskValue":"4",
-			             "taskResult":"24",
-			             "taskState":"Done",
-			             "userName":"Txuso",
-			             
-			          },
-			          {
-			        	  "taskID":"1111",
-				          "taskValue":"4",
-				          "taskResult":"24",
-				          "taskState":"Done",
-				          "userName":"Txuso",
-				             
-			          }
-			  ]
-			  };
-			  $scope.ocw = json;
+	
     	$scope.error2 = "Wait untill the petition is processed...";
     	
  		$http({
@@ -57,11 +36,11 @@ findTaskByUser.controller("findTaskByUser", function($scope, $http, $interval, $
         }).
         success(function(data, status, headers, config) {
 		$scope.error2 = "These are the tasks: ";
-		$scope.results = data;		 
+		$scope.ocw = data;		 
 
 		            }).
         error(function(data, status, headers, config){	
-		$scope.error2 = data;
+		$scope.error2 = $scope.findUserName;
         	
        });
     };

@@ -59,20 +59,22 @@ public class UserAPI {
    	 	JsonObject jsonObject = jsonReader.readObject();
    	 	jsonReader.close();
    	 	
-   	 	String userName = jsonObject.getString("userName").trim();
-   	 	String password = jsonObject.getString("password").trim();
-   	 	
-   	 	if (userName.isEmpty() || password.isEmpty()) {
-        JsonObject payload = Json.createObjectBuilder()
-            .add("message", "Provide data to create an user")
-            .build();
-        return Response.status(Status.NOT_ACCEPTABLE)
-            .entity(payload)
-            .build();
-   	 	}
    	 	CassandraDAOFactory factory = new CassandraDAOFactory();
    	 	
    	 	try {
+   	 	  
+        String userName = jsonObject.getString("userName").trim();
+        String password = jsonObject.getString("password").trim();
+        
+        if (userName.isEmpty() || password.isEmpty()) {
+          JsonObject payload = Json.createObjectBuilder()
+              .add("message", "Provide data to create an user")
+              .build();
+          return Response.status(Status.NOT_ACCEPTABLE)
+              .entity(payload)
+              .build();
+        }
+        
    	 	  UserDAO user = factory.getUserDAO();
    	 	  
    	 	  Result<MoppaUser> userCheck = user.checkIfUserExists(userName);
@@ -132,21 +134,22 @@ public class UserAPI {
       JsonObject jsonObject = jsonReader.readObject();
       jsonReader.close();
       
-      String userName = jsonObject.getString("userName").trim();
-      String password = jsonObject.getString("password").trim();
-      
-      if (userName.isEmpty() || password.isEmpty()) {
-        JsonObject payload = Json.createObjectBuilder()
-            .add("message", "Provide credentials in order to login")
-            .build();
-        return Response.status(Status.NOT_ACCEPTABLE)
-            .entity(payload)
-            .build();
-      }
-      
       CassandraDAOFactory factory = new CassandraDAOFactory();
       
       try {
+        
+        String userName = jsonObject.getString("userName").trim();
+        String password = jsonObject.getString("password").trim();
+        
+        if (userName.isEmpty() || password.isEmpty()) {
+          JsonObject payload = Json.createObjectBuilder()
+              .add("message", "Provide credentials in order to login")
+              .build();
+          return Response.status(Status.NOT_ACCEPTABLE)
+              .entity(payload)
+              .build();
+        }
+        
         UserDAO user = factory.getUserDAO();
         Result<MoppaUser> login = user.loginUser(userName, password);
         if (login.isExhausted()) {

@@ -67,18 +67,19 @@ public class MobileTaskAPI {
       JsonObject jsonObject = jsonReader.readObject();
       jsonReader.close();
       
-      String phoneName = jsonObject.getString("phoneName").trim();
-      
-      if (phoneName.isEmpty()) {
-        JsonObject payload = Json.createObjectBuilder()
-            .add("message", "Provide phone data.")
-            .build();
-        return Response.status(Status.NOT_FOUND)
-            .entity(payload)
-            .build();
-      }
-      
       try {
+        
+        String phoneName = jsonObject.getString("phoneName").trim();
+        
+        if (phoneName.isEmpty()) {
+          JsonObject payload = Json.createObjectBuilder()
+              .add("message", "Provide phone data.")
+              .build();
+          return Response.status(Status.NOT_FOUND)
+              .entity(payload)
+              .build();
+        }
+        
         Jedis jedis = new Jedis();
         String taskRedis = jedis.lpop("tasks");
         
@@ -122,24 +123,25 @@ public class MobileTaskAPI {
       JsonObject jsonObject = jsonReader.readObject();
       jsonReader.close();
       
-      String phoneName = jsonObject.getString("phoneName").trim();
-      UUID taskID = java.util.UUID.fromString(jsonObject.getString("taskID").trim());
-      String taskResult = jsonObject.getString("taskResult").trim();
- 
-      if (phoneName.isEmpty()
-          || taskID.toString().isEmpty()
-          || taskResult.isEmpty()) {
-        JsonObject payload = Json.createObjectBuilder()
-            .add("message", "Some of the important data is missing.")
-            .build();
-        return Response.status(Status.NOT_FOUND)
-            .entity(payload)
-            .build();
-      }
-      
       CassandraDAOFactory factory = new CassandraDAOFactory();
       
       try {
+        
+        String phoneName = jsonObject.getString("phoneName").trim();
+        UUID taskID = java.util.UUID.fromString(jsonObject.getString("taskID").trim());
+        String taskResult = jsonObject.getString("taskResult").trim();
+   
+        if (phoneName.isEmpty()
+            || taskID.toString().isEmpty()
+            || taskResult.isEmpty()) {
+          JsonObject payload = Json.createObjectBuilder()
+              .add("message", "Some of the important data is missing.")
+              .build();
+          return Response.status(Status.NOT_FOUND)
+              .entity(payload)
+              .build();
+        }
+        
         CassandraTaskDAO task = factory.getTaskDAO();
         
         boolean success = task.updateTask(taskID, taskResult);

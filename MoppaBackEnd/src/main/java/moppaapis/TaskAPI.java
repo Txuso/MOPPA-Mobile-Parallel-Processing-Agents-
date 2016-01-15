@@ -73,11 +73,19 @@ public class TaskAPI {
     	CassandraDAOFactory factory = new CassandraDAOFactory();
       
       try {
-        CassandraTaskDAO task = factory.getTaskDAO();
-        
+       
         String taskValue = jsonObject.getString("taskValue");
         String userName = jsonObject.getString("userName");
         UUID uuid = UUID.randomUUID();
+        
+        if (taskValue.isEmpty() || userName.isEmpty()) {
+          JsonObject payload = Json.createObjectBuilder()
+              .add("message", "Please provide username and task value")
+              .build();
+          return Response.status(Status.NOT_ACCEPTABLE)
+                 .entity(payload)
+                 .build();
+        }
         
         int taskValueInt = Integer.parseInt(taskValue);
 
@@ -89,6 +97,8 @@ public class TaskAPI {
                  .entity(payload)
                  .build();
         }
+        
+        CassandraTaskDAO task = factory.getTaskDAO();
         
         Result<Task> tasks = task.checkIfTaskExists(taskValueInt);
         
@@ -157,21 +167,22 @@ public class TaskAPI {
       JsonReader jsonReader = Json.createReader(new StringReader(input));
       JsonObject jsonObject = jsonReader.readObject();
       jsonReader.close();
-      
-      String userName = jsonObject.getString("userName").trim();
-      
-    	if (userName.isEmpty()) {
-        JsonObject payload = Json.createObjectBuilder()
-            .add("message", "Username not provided")
-            .build();
-        return Response.status(Status.NOT_ACCEPTABLE)
-               .entity(payload)
-               .build();
-    	}
-    		
+          		
       CassandraDAOFactory factory = new CassandraDAOFactory();
       
       try {
+        
+        String userName = jsonObject.getString("userName").trim();
+        
+        if (userName.isEmpty()) {
+          JsonObject payload = Json.createObjectBuilder()
+              .add("message", "Username not provided")
+              .build();
+          return Response.status(Status.NOT_ACCEPTABLE)
+                 .entity(payload)
+                 .build();
+        }
+        
         CassandraTaskDAO task = factory.getTaskDAO();
         
         Result<Task> tasks = task.findTasksbyUsername(userName);
@@ -192,7 +203,7 @@ public class TaskAPI {
       	  JSONObject taskJSON = new JSONObject();
           taskJSON.put("taskID", taskIterator.getTaskid().toString());
           taskJSON.put("taskValue", taskIterator.getProblem());
-          taskJSON.put("result", taskIterator.getResult());
+          taskJSON.put("taskResult", taskIterator.getResult());
           taskJSON.put("taskState", taskIterator.getState());
           taskJSON.put("userName", taskIterator.getUsername());  
           tasksJSON.add(taskJSON);
@@ -230,12 +241,22 @@ public class TaskAPI {
     	JsonObject jsonObject = jsonReader.readObject();
     	jsonReader.close();
     	
-    	String userName = jsonObject.getString("userName").trim();
-    	String taskState = jsonObject.getString("taskState").trim();
-    	
       CassandraDAOFactory factory = new CassandraDAOFactory();
     	
     	try {
+
+        String userName = jsonObject.getString("userName").trim();
+        String taskState = jsonObject.getString("taskState").trim();
+        
+        if (userName.isEmpty() || taskState.isEmpty()) {
+          JsonObject payload = Json.createObjectBuilder()
+              .add("message", "Please provide username and task state")
+              .build();
+          return Response.status(Status.NOT_ACCEPTABLE)
+                 .entity(payload)
+                 .build();
+        }
+        
       	CassandraTaskDAO task = factory.getTaskDAO();
       	
       	Result<Task> tasks = task.findTasksbyState(userName, taskState); 
@@ -258,7 +279,7 @@ public class TaskAPI {
           JSONObject taskJSON = new JSONObject();
           taskJSON.put("taskID", taskIterator.getTaskid().toString());
           taskJSON.put("taskValue", taskIterator.getProblem());
-          taskJSON.put("result", taskIterator.getResult());
+          taskJSON.put("taskResult", taskIterator.getResult());
           taskJSON.put("taskState", taskIterator.getState());
           taskJSON.put("userName", taskIterator.getUsername());
           
