@@ -8,7 +8,7 @@
         <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
         <script src="js/module.js"></script>
-<body>
+<body data-ng-controller="findTaskByUser">
 <!-- Nav -->
             <nav id="nav">
                 <ul class="container">
@@ -120,7 +120,7 @@
                                 </article>
                             </div>
                             <div class="4u 12u(mobile)">
-                                <article class="box style2" data-ng-controller="findTaskByUser">
+                                <article class="box style2" >
                                     <h3>Find a Task by User</h3>
                                     <p>Introduce an User Name</p>
                                      <div>
@@ -133,25 +133,25 @@
                         </div>
                    </div>
                         
-                        <div>
-                        
-                        <table class="results">
-                        <tr id="title">
+                       <div>    
+                        <table class="table table-bordered" >
+                            <tr id="title">
                             <td>TASK ID</td>
                             <td>NUMBER</td>
                             <td>STATUS</td>
                             <td>RESULT</td>
                             <td>CREATOR USERNAME</td>
-                        </tr>
-                        <tr data-ng-repeat="r in results">
-                            <td>{{r.taskID}}</td>
-                            <td>{{r.numberCalculate}}</td>
-                            <td>{{r.numberStatus}}</td>
-                            <td>{{r.numberResult}}</td>
-                            <td>{{r.tuserName}}</td>
-                        </tr>
-                        </table>
+                            </tr>
+                            <tr data-ng-repeat="tasks in ocw.tasks">
+                                <td>{{ tasks.taskID }}</td>
+                                <td>{{tasks.taskValue}}</td>
+                                <td>{{tasks.taskResult}}</td>
+                               <td>{{tasks.taskState}}</td>
+                               <td>{{tasks.userName}}</td>
+    
+                            </tr>
 
+                        </table>
                     </div>
                     <footer>
                         <p>If you have questions do not hesitate in contacting our team.</p>
